@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/page_month"
+        android:enabled="true"
+        android:icon="@drawable/ic_callendar_month"
+        android:title="@string/page_month" />
+
+    <item
+        android:id="@+id/page_week"
+        android:enabled="true"
+        android:icon="@drawable/ic_callendar_week"
+        android:title="@string/page_week" />
+
+    <item
+        android:id="@+id/page_day"
+        android:enabled="true"
+        android:icon="@drawable/ic_callendar_day"
+        android:title="@string/page_day" />
+
+</menu>

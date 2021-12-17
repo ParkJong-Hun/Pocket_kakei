@@ -1,4 +1,4 @@
-package com.parkjonghun.kaji_pocket.viewmodel
+package com.parkjonghun.pocket_kakei.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application

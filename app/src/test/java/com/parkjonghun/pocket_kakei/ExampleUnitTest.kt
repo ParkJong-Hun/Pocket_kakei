@@ -1,4 +1,4 @@
-package com.parkjonghun.kaji_pocket
+package com.parkjonghun.pocket_kakei
 
 import org.junit.Test
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.parkjonghun.kaji_pocket">
+    package="com.parkjonghun.pocket_kakei">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kaji_pocket">
         <activity
-            android:name=".view.LoginActivity"
+            android:name="com.parkjonghun.pocket_kakei.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
