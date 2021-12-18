@@ -33,7 +33,6 @@
         android:maxLines="1"
         android:paddingRight="10dp"
         android:text="0"
-        android:inputType="number"
         android:textSize="36sp"
         android:background="@null"
         android:textColor="@color/lifeBlack"
