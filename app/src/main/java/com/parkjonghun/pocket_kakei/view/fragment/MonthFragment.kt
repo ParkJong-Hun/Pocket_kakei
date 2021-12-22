@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.parkjonghun.pocket_kakei.R
 import com.parkjonghun.pocket_kakei.databinding.FragmentMonthBinding
+import com.parkjonghun.pocket_kakei.model.SheetModel
 import com.parkjonghun.pocket_kakei.view.activity.AddActivity
 import com.parkjonghun.pocket_kakei.view.decorator.BackgroundDecorator
 import com.parkjonghun.pocket_kakei.view.decorator.SaturdayDecorator
@@ -32,8 +33,8 @@ class MonthFragment: Fragment() {
         view.monthCalendar.selectedDate = CalendarDay.today()
         //週末の色、支出、収入日の背景
 
-        val addedDay:List<Int> = listOf(1, 3, 5 ,7 ,9, 12)
-        val paidDay:List<Int> = listOf(2, 6, 8, 9, 12)
+        val addedDay:List<SheetModel> = listOf(SheetModel())
+        val paidDay:List<SheetModel> = listOf(SheetModel().apply {date.set(2021, 10, 12)})
 
         val addedMoneyIcon:Drawable = view.root.resources.getDrawable(R.drawable.ic_add_money, null)
         val paidMoneyIcon:Drawable = view.root.resources.getDrawable(R.drawable.ic_pay_money, null)
