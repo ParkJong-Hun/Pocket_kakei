@@ -1,4 +1,4 @@
-package com.parkjonghun.pocket_kakei.view
+package com.parkjonghun.pocket_kakei.view.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
