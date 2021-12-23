@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.parkjonghun.pocket_kakei.databinding.FragmentAddDescriptionBinding
+import com.parkjonghun.pocket_kakei.viewmodel.AddViewModel
 
 class AddDescriptionFragment: Fragment() {
     override fun onCreateView(
@@ -15,8 +17,10 @@ class AddDescriptionFragment: Fragment() {
     ): View {
         val view = FragmentAddDescriptionBinding.inflate(inflater, container, false)
 
-        view.submitDescriptionButton.setOnClickListener {
+        val viewModel: AddViewModel by activityViewModels()
 
+        view.submitDescriptionButton.setOnClickListener {
+            viewModel.nextStep()
         }
 
         return view.root

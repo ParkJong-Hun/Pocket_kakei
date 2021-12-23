@@ -7,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.parkjonghun.pocket_kakei.databinding.FragmentAddMoneyBinding
 import com.parkjonghun.pocket_kakei.viewmodel.AddViewModel
-
-//TODO: ViewModelをActivityのものシェア
 
 class AddMoneyFragment: Fragment() {
     override fun onCreateView(
@@ -21,7 +19,7 @@ class AddMoneyFragment: Fragment() {
     ): View {
         val view = FragmentAddMoneyBinding.inflate(inflater, container, false)
 
-        val viewModel: AddViewModel by viewModels()
+        val viewModel: AddViewModel by activityViewModels()
 
         view.moneyValue.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
