@@ -10,8 +10,8 @@
 
     <color name="gray">#8C8C8C</color>
     <color name="lifeBlack">#191919</color>
-    <color name="green">#1EAF23</color>
-    <color name="red">#BC1414</color>
+    <color name="green">#53C657</color>
+    <color name="red">#FF7878</color>
 
     <color name="lifeGreen">#70DF75</color>
     <color name="lifeGreen_dark">#58955B</color>

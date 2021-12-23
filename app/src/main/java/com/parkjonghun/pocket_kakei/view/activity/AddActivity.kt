@@ -1,5 +1,6 @@
 package com.parkjonghun.pocket_kakei.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,8 @@ import com.parkjonghun.pocket_kakei.databinding.ActivityAddBinding
 import com.parkjonghun.pocket_kakei.viewmodel.AddViewModel
 
 class AddActivity: AppCompatActivity() {
+
+    //TODO: これと説明画面をFragmentとしてこのActivityで使う。
 
     private lateinit var binding: ActivityAddBinding
 
@@ -35,6 +38,24 @@ class AddActivity: AppCompatActivity() {
                 binding.moneyValue.addTextChangedListener(this)
             }
         })
+
+        val intent = Intent(this, AddDescriptionActivity::class.java)
+        binding.submitExpenditureButton.setOnClickListener {
+            intent.let {
+                it.putExtra("money", viewModel.moneyValue.value)
+                it.putExtra("isIn", true)
+                startActivity(it)
+            }
+
+        }
+
+        binding.submitIncomeButton.setOnClickListener {
+            intent.let {
+                it.putExtra("money", viewModel.moneyValue.value)
+                it.putExtra("isIn", false)
+                startActivity(it)
+            }
+        }
 
         binding.closeButton.setOnClickListener {
             finish()
