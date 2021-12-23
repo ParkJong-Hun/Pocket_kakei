@@ -10,6 +10,12 @@ class AddViewModel:ViewModel() {
     private var _moneyValue = 0
     private var _moneyValueLiveData: MutableLiveData<Int> = MutableLiveData()
     val moneyValue:LiveData<Int> = _moneyValueLiveData
+    private var _currentStep = 0
+    var currentStep:MutableLiveData<Int> = MutableLiveData()
+
+    init {
+        _currentStep = 0
+    }
 
     fun checkComma(value:Int): String {
         val formatter = DecimalFormat("###,###")
@@ -27,5 +33,10 @@ class AddViewModel:ViewModel() {
         } else {
             value
         }
+    }
+
+    fun nextStep() {
+        _currentStep += 1
+        currentStep.value = _currentStep
     }
 }

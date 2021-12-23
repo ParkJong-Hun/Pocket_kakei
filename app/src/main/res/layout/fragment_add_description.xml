@@ -3,26 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
-
-    <TextView
-        android:id="@+id/todayTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2021年12月17日"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/closeButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_close"
-        app:tint="@color/red"
-        android:background="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/descriptionValue"
@@ -31,7 +12,7 @@
         android:layout_marginTop="100dp"
         android:textSize="24sp"
         android:hint="@string/description_hint"
-        app:layout_constraintTop_toBottomOf="@+id/todayTextView2"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="10dp" />
 
     <Button

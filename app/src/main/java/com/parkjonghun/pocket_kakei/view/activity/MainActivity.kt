@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         val viewModel: MainViewModel by viewModels()
 
         supportFragmentManager.beginTransaction().add(binding.fragmentLayout.id, MonthFragment()).commit()
+
         binding.bottomNavigationView.run {
             setOnItemSelectedListener { item ->
                 when(item.itemId) {

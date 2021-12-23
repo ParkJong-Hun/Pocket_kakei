@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp">
@@ -14,34 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/moneyTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="円"
-        android:textColor="@color/gray"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:layout_marginTop="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todayTextView" />
-
-    <EditText
-        android:id="@+id/moneyValue"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:maxLines="1"
-        android:paddingRight="10dp"
-        android:text="0"
-        android:textSize="36sp"
-        android:background="@null"
-        android:textColor="@color/lifeBlack"
-        android:textAlignment="viewEnd"
-        app:layout_constraintBottom_toBottomOf="@+id/moneyTitle"
-        app:layout_constraintEnd_toStartOf="@+id/moneyTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/moneyTitle" />
-
     <ImageButton
         android:id="@+id/closeButton"
         android:layout_width="wrap_content"
@@ -52,45 +24,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addFragmentLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintTop_toBottomOf="@+id/moneyValue"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        tools:layout_editor_absoluteX="10dp">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <Button
-            android:id="@+id/submitIncomeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginRight="5dp"
-            android:backgroundTint="@color/green"
-            android:text="入金" />
-
-        <Button
-            android:id="@+id/submitExpenditureButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
-            android:backgroundTint="@color/red"
-            android:text="支出" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/todayTextView">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
