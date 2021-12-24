@@ -39,10 +39,12 @@ class AddMoneyFragment: Fragment() {
         })
 
         view.submitExpenditureButton.setOnClickListener {
+            viewModel.isAdd = false
             viewModel.nextStep()
         }
 
         view.submitIncomeButton.setOnClickListener {
+            viewModel.isAdd = true
             viewModel.nextStep()
         }
 

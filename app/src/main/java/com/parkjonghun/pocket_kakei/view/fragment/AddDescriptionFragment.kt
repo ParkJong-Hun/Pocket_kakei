@@ -20,6 +20,7 @@ class AddDescriptionFragment: Fragment() {
         val viewModel: AddViewModel by activityViewModels()
 
         view.submitDescriptionButton.setOnClickListener {
+            viewModel.description = view.descriptionValue.text.toString()
             viewModel.nextStep()
         }
 

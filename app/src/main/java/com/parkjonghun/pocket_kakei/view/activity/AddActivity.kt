@@ -17,8 +17,6 @@ class AddActivity: AppCompatActivity() {
         binding = ActivityAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         supportFragmentManager.beginTransaction().add(binding.addFragmentLayout.id, AddMoneyFragment()).commit()
 
         val viewModel: AddViewModel by viewModels()
@@ -35,10 +33,17 @@ class AddActivity: AppCompatActivity() {
                         AddDescriptionFragment()
                     ).commitAllowingStateLoss()
                 2->
-                    supportFragmentManager.beginTransaction ().replace(
-                        binding.addFragmentLayout.id,
-                        AddCategoryFragment()
-                    ).commitAllowingStateLoss()
+                    if(viewModel.isAdd) {
+                        supportFragmentManager.beginTransaction().replace(
+                            binding.addFragmentLayout.id,
+                            AddAddCategoryFragment()
+                        ).commitAllowingStateLoss()
+                    } else {
+                        supportFragmentManager.beginTransaction().replace(
+                            binding.addFragmentLayout.id,
+                            AddPayCategoryFragment()
+                        ).commitAllowingStateLoss()
+                    }
             }
         }
 
