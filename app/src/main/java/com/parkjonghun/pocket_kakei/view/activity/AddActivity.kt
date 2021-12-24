@@ -1,6 +1,7 @@
 package com.parkjonghun.pocket_kakei.view.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.parkjonghun.pocket_kakei.databinding.ActivityAddBinding
@@ -16,6 +17,8 @@ class AddActivity: AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivityAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.backButton.visibility = View.GONE
 
         supportFragmentManager.beginTransaction().add(binding.addFragmentLayout.id, AddMoneyFragment()).commit()
 
@@ -45,6 +48,17 @@ class AddActivity: AppCompatActivity() {
                         ).commitAllowingStateLoss()
                     }
             }
+        }
+        viewModel.currentStep.observe(this) {
+            if(it == 0) {
+                binding.backButton.visibility = View.GONE
+            } else {
+                binding.backButton.visibility = View.VISIBLE
+            }
+        }
+
+        binding.backButton.setOnClickListener {
+            viewModel.previousStep()
         }
 
         binding.closeButton.setOnClickListener {

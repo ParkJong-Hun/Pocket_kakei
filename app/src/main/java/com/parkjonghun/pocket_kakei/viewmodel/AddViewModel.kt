@@ -37,4 +37,9 @@ class AddViewModel:ViewModel() {
         _currentStep += 1
         currentStep.value = _currentStep
     }
+
+    fun previousStep() {
+        _currentStep -= 1
+        currentStep.value = _currentStep
+    }
 }

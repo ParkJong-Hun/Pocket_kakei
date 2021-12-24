@@ -5,4 +5,7 @@
     <string name="page_day">日間</string>
     <string name="add_description">この内容を登録</string>
     <string name="description_hint">内容を入力してください。</string>
+    <string name="cash">現金</string>
+    <string name="debit_card">デビットカード</string>
+    <string name="credit_card">クレジットカード</string>
 </resources>

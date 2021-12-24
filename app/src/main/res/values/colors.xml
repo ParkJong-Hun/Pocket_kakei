@@ -15,4 +15,6 @@
 
     <color name="lifeGreen">#70DF75</color>
     <color name="lifeGreen_dark">#58955B</color>
+
+    <color name="orange">#ECB879</color>
 </resources>

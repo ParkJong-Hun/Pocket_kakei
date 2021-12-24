@@ -20,6 +20,7 @@ class AddMoneyFragment: Fragment() {
         val view = FragmentAddMoneyBinding.inflate(inflater, container, false)
 
         val viewModel: AddViewModel by activityViewModels()
+        view.moneyValue.setText(viewModel.checkComma(viewModel.checkLength(viewModel.moneyValue.value.toString()).filter { it.isDigit() }.toInt()))
 
         view.moneyValue.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

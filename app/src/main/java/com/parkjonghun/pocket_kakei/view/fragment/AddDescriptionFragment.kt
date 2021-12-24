@@ -18,6 +18,7 @@ class AddDescriptionFragment: Fragment() {
         val view = FragmentAddDescriptionBinding.inflate(inflater, container, false)
 
         val viewModel: AddViewModel by activityViewModels()
+        view.descriptionValue.setText(viewModel.description)
 
         view.submitDescriptionButton.setOnClickListener {
             viewModel.description = view.descriptionValue.text.toString()
