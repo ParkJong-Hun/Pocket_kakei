@@ -14,6 +14,9 @@ class AddViewModel:ViewModel() {
     var currentStep:MutableLiveData<Int> = MutableLiveData()
     var isAdd: Boolean = false
     var description: String = ""
+    private var _dataIsReady: Boolean = false
+    var category: String = ""
+    var dataIsReady: MutableLiveData<Boolean> = MutableLiveData()
 
     fun checkComma(value:Int): String {
         val formatter = DecimalFormat("###,###")
@@ -41,5 +44,18 @@ class AddViewModel:ViewModel() {
     fun previousStep() {
         _currentStep -= 1
         currentStep.value = _currentStep
+    }
+
+    fun dataReady() {
+        _dataIsReady = true
+        dataIsReady.value = _dataIsReady
+    }
+
+    fun addDepositOnDatabase() {
+        //TODO: Roomでデータベースにデータ追加
+    }
+
+    fun addPayingOnDatabase() {
+        //TODO: Roomでデータベースにデータ追加
     }
 }

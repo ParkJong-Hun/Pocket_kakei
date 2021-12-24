@@ -22,7 +22,9 @@ class AddDescriptionFragment: Fragment() {
 
         view.submitDescriptionButton.setOnClickListener {
             viewModel.description = view.descriptionValue.text.toString()
-            viewModel.nextStep()
+            if(viewModel.isAdd) {
+                viewModel.dataReady()
+            } else { viewModel.nextStep() }
         }
 
         return view.root

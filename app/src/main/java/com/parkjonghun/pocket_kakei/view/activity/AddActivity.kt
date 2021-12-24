@@ -36,17 +36,10 @@ class AddActivity: AppCompatActivity() {
                         AddDescriptionFragment()
                     ).commitAllowingStateLoss()
                 2->
-                    if(viewModel.isAdd) {
-                        supportFragmentManager.beginTransaction().replace(
-                            binding.addFragmentLayout.id,
-                            AddAddCategoryFragment()
-                        ).commitAllowingStateLoss()
-                    } else {
-                        supportFragmentManager.beginTransaction().replace(
-                            binding.addFragmentLayout.id,
-                            AddPayCategoryFragment()
-                        ).commitAllowingStateLoss()
-                    }
+                    supportFragmentManager.beginTransaction().replace(
+                        binding.addFragmentLayout.id,
+                        AddCategoryFragment()
+                    ).commitAllowingStateLoss()
             }
         }
         viewModel.currentStep.observe(this) {
@@ -54,6 +47,16 @@ class AddActivity: AppCompatActivity() {
                 binding.backButton.visibility = View.GONE
             } else {
                 binding.backButton.visibility = View.VISIBLE
+            }
+        }
+        viewModel.dataIsReady.observe(this) {
+            if(it) {
+                if(viewModel.isAdd) {
+                    viewModel.addDepositOnDatabase()
+                } else {
+                    viewModel.addPayingOnDatabase()
+                }
+                finish()
             }
         }
 
