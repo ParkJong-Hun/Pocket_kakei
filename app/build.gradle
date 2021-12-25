@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdk 31
 
@@ -47,6 +49,14 @@ dependencies {
 
     implementation 'androidx.fragment:fragment-ktx:1.4.0'
     //カスタム　カレンダー
-    version = "1.4.3"
-    implementation "com.prolificinteractive:material-calendarview:${version}"
+    def version = "1.4.3"
+    implementation "com.prolificinteractive:material-calendarview:$version"
+
+    //Room
+    def roomVersion = "2.3.0"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    // Room_kapt
+    kapt "androidx.room:room-compiler:$roomVersion"
 }
