@@ -5,7 +5,7 @@ import java.util.*
 
 class Converters {
     @TypeConverter
-    fun timeStampToDate(value: Long?): Calendar? {
+    fun longToCalendar(value: Long?): Calendar? {
         val date = value?.let { Date(it) }
         val calendar = Calendar.getInstance()
         date?.run {
@@ -15,7 +15,7 @@ class Converters {
     }
 
     @TypeConverter
-    fun dateToTimeStamp(calendar: Calendar?): Long? {
+    fun calendarToLong(calendar: Calendar?): Long? {
         return calendar?.time?.time
     }
 }
