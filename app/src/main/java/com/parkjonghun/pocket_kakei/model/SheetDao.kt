@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface SheetDao {
     @Insert
-    fun insert(sheet:Sheet)
+    fun insert(sheet: Sheet?)
 
     @Update
     fun update(sheet:Sheet)

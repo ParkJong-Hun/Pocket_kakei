@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.parkjonghun.pocket_kakei.R
 import com.parkjonghun.pocket_kakei.databinding.FragmentMonthBinding
 import com.parkjonghun.pocket_kakei.model.SheetModel
@@ -15,7 +16,10 @@ import com.parkjonghun.pocket_kakei.view.activity.AddActivity
 import com.parkjonghun.pocket_kakei.view.decorator.BackgroundDecorator
 import com.parkjonghun.pocket_kakei.view.decorator.SaturdayDecorator
 import com.parkjonghun.pocket_kakei.view.decorator.SundayDecorator
+import com.parkjonghun.pocket_kakei.viewmodel.MainViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MonthFragment: Fragment() {
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -25,9 +29,15 @@ class MonthFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = FragmentMonthBinding.inflate(inflater, container, false)
+
+        val viewModel: MainViewModel by activityViewModels()
+
         //FloatingButtonクリックしたら
         view.addButton.setOnClickListener {
-            startActivity(Intent(activity, AddActivity::class.java))
+            Intent(activity, AddActivity::class.java).apply {
+                putExtra("calendar", viewModel.calendarDayToString(view.monthCalendar.selectedDate))
+                startActivity(this)
+            }
         }
         //今日を選択する
         view.monthCalendar.selectedDate = CalendarDay.today()

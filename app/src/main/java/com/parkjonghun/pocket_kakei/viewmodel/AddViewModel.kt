@@ -1,12 +1,21 @@
 package com.parkjonghun.pocket_kakei.viewmodel
 
+import android.annotation.SuppressLint
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.parkjonghun.pocket_kakei.model.AppDatabase
+import com.parkjonghun.pocket_kakei.model.Sheet
 import java.text.DecimalFormat
+import java.util.*
 
-class AddViewModel:ViewModel() {
+class AddViewModel(application: Application):AndroidViewModel(application) {
+    @SuppressLint("StaticFieldLeak")
+    private val context = getApplication<Application>().applicationContext
+
+    val calendar = Calendar.getInstance()
     private var _moneyValue = 0
     private var _moneyValueLiveData: MutableLiveData<Int> = MutableLiveData()
     val moneyValue:LiveData<Int> = _moneyValueLiveData
@@ -53,6 +62,19 @@ class AddViewModel:ViewModel() {
 
     fun addDepositOnDatabase() {
         //TODO: Roomでデータベースにデータ追加
+        val db = AppDatabase.getInstance(context)
+        val newSheet = moneyValue.value?.let {
+            Sheet(
+                id =  calendar.time.toString() + "_" + description,
+                date = calendar,
+                isAdd = isAdd,
+                money = it,
+                category = category
+            )
+        }
+        if (newSheet != null) {
+            db?.sheetDao()?.insert(newSheet)
+        }
     }
 
     fun addPayingOnDatabase() {

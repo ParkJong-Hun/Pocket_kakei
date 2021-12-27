@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.parkjonghun.pocket_kakei.databinding.ActivityAddBinding
 import com.parkjonghun.pocket_kakei.view.fragment.*
 import com.parkjonghun.pocket_kakei.viewmodel.AddViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddActivity: AppCompatActivity() {
 
@@ -22,7 +24,11 @@ class AddActivity: AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().add(binding.addFragmentLayout.id, AddMoneyFragment()).commit()
 
+        val intent = intent
+
         val viewModel: AddViewModel by viewModels()
+        val selectedCalendarDay = SimpleDateFormat("yyyy MM dd", Locale.JAPANESE).parse(intent.getStringExtra("calendar")!!)
+        viewModel.calendar.time = selectedCalendarDay!!
         viewModel.currentStep.observe(this) {
             when(it) {
                 0 ->
