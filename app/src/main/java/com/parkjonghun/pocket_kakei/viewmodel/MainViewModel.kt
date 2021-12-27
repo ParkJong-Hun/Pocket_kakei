@@ -12,6 +12,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private val context = getApplication<Application>().applicationContext
 
     fun calendarDayToString(calendar: CalendarDay): String {
-        return SimpleDateFormat("yyyy MM dd", Locale.JAPANESE).format(calendar)
+        return SimpleDateFormat("yyyy MM dd", Locale.JAPANESE).format(calendar.date)
     }
 }

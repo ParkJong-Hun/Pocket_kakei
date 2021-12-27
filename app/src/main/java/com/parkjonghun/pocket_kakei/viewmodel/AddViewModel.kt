@@ -61,7 +61,6 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
     }
 
     fun addDepositOnDatabase() {
-        //TODO: Roomでデータベースにデータ追加
         val db = AppDatabase.getInstance(context)
         val newSheet = moneyValue.value?.let {
             Sheet(
@@ -71,9 +70,14 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
                 money = it,
                 category = category
             )
-        }
+        }.also { Log.d("new Sheet", it.toString()) }
         if (newSheet != null) {
-            db?.sheetDao()?.insert(newSheet)
+            val r = Runnable {
+                db!!.sheetDao().insert(newSheet)
+                val sheets = db.sheetDao().load()
+                Log.d("", sheets.toString())
+            }
+            Thread(r).start()
         }
     }
 
