@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.parkjonghun.pocket_kakei.R
@@ -43,11 +45,17 @@ class MonthFragment: Fragment() {
             )
         }
 
+        val activitResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if(result.resultCode == AppCompatActivity.RESULT_OK) {
+                viewModel.loadSheets()
+            }
+        }
+
         //FloatingButtonクリックしたら
         view.addButton.setOnClickListener {
             Intent(activity, AddActivity::class.java).apply {
                 putExtra("calendar", viewModel.calendarDayToString(view.monthCalendar.selectedDate))
-                startActivity(this)
+                activitResult.launch(this)
             }
         }
         //今日を選択する

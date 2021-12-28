@@ -58,6 +58,7 @@ class AddActivity: AppCompatActivity() {
         viewModel.dataIsReady.observe(this) {
             if(it) {
                 viewModel.addOnDatabase()
+                setResult(RESULT_OK)
                 finish()
             }
         }

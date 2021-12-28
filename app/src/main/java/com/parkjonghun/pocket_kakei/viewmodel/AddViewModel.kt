@@ -27,7 +27,7 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
     var isAdd: Boolean = false
     var description: String = ""
     private var _dataIsReady: Boolean = false
-    var category: String = ""
+    var category: String = "deposit"
     var dataIsReady: MutableLiveData<Boolean> = MutableLiveData()
 
     fun checkComma(value:Int): String {
@@ -71,7 +71,7 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
                 date = calendar,
                 isAdd = isAdd,
                 money = it,
-                category = "deposit"
+                category = category
             )
         }
         if (newSheet != null) {
