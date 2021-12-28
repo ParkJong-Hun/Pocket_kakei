@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel: MainViewModel by viewModels()
 
+        //TODO: RegisterForActivityResult (viewModel.loadSheets)
+
         supportFragmentManager.beginTransaction().add(binding.fragmentLayout.id, MonthFragment()).commit()
 
         binding.bottomNavigationView.run {

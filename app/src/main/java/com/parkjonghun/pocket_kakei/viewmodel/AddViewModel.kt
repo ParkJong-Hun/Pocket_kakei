@@ -60,7 +60,7 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
         dataIsReady.value = _dataIsReady
     }
 
-    fun addDepositOnDatabase() {
+    fun addOnDatabase() {
         val db = AppDatabase.getInstance(context)
         val newSheet = moneyValue.value?.let {
             Sheet(
@@ -68,7 +68,7 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
                 date = calendar,
                 isAdd = isAdd,
                 money = it,
-                category = category
+                category = "deposit"
             )
         }.also { Log.d("new Sheet", it.toString()) }
         if (newSheet != null) {
@@ -79,9 +79,5 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
             }
             Thread(r).start()
         }
-    }
-
-    fun addPayingOnDatabase() {
-        //TODO: Roomでデータベースにデータ追加
     }
 }

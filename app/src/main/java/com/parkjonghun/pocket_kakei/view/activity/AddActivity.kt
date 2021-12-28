@@ -57,11 +57,7 @@ class AddActivity: AppCompatActivity() {
         }
         viewModel.dataIsReady.observe(this) {
             if(it) {
-                if(viewModel.isAdd) {
-                    viewModel.addDepositOnDatabase()
-                } else {
-                    viewModel.addPayingOnDatabase()
-                }
+                viewModel.addOnDatabase()
                 finish()
             }
         }

@@ -18,8 +18,6 @@ import com.parkjonghun.pocket_kakei.view.decorator.SaturdayDecorator
 import com.parkjonghun.pocket_kakei.view.decorator.SundayDecorator
 import com.parkjonghun.pocket_kakei.viewmodel.MainViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import java.text.SimpleDateFormat
-import java.util.*
 
 class MonthFragment: Fragment() {
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -31,6 +29,20 @@ class MonthFragment: Fragment() {
         val view = FragmentMonthBinding.inflate(inflater, container, false)
 
         val viewModel: MainViewModel by activityViewModels()
+        viewModel.sheets.observe(viewLifecycleOwner) {
+            //TODO: リストを加工してカレンダーに表示する
+            //支出、収入日の背景
+            val addedDay:List<SheetModel> = listOf(SheetModel())
+            val paidDay:List<SheetModel> = listOf(SheetModel().apply {date.set(2021, 10, 12)})
+
+            val addedMoneyIcon:Drawable = view.root.resources.getDrawable(R.drawable.ic_add_money, null)
+            val paidMoneyIcon:Drawable = view.root.resources.getDrawable(R.drawable.ic_pay_money, null)
+
+            view.monthCalendar.addDecorators(
+                BackgroundDecorator(addedMoneyIcon, addedDay),
+                BackgroundDecorator(paidMoneyIcon, paidDay)
+            )
+        }
 
         //FloatingButtonクリックしたら
         view.addButton.setOnClickListener {
@@ -41,19 +53,10 @@ class MonthFragment: Fragment() {
         }
         //今日を選択する
         view.monthCalendar.selectedDate = CalendarDay.today()
-        //週末の色、支出、収入日の背景
-
-        val addedDay:List<SheetModel> = listOf(SheetModel())
-        val paidDay:List<SheetModel> = listOf(SheetModel().apply {date.set(2021, 10, 12)})
-
-        val addedMoneyIcon:Drawable = view.root.resources.getDrawable(R.drawable.ic_add_money, null)
-        val paidMoneyIcon:Drawable = view.root.resources.getDrawable(R.drawable.ic_pay_money, null)
-
+        //週末の色
         view.monthCalendar.addDecorators(
             SaturdayDecorator(),
             SundayDecorator(),
-            BackgroundDecorator(addedMoneyIcon, addedDay),
-            BackgroundDecorator(paidMoneyIcon, paidDay)
         )
         return view.root
     }
