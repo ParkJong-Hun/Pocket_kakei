@@ -8,6 +8,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.parkjonghun.pocket_kakei.model.AppDatabase
 import com.parkjonghun.pocket_kakei.model.Sheet
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.util.*
 
@@ -70,14 +73,11 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
                 money = it,
                 category = "deposit"
             )
-        }.also { Log.d("new Sheet", it.toString()) }
+        }
         if (newSheet != null) {
-            val r = Runnable {
+            CoroutineScope(Dispatchers.IO).launch {
                 db!!.sheetDao().insert(newSheet)
-                val sheets = db.sheetDao().load()
-                Log.d("", sheets.toString())
             }
-            Thread(r).start()
         }
     }
 }

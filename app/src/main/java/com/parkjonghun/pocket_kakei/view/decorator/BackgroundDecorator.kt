@@ -1,7 +1,7 @@
 package com.parkjonghun.pocket_kakei.view.decorator
 
 import android.graphics.drawable.Drawable
-import com.parkjonghun.pocket_kakei.model.SheetModel
+import com.parkjonghun.pocket_kakei.model.Sheet
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
@@ -9,7 +9,7 @@ import java.util.*
 
 class BackgroundDecorator(
     private val drawable: Drawable,
-    private val addedDay: List<SheetModel>
+    private val addedDay: List<Sheet>
     ): DayViewDecorator {
 
     private val calendar = Calendar.getInstance()

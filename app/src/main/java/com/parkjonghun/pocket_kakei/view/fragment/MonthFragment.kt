@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.parkjonghun.pocket_kakei.R
 import com.parkjonghun.pocket_kakei.databinding.FragmentMonthBinding
-import com.parkjonghun.pocket_kakei.model.SheetModel
+import com.parkjonghun.pocket_kakei.model.Sheet
 import com.parkjonghun.pocket_kakei.view.activity.AddActivity
 import com.parkjonghun.pocket_kakei.view.decorator.BackgroundDecorator
 import com.parkjonghun.pocket_kakei.view.decorator.SaturdayDecorator
@@ -30,17 +30,16 @@ class MonthFragment: Fragment() {
 
         val viewModel: MainViewModel by activityViewModels()
         viewModel.sheets.observe(viewLifecycleOwner) {
-            //TODO: リストを加工してカレンダーに表示する
             //支出、収入日の背景
-            val addedDay:List<SheetModel> = listOf(SheetModel())
-            val paidDay:List<SheetModel> = listOf(SheetModel().apply {date.set(2021, 10, 12)})
+            val addedDay: List<Sheet>? = viewModel.sheets.value?.filter { it.isAdd }
+            val paidDay: List<Sheet>? = viewModel.sheets.value?.filter { !it.isAdd }
 
-            val addedMoneyIcon:Drawable = view.root.resources.getDrawable(R.drawable.ic_add_money, null)
+            val addedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_add_money, null)
             val paidMoneyIcon:Drawable = view.root.resources.getDrawable(R.drawable.ic_pay_money, null)
 
             view.monthCalendar.addDecorators(
-                BackgroundDecorator(addedMoneyIcon, addedDay),
-                BackgroundDecorator(paidMoneyIcon, paidDay)
+                addedDay?.let { it1 -> BackgroundDecorator(addedMoneyIcon, it1) },
+                paidDay?.let { it1 -> BackgroundDecorator(paidMoneyIcon, it1) }
             )
         }
 

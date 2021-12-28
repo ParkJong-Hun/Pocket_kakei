@@ -1,6 +1,7 @@
 package com.parkjonghun.pocket_kakei.view.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.parkjonghun.pocket_kakei.R
@@ -21,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: MainViewModel by viewModels()
-
         //TODO: RegisterForActivityResult (viewModel.loadSheets)
 
         supportFragmentManager.beginTransaction().add(binding.fragmentLayout.id, MonthFragment()).commit()
