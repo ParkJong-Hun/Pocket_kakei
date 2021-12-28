@@ -37,12 +37,19 @@ class MonthFragment: Fragment() {
             val paidDay: List<Sheet>? = viewModel.sheets.value?.filter { !it.isAdd }
 
             val addedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_add_money, null)
-            val paidMoneyIcon:Drawable = view.root.resources.getDrawable(R.drawable.ic_pay_money, null)
+            val paidMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_pay_money, null)
+            val usedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_use_money, null)
 
             view.monthCalendar.addDecorators(
                 addedDay?.let { it1 -> BackgroundDecorator(addedMoneyIcon, it1) },
-                paidDay?.let { it1 -> BackgroundDecorator(paidMoneyIcon, it1) }
+                paidDay?.let { it1 -> BackgroundDecorator(paidMoneyIcon, it1) },
             )
+
+            if(addedDay != null && paidDay != null) {
+                val union = addedDay + paidDay
+                val intersection = union.groupBy { it.date.time }.filter { it.value.size > 1 }.flatMap { it.value }.distinct()
+                view.monthCalendar.addDecorator(BackgroundDecorator(usedMoneyIcon, intersection))
+            }
         }
 
         val activitResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
