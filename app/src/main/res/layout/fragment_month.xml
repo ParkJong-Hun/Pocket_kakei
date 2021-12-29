@@ -190,6 +190,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/month_recyclerView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!--追加ボタン-->
         </androidx.constraintlayout.widget.ConstraintLayout>
