@@ -71,7 +71,8 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
                 date = calendar,
                 isAdd = isAdd,
                 money = it,
-                category = category
+                category = category,
+                description = description
             )
         }
         if (newSheet != null) {

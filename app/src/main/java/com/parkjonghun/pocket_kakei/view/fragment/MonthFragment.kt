@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,8 +52,13 @@ class MonthFragment: Fragment() {
                 view.monthCalendar.addDecorator(BackgroundDecorator(usedMoneyIcon, intersection))
             }
         }
+        viewModel.selectedDay.observe(viewLifecycleOwner) {
+            //TODO: 選択した日のデータを加工してAdapterに伝える
+            val sheetsOfSelectedDay = viewModel.optimizeForMonth()
+            view.monthRecyclerView.visibility = View.VISIBLE
+        }
 
-        val activitResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val activityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if(result.resultCode == AppCompatActivity.RESULT_OK) {
                 viewModel.loadSheets()
             }
@@ -62,7 +68,7 @@ class MonthFragment: Fragment() {
         view.addButton.setOnClickListener {
             Intent(activity, AddActivity::class.java).apply {
                 putExtra("calendar", viewModel.calendarDayToString(view.monthCalendar.selectedDate))
-                activitResult.launch(this)
+                activityResult.launch(this)
             }
         }
         //今日を選択する
@@ -72,6 +78,14 @@ class MonthFragment: Fragment() {
             SaturdayDecorator(),
             SundayDecorator(),
         )
+
+        view.monthCalendar.setOnDateChangedListener { widget, date, selected ->
+            if (selected) {
+                viewModel.selectDay(date).also {
+                    Log.d("", viewModel.selectedDay.value.toString())
+                }
+            }
+        }
         return view.root
     }
 

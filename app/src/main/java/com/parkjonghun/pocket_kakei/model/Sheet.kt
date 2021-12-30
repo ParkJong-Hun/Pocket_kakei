@@ -10,5 +10,6 @@ data class Sheet(
     val date: Calendar,
     val isAdd: Boolean,
     val money: Int,
-    val category: String
+    val category: String,
+    val description: String
 )

@@ -25,6 +25,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private val _sheets:MutableLiveData<List<Sheet>> = MutableLiveData()
     val sheets:LiveData<List<Sheet>> = _sheets
 
+    private var _selectedDayList: CalendarDay? = CalendarDay.today()
+    private val _selectedDay: MutableLiveData<CalendarDay> = MutableLiveData()
+    val selectedDay:LiveData<CalendarDay> = _selectedDay
+
     init {
         Log.d("초기화됨", "초기화됨")
         loadSheets()
@@ -37,8 +41,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun optimizeForMonth() {
-
+    fun optimizeForMonth(): List<Sheet>? {
+        return null
     }
 
     fun optimizeForWeek() {
@@ -51,5 +55,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     fun calendarDayToString(calendar: CalendarDay): String {
         return SimpleDateFormat("yyyy MM dd", Locale.JAPANESE).format(calendar.date)
+    }
+
+    fun selectDay(date: CalendarDay) {
+        _selectedDayList = date
+        _selectedDay.value = _selectedDayList
     }
 }
