@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.parkjonghun.pocket_kakei.R
 import com.parkjonghun.pocket_kakei.databinding.FragmentMonthBinding
 import com.parkjonghun.pocket_kakei.model.Sheet
@@ -19,8 +20,12 @@ import com.parkjonghun.pocket_kakei.view.activity.AddActivity
 import com.parkjonghun.pocket_kakei.view.decorator.BackgroundDecorator
 import com.parkjonghun.pocket_kakei.view.decorator.SaturdayDecorator
 import com.parkjonghun.pocket_kakei.view.decorator.SundayDecorator
+import com.parkjonghun.pocket_kakei.view.recylcerview.DayOfMonthAdapter
 import com.parkjonghun.pocket_kakei.viewmodel.MainViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MonthFragment: Fragment() {
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -30,6 +35,10 @@ class MonthFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = FragmentMonthBinding.inflate(inflater, container, false)
+
+        val adapter = DayOfMonthAdapter()
+        val layoutManager = LinearLayoutManager(inflater.context)
+        view.monthRecyclerView.layoutManager = layoutManager
 
         val viewModel: MainViewModel by activityViewModels()
         viewModel.sheets.observe(viewLifecycleOwner) {
@@ -54,8 +63,23 @@ class MonthFragment: Fragment() {
         }
         viewModel.selectedDay.observe(viewLifecycleOwner) {
             //TODO: 選択した日のデータを加工してAdapterに伝える
-            val sheetsOfSelectedDay = viewModel.optimizeForMonth()
-            view.monthRecyclerView.visibility = View.VISIBLE
+            CoroutineScope(Dispatchers.Main).launch {
+                val sheetsOfSelectedDay = viewModel.optimizeForMonth()
+                if (sheetsOfSelectedDay != null) {
+                    if (sheetsOfSelectedDay.isNotEmpty()) {
+                        view.monthRecyclerView.visibility = View.VISIBLE
+                        view.noDataNotification.visibility = View.GONE
+                        view.monthRecyclerView.adapter = adapter
+                        adapter.submitList(sheetsOfSelectedDay)
+                    } else {
+                        view.monthRecyclerView.visibility = View.GONE
+                        view.noDataNotification.visibility = View.VISIBLE
+                        view.monthRecyclerView.adapter = adapter
+                        adapter.submitList(sheetsOfSelectedDay)
+                    }
+                }
+                Log.d("", sheetsOfSelectedDay.toString())
+            }
         }
 
         val activityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -81,9 +105,7 @@ class MonthFragment: Fragment() {
 
         view.monthCalendar.setOnDateChangedListener { widget, date, selected ->
             if (selected) {
-                viewModel.selectDay(date).also {
-                    Log.d("", viewModel.selectedDay.value.toString())
-                }
+                viewModel.selectDay(date)
             }
         }
         return view.root

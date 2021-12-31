@@ -11,6 +11,7 @@ import com.parkjonghun.pocket_kakei.model.Sheet
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,7 +31,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     val selectedDay:LiveData<CalendarDay> = _selectedDay
 
     init {
-        Log.d("초기화됨", "초기화됨")
         loadSheets()
     }
 
@@ -38,11 +38,22 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         CoroutineScope(Dispatchers.IO).launch {
             _sheetsList = db?.sheetDao()?.load()
             _sheets.postValue(_sheetsList)
+            Log.d("all data", _sheetsList.toString())
         }
     }
 
-    fun optimizeForMonth(): List<Sheet>? {
-        return null
+    suspend fun optimizeForMonth(): List<Sheet>? {
+        return if(selectedDay.value != null) {
+            val day: Calendar = Calendar.getInstance()
+            day.set(selectedDay.value!!.year, selectedDay.value!!.month, selectedDay.value!!.day)
+            Log.d("", day.toString())
+            val job = CoroutineScope(Dispatchers.IO).async {
+                db?.sheetDao()?.readThatDay(day)
+            }
+            job.await()
+        } else {
+            null
+        }
     }
 
     fun optimizeForWeek() {
