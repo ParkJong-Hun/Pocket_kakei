@@ -17,7 +17,6 @@ interface SheetDao {
     @Query("SELECT * FROM Sheet")
     fun load(): List<Sheet>
 
-    //TODO: オブジェクトが違っても同じ日だったら同じ扱いする
-    @Query("SELECT * FROM Sheet WHERE date = :day")
-    fun readThatDay(day: Calendar): List<Sheet>
+    @Query("SELECT * FROM Sheet WHERE id LIKE :day")
+    fun readThatDay(day: String): List<Sheet>
 }

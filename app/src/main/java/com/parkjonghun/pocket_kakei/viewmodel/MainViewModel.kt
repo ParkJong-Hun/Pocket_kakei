@@ -45,10 +45,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     suspend fun optimizeForMonth(): List<Sheet>? {
         return if(selectedDay.value != null) {
             val day: Calendar = Calendar.getInstance()
-            day.set(selectedDay.value!!.year, selectedDay.value!!.month, selectedDay.value!!.day)
-            Log.d("", day.toString())
+            day.set(selectedDay.value!!.year, selectedDay.value!!.month, selectedDay.value!!.day, 0, 0, 0)
             val job = CoroutineScope(Dispatchers.IO).async {
-                db?.sheetDao()?.readThatDay(day)
+                db?.sheetDao()?.readThatDay(day.time.toString() + "%").also { Log.d("", day.time.toString() + "%") }
             }
             job.await()
         } else {
