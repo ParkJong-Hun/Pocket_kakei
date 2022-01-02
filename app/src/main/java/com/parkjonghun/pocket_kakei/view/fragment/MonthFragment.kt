@@ -62,7 +62,6 @@ class MonthFragment: Fragment() {
             }
         }
         viewModel.selectedDay.observe(viewLifecycleOwner) {
-            //TODO: 選択した日のデータを加工してAdapterに伝える
             CoroutineScope(Dispatchers.Main).launch {
                 val sheetsOfSelectedDay = viewModel.optimizeForMonth()
                 if (sheetsOfSelectedDay != null) {
