@@ -26,19 +26,24 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private val _sheets:MutableLiveData<List<Sheet>> = MutableLiveData()
     val sheets:LiveData<List<Sheet>> = _sheets
 
-    private var _selectedDayList: CalendarDay? = CalendarDay.today()
+    private var _mutableSelectedDay: CalendarDay? = CalendarDay.today()
     private val _selectedDay: MutableLiveData<CalendarDay> = MutableLiveData()
     val selectedDay:LiveData<CalendarDay> = _selectedDay
 
+    private var _mutableSelectedMonth: CalendarDay = CalendarDay.today()
+    private val _selectedMonth: MutableLiveData<CalendarDay> = MutableLiveData()
+    val selectedMonth:LiveData<CalendarDay> = _selectedMonth
+
     init {
         loadSheets()
+        _selectedDay.value = _mutableSelectedDay
+        _selectedMonth.value = _mutableSelectedMonth
     }
 
     fun loadSheets() {
         CoroutineScope(Dispatchers.IO).launch {
             _sheetsList = db?.sheetDao()?.load()
             _sheets.postValue(_sheetsList)
-            Log.d("all data", _sheetsList.toString())
         }
     }
 
@@ -47,7 +52,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             val day: Calendar = Calendar.getInstance()
             day.set(selectedDay.value!!.year, selectedDay.value!!.month, selectedDay.value!!.day, 0, 0, 0)
             val job = CoroutineScope(Dispatchers.IO).async {
-                db?.sheetDao()?.readThatDay(day.time.toString() + "%").also { Log.d("", day.time.toString() + "%") }
+                db?.sheetDao()?.readThatDay(day.time.toString() + "%")
             }
             job.await()
         } else {
@@ -68,7 +73,30 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun selectDay(date: CalendarDay) {
-        _selectedDayList = date
-        _selectedDay.value = _selectedDayList
+        _mutableSelectedDay = date
+        _selectedDay.value = _mutableSelectedDay
+    }
+
+    fun selectMonth(date: CalendarDay) {
+        _mutableSelectedMonth = date
+        _selectedMonth.value = _mutableSelectedMonth
+        Log.d("", selectedMonth.value.toString())
+    }
+
+    fun getAllDepositMoney(): Int {
+        var result = 0
+        sheets.value?.let {
+            Log.d("1", it.toString())
+            val thisMonthSheets = it.filter { sheet ->
+                sheet.date.get(Calendar.MONTH) == selectedMonth.value?.month
+            }
+            Log.d("2", thisMonthSheets.toString())
+            for(sheet in thisMonthSheets) {
+                if(sheet.category == "deposit") {
+                    result += sheet.money
+                }
+            }
+        }
+        return result
     }
 }

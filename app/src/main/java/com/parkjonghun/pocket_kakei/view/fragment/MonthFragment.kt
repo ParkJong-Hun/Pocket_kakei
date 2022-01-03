@@ -28,7 +28,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MonthFragment: Fragment() {
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,6 +60,11 @@ class MonthFragment: Fragment() {
                 val intersection = union.groupBy { it.date.time }.filter { it.value.size > 1 }.flatMap { it.value }.distinct()
                 view.monthCalendar.addDecorator(BackgroundDecorator(usedMoneyIcon, intersection))
             }
+
+            view.monthIncomeValue.text = "${viewModel.getAllDepositMoney()}円"
+        }
+        viewModel.selectedMonth.observe(viewLifecycleOwner) {
+            view.monthIncomeValue.text = "${viewModel.getAllDepositMoney()}円"
         }
         viewModel.selectedDay.observe(viewLifecycleOwner) {
             CoroutineScope(Dispatchers.Main).launch {
@@ -106,6 +111,9 @@ class MonthFragment: Fragment() {
             if (selected) {
                 viewModel.selectDay(date)
             }
+        }
+        view.monthCalendar.setOnMonthChangedListener { widget, date ->
+            viewModel.selectMonth(date)
         }
         return view.root
     }
