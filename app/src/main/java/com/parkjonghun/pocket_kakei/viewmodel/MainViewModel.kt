@@ -93,20 +93,64 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
 
     //選択した月の収入を計算
-    fun getAllDepositMoney(): Int {
+    fun getAllIncomeMoney(): Int {
         var result = 0
         sheets.value?.let {
-            Log.d("1", it.toString())
             val thisMonthSheets = it.filter { sheet ->
                 sheet.date.get(Calendar.MONTH) == selectedMonth.value?.month
             }
-            Log.d("2", thisMonthSheets.toString())
             for(sheet in thisMonthSheets) {
-                if(sheet.category == "deposit") {
+                if(sheet.isAdd) {
                     result += sheet.money
                 }
             }
         }
         return result
     }
+    //選択した月の支出を計算
+    fun getAllExpenditureMoney(): Int {
+        var result = 0
+        sheets.value?.let {
+            val thisMonthSheets = it.filter { sheet ->
+                sheet.date.get(Calendar.MONTH) == selectedMonth.value?.month
+            }
+            for(sheet in thisMonthSheets) {
+                if(!sheet.isAdd) {
+                    result += sheet.money
+                }
+            }
+        }
+        return result
+    }
+    //選択した月の現金を計算
+    fun getCashExpenditureMoney(): Int {
+        var result = 0
+        sheets.value?.let {
+            val thisMonthSheets = it.filter { sheet ->
+                sheet.date.get(Calendar.MONTH) == selectedMonth.value?.month
+            }
+            for(sheet in thisMonthSheets) {
+                if(sheet.category == "cash") {
+                    result += sheet.money
+                }
+            }
+        }
+        return result
+    }
+    //選択した月のカードを計算
+    fun getCardExpenditureMoney(): Int {
+        var result = 0
+        sheets.value?.let {
+            val thisMonthSheets = it.filter { sheet ->
+                sheet.date.get(Calendar.MONTH) == selectedMonth.value?.month
+            }
+            for(sheet in thisMonthSheets) {
+                if(sheet.category == "debitCard" || sheet.category == "creditCard") {
+                    result += sheet.money
+                }
+            }
+        }
+        return result
+    }
+
 }

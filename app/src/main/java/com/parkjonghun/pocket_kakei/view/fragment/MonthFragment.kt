@@ -36,12 +36,23 @@ class MonthFragment: Fragment() {
     ): View {
         val view = FragmentMonthBinding.inflate(inflater, container, false)
 
-        //RecylcerView設定
+        //RecyclerView設定
         val adapter = DayOfMonthAdapter()
         val layoutManager = LinearLayoutManager(inflater.context)
         view.monthRecyclerView.layoutManager = layoutManager
 
         val viewModel: MainViewModel by activityViewModels()
+        //上段のUI更新
+        fun updateTopUI() {
+            //収入
+            view.monthIncomeValue.text = "${viewModel.getAllIncomeMoney()}円"
+            //支出
+            view.monthExpenditureValue.text = "${viewModel.getAllExpenditureMoney()}円"
+            //現金
+            view.monthExpenditureCashValue.text = "${viewModel.getCashExpenditureMoney()}円"
+            //カード
+            view.monthExpenditureCardValue.text = "${viewModel.getCardExpenditureMoney()}円"
+        }
         //Sheetsが変わったら
         viewModel.sheets.observe(viewLifecycleOwner) {
             //支出、収入日の背景
@@ -63,13 +74,11 @@ class MonthFragment: Fragment() {
                 view.monthCalendar.addDecorator(BackgroundDecorator(usedMoneyIcon, intersection))
             }
 
-            //収入更新
-            view.monthIncomeValue.text = "${viewModel.getAllDepositMoney()}円"
+            updateTopUI()
         }
         //選択した月が変わったら
         viewModel.selectedMonth.observe(viewLifecycleOwner) {
-            //収入更新
-            view.monthIncomeValue.text = "${viewModel.getAllDepositMoney()}円"
+            updateTopUI()
         }
         //選択した日が変わったら
         viewModel.selectedDay.observe(viewLifecycleOwner) {
@@ -96,7 +105,6 @@ class MonthFragment: Fragment() {
             }
         }
 
-
         //AddActivityからデータを追加したら
         val activityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if(result.resultCode == AppCompatActivity.RESULT_OK) {
@@ -121,17 +129,20 @@ class MonthFragment: Fragment() {
             SundayDecorator(),
         )
         //日を選択したら
-        view.monthCalendar.setOnDateChangedListener { widget, date, selected ->
+        view.monthCalendar.setOnDateChangedListener { _, date, selected ->
             if (selected) {
                 //データ更新
                 viewModel.selectDay(date)
             }
         }
         //月を選択したら
-        view.monthCalendar.setOnMonthChangedListener { widget, date ->
+        view.monthCalendar.setOnMonthChangedListener { _, date ->
             //データ更新
             viewModel.selectMonth(date)
         }
+
+
+
 
 
 
