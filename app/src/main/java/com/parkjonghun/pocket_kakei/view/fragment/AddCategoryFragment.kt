@@ -18,6 +18,7 @@ class AddCategoryFragment: Fragment() {
         val view = FragmentAddCategoryBinding.inflate(inflater, container, false)
 
         val viewModel: AddViewModel by activityViewModels()
+        //カテゴリー選択してデータ追加
         view.cashButton.setOnClickListener {
             viewModel.category = "cash"
             viewModel.dataReady()
@@ -30,6 +31,8 @@ class AddCategoryFragment: Fragment() {
             viewModel.category = "creditCard"
             viewModel.dataReady()
         }
+
+
 
         return view.root
     }

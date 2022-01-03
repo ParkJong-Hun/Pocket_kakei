@@ -15,12 +15,14 @@ class BackgroundDecorator(
     private val calendar = Calendar.getInstance()
 
     override fun shouldDecorate(day: CalendarDay?): Boolean {
+        //シートにある日なら
         day?.copyTo(calendar)
         val yearDay = calendar.get(Calendar.DAY_OF_YEAR)
         return addedDay.map{ it.date.get(Calendar.DAY_OF_YEAR) }.contains(yearDay)
     }
 
     override fun decorate(view: DayViewFacade?) {
+        //背景をdrawableにイメージを変える
         view?.setBackgroundDrawable(drawable)
     }
 }

@@ -22,10 +22,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         val viewModel: MainViewModel by viewModels()
 
-        supportFragmentManager.beginTransaction().add(binding.fragmentLayout.id, MonthFragment()).commit()
 
+        //初期Fragment表示
+        supportFragmentManager.beginTransaction().add(binding.fragmentLayout.id, MonthFragment()).commit()
+        //Navigationボタンをクリックしたら
         binding.bottomNavigationView.run {
             setOnItemSelectedListener { item ->
                 when(item.itemId) {

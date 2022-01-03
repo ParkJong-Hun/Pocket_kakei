@@ -18,14 +18,17 @@ class AddDescriptionFragment: Fragment() {
         val view = FragmentAddDescriptionBinding.inflate(inflater, container, false)
 
         val viewModel: AddViewModel by activityViewModels()
+        //ViewModelからデータを持ってきてUI表示
         view.descriptionValue.setText(viewModel.description)
-
+        //ボタンをクリックしたら
         view.submitDescriptionButton.setOnClickListener {
+            //入力したのをViewModelのデータに更新
             viewModel.description = view.descriptionValue.text.toString()
-            if(viewModel.isAdd) {
-                viewModel.dataReady()
-            } else { viewModel.nextStep() }
+            //収入ならデータ追加、じゃないと次の画面
+            if(viewModel.isAdd) { viewModel.dataReady() } else { viewModel.nextStep() }
         }
+
+
 
         return view.root
     }

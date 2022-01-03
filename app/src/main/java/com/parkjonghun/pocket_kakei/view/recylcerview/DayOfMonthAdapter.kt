@@ -15,6 +15,7 @@ class DayOfMonthAdapter: ListAdapter<Sheet, DayOfMonthAdapter.DayOfMonthViewHold
     inner class DayOfMonthViewHolder(private val binding: ItemDayOfMonthBinding): RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(item: Sheet) {
+            //Sheetの情報を加工してアイテムのUIを更新
             binding.itemDayOfMonthDescription.text = item.description
             when(item.category) {
                 "deposit"-> binding.itemDayOfMonthCategory.text = "入金"

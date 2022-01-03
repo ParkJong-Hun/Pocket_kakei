@@ -6,11 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
+//データベース
 @Database(entities = [Sheet::class], version = 2)
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun sheetDao(): SheetDao
 
+    //シングルトーン
     companion object {
         private var instance: AppDatabase? = null
 

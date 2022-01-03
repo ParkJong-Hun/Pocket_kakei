@@ -19,20 +19,22 @@ import java.util.*
 class MainViewModel(application: Application): AndroidViewModel(application) {
     @SuppressLint("StaticFieldLeak")
     private val context = getApplication<Application>().applicationContext
-
+    //Roomデータベース
     private val db = AppDatabase.getInstance(context)
-
+    //シートデータ
     private var _sheetsList: List<Sheet>? = null
     private val _sheets:MutableLiveData<List<Sheet>> = MutableLiveData()
     val sheets:LiveData<List<Sheet>> = _sheets
-
+    //選択した日
     private var _mutableSelectedDay: CalendarDay? = CalendarDay.today()
     private val _selectedDay: MutableLiveData<CalendarDay> = MutableLiveData()
     val selectedDay:LiveData<CalendarDay> = _selectedDay
-
+    //選択した月
     private var _mutableSelectedMonth: CalendarDay = CalendarDay.today()
     private val _selectedMonth: MutableLiveData<CalendarDay> = MutableLiveData()
     val selectedMonth:LiveData<CalendarDay> = _selectedMonth
+
+
 
     init {
         loadSheets()
@@ -40,6 +42,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         _selectedMonth.value = _mutableSelectedMonth
     }
 
+
+    //データベースからデータ全部を持ってくる
     fun loadSheets() {
         CoroutineScope(Dispatchers.IO).launch {
             _sheetsList = db?.sheetDao()?.load()
@@ -47,6 +51,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+
+    //MonthFragmentのカレンダーの選択した日に合わせてデータ情報を加工
     suspend fun optimizeForMonth(): List<Sheet>? {
         return if(selectedDay.value != null) {
             val day: Calendar = Calendar.getInstance()
@@ -59,30 +65,34 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             null
         }
     }
-
+    //TODO: WeekFragmentのカレンダーの選択した日に合わせてデータ情報を加工
     fun optimizeForWeek() {
-
     }
-
+    //TODO: DayFragmentのカレンダーの選択した日に合わせてデータ情報を加工
     fun optimizeForDay() {
-
     }
 
+
+    //CalendarDayをStringに変換
     fun calendarDayToString(calendar: CalendarDay): String {
         return SimpleDateFormat("yyyy MM dd", Locale.JAPANESE).format(calendar.date)
     }
 
+
+    //選択した日更新
     fun selectDay(date: CalendarDay) {
         _mutableSelectedDay = date
         _selectedDay.value = _mutableSelectedDay
     }
-
+    //選択した月更新
     fun selectMonth(date: CalendarDay) {
         _mutableSelectedMonth = date
         _selectedMonth.value = _mutableSelectedMonth
         Log.d("", selectedMonth.value.toString())
     }
 
+
+    //選択した月の収入を計算
     fun getAllDepositMoney(): Int {
         var result = 0
         sheets.value?.let {

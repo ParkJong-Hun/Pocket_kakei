@@ -3,6 +3,7 @@ package com.parkjonghun.pocket_kakei.model
 import androidx.room.TypeConverter
 import java.util.*
 
+//CalendarをLongに
 class Converters {
     @TypeConverter
     fun longToCalendar(value: Long?): Calendar? {

@@ -17,19 +17,25 @@ import java.util.*
 class AddViewModel(application: Application):AndroidViewModel(application) {
     @SuppressLint("StaticFieldLeak")
     private val context = getApplication<Application>().applicationContext
-
-    val calendar = Calendar.getInstance()
+    //カレンダー
+    val calendar: Calendar = Calendar.getInstance()
+    //金額
     private var _moneyValue = 0
     private var _moneyValueLiveData: MutableLiveData<Int> = MutableLiveData()
     val moneyValue:LiveData<Int> = _moneyValueLiveData
+    //収入か支出か
+    var isAdd: Boolean = false
+    //説明
+    var description: String = ""
+    //カテゴリー
+    var category: String = "deposit"
+    //シート追加の画面のステップ
     private var _currentStep = 0
     var currentStep:MutableLiveData<Int> = MutableLiveData()
-    var isAdd: Boolean = false
-    var description: String = ""
+    //データ追加準備完了合図
     private var _dataIsReady: Boolean = false
-    var category: String = "deposit"
     var dataIsReady: MutableLiveData<Boolean> = MutableLiveData()
-
+    //3字があれば「,」を記入
     fun checkComma(value:Int): String {
         val formatter = DecimalFormat("###,###")
         _moneyValue = value
@@ -37,7 +43,7 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
         Log.d("money", "money: ${moneyValue.value}")
         return formatter.format(value)
     }
-
+    //数字の長さが9より高いと禁止
     fun checkLength(value:String): String {
         return if (value.filter { it.isDigit() }.length > 9) {
             value.drop(1)
@@ -47,22 +53,22 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
             value
         }
     }
-
+    //次の画面に移る
     fun nextStep() {
         _currentStep += 1
         currentStep.value = _currentStep
     }
-
+    //以前の画面に戻る
     fun previousStep() {
         _currentStep -= 1
         currentStep.value = _currentStep
     }
-
+    //データを追加する準備OK
     fun dataReady() {
         _dataIsReady = true
         dataIsReady.value = _dataIsReady
     }
-
+    //データをデータベースに挿入
     fun addOnDatabase() {
         val db = AppDatabase.getInstance(context)
         val newSheet = moneyValue.value?.let {

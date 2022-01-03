@@ -12,12 +12,14 @@ class SundayDecorator: DayViewDecorator {
     private val calendar = Calendar.getInstance()
 
     override fun shouldDecorate(day: CalendarDay?): Boolean {
+        //カレンダーの日が日曜日なら
         day?.copyTo(calendar)
         val weekDay = calendar.get(Calendar.DAY_OF_WEEK)
         return weekDay == Calendar.SUNDAY
     }
 
     override fun decorate(view: DayViewFacade?) {
+        //赤色に変える
         view?.addSpan(ForegroundColorSpan(Color.RED))
     }
 }

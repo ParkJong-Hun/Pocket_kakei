@@ -36,11 +36,13 @@ class MonthFragment: Fragment() {
     ): View {
         val view = FragmentMonthBinding.inflate(inflater, container, false)
 
+        //RecylcerView設定
         val adapter = DayOfMonthAdapter()
         val layoutManager = LinearLayoutManager(inflater.context)
         view.monthRecyclerView.layoutManager = layoutManager
 
         val viewModel: MainViewModel by activityViewModels()
+        //Sheetsが変わったら
         viewModel.sheets.observe(viewLifecycleOwner) {
             //支出、収入日の背景
             val addedDay: List<Sheet>? = viewModel.sheets.value?.filter { it.isAdd }
@@ -54,28 +56,36 @@ class MonthFragment: Fragment() {
                 addedDay?.let { it1 -> BackgroundDecorator(addedMoneyIcon, it1) },
                 paidDay?.let { it1 -> BackgroundDecorator(paidMoneyIcon, it1) },
             )
-
+            //データが支出と収入どっちもあったら
             if(addedDay != null && paidDay != null) {
                 val union = addedDay + paidDay
                 val intersection = union.groupBy { it.date.time }.filter { it.value.size > 1 }.flatMap { it.value }.distinct()
                 view.monthCalendar.addDecorator(BackgroundDecorator(usedMoneyIcon, intersection))
             }
 
+            //収入更新
             view.monthIncomeValue.text = "${viewModel.getAllDepositMoney()}円"
         }
+        //選択した月が変わったら
         viewModel.selectedMonth.observe(viewLifecycleOwner) {
+            //収入更新
             view.monthIncomeValue.text = "${viewModel.getAllDepositMoney()}円"
         }
+        //選択した日が変わったら
         viewModel.selectedDay.observe(viewLifecycleOwner) {
             CoroutineScope(Dispatchers.Main).launch {
+                //選択した日の情報を利用し、データを加工
                 val sheetsOfSelectedDay = viewModel.optimizeForMonth()
+                //データがないわけじゃないと
                 if (sheetsOfSelectedDay != null) {
                     if (sheetsOfSelectedDay.isNotEmpty()) {
+                        //情報を表示
                         view.monthRecyclerView.visibility = View.VISIBLE
                         view.noDataNotification.visibility = View.GONE
                         view.monthRecyclerView.adapter = adapter
                         adapter.submitList(sheetsOfSelectedDay)
                     } else {
+                        ////情報を非表示
                         view.monthRecyclerView.visibility = View.GONE
                         view.noDataNotification.visibility = View.VISIBLE
                         view.monthRecyclerView.adapter = adapter
@@ -86,11 +96,15 @@ class MonthFragment: Fragment() {
             }
         }
 
+
+        //AddActivityからデータを追加したら
         val activityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if(result.resultCode == AppCompatActivity.RESULT_OK) {
+                //データ更新
                 viewModel.loadSheets()
             }
         }
+
 
         //FloatingButtonクリックしたら
         view.addButton.setOnClickListener {
@@ -106,15 +120,21 @@ class MonthFragment: Fragment() {
             SaturdayDecorator(),
             SundayDecorator(),
         )
-
+        //日を選択したら
         view.monthCalendar.setOnDateChangedListener { widget, date, selected ->
             if (selected) {
+                //データ更新
                 viewModel.selectDay(date)
             }
         }
+        //月を選択したら
         view.monthCalendar.setOnMonthChangedListener { widget, date ->
+            //データ更新
             viewModel.selectMonth(date)
         }
+
+
+
         return view.root
     }
 
