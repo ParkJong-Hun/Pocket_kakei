@@ -33,6 +33,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private var _mutableSelectedMonth: CalendarDay = CalendarDay.today()
     private val _selectedMonth: MutableLiveData<CalendarDay> = MutableLiveData()
     val selectedMonth:LiveData<CalendarDay> = _selectedMonth
+    //ダブルクリック
+    private var _mutableDoubleClicked:Boolean = false
+    private val _doubleClicked: MutableLiveData<Boolean> = MutableLiveData()
+    val doubleClicked:LiveData<Boolean> = _doubleClicked
 
 
 
@@ -152,5 +156,13 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         return result
     }
-
+    //ダブルクリックチェック
+    fun doubleClicked() {
+        _mutableDoubleClicked = true
+        _doubleClicked.value = _mutableDoubleClicked
+    }
+    fun doubleClickEventDone() {
+        _mutableDoubleClicked = false
+        _doubleClicked.value = _mutableDoubleClicked
+    }
 }

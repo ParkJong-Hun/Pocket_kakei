@@ -140,8 +140,12 @@ class MonthFragment: Fragment() {
         //日を選択したら
         view.monthCalendar.setOnDateChangedListener { _, date, selected ->
             if (selected) {
-                //データ更新
-                viewModel.selectDay(date)
+                if (viewModel.selectedDay.value == date) {
+                    viewModel.doubleClicked()
+                } else {
+                    //データ更新
+                    viewModel.selectDay(date)
+                }
             }
         }
         //月を選択したら
