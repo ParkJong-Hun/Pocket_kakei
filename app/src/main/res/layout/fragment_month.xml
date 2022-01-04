@@ -43,7 +43,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left"
-                            android:text="収入" />
+                            android:text="@string/syuunyuu" />
 
                         <View
                             android:layout_width="0dp"
@@ -54,7 +54,7 @@
                             android:id="@+id/monthIncomeValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0円"
+                            android:text="@string/_0en_big"
                             android:textColor="@color/green"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -69,11 +69,11 @@
                         app:layout_constraintTop_toBottomOf="@+id/monthIncomeLayout">
 
                         <TextView
-                            android:id="@+id/monthCashTitle"
+                            android:id="@+id/monthBalanceTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left"
-                            android:text="現金 残高" />
+                            android:text="@string/zandaka" />
 
                         <View
                             android:layout_width="0dp"
@@ -81,10 +81,10 @@
                             android:layout_weight="1" />
 
                         <TextView
-                            android:id="@+id/monthCashValue"
+                            android:id="@+id/monthBalanceValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0円"
+                            android:text="@string/_0en_big"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -117,7 +117,7 @@
                             android:id="@+id/monthExpenditureValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0円"
+                            android:text="@string/_0en_big"
                             android:textColor="@color/red"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -131,7 +131,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="└現金" />
+                                android:text="@string/genkin_underbar" />
                             <View
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
@@ -148,7 +148,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="└カード" />
+                                android:text="@string/card_underbar" />
                             <View
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
@@ -186,7 +186,7 @@
                     android:id="@+id/noDataNotification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="データがないです。"
+                    android:text="@string/no_data_notification"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

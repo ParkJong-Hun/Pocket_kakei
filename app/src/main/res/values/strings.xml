@@ -8,4 +8,10 @@
     <string name="cash">現金</string>
     <string name="debit_card">デビットカード</string>
     <string name="credit_card">クレジットカード</string>
+    <string name="syuunyuu">収入</string>
+    <string name="_0en_big">0円</string>
+    <string name="zandaka">残高</string>
+    <string name="genkin_underbar">└現金</string>
+    <string name="card_underbar">└カード</string>
+    <string name="no_data_notification">データがないです。</string>
 </resources>

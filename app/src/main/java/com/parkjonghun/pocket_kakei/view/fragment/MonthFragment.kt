@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,6 +53,14 @@ class MonthFragment: Fragment() {
             view.monthExpenditureCashValue.text = "${viewModel.getCashExpenditureMoney()}円"
             //カード
             view.monthExpenditureCardValue.text = "${viewModel.getCardExpenditureMoney()}円"
+            //残高
+            val balance = viewModel.getAllIncomeMoney() - viewModel.getAllExpenditureMoney()
+            view.monthBalanceValue.text = "${balance}円"
+            if(balance < 0) {
+                view.monthBalanceValue.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+            } else {
+                view.monthBalanceValue.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
+            }
         }
         //Sheetsが変わったら
         viewModel.sheets.observe(viewLifecycleOwner) {
