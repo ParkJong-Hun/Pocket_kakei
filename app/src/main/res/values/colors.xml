@@ -12,6 +12,8 @@
     <color name="lifeBlack">#191919</color>
     <color name="green">#53C657</color>
     <color name="red">#FF7878</color>
+    <color name="blue">#4B72FF</color>
+    <color name="lifeWhite">#F8F8F8</color>
 
     <color name="lifeGreen">#70DF75</color>
     <color name="lifeGreen_dark">#58955B</color>
