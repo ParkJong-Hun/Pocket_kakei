@@ -76,6 +76,7 @@ class AddActivity: AppCompatActivity() {
         binding.closeButton.setOnClickListener {
             finish()
         }
+        //選択した日付
         binding.todayTextView.text = viewModel.getToday()
     }
 }

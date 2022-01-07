@@ -31,6 +31,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/daySundayValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="1" />
@@ -58,6 +59,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/dayMondayValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="2" />
@@ -85,6 +87,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/dayTuesdayValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="3" />
@@ -112,6 +115,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/dayWednesdayValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="4" />
@@ -139,6 +143,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/dayThursdayValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="5" />
@@ -166,6 +171,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/dayFridayValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="6" />
@@ -193,6 +199,7 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/daySaturdayValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="7" />

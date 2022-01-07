@@ -165,4 +165,18 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         _mutableDoubleClicked = false
         _doubleClicked.value = _mutableDoubleClicked
     }
+    //選択する日を次の日に
+    fun selectNextDay() {
+        _mutableSelectedDay?.calendar?.apply {
+            add(Calendar.DATE, 1)
+        }
+        _selectedDay.value = _mutableSelectedDay
+    }
+    //選択する日を前の日に
+    fun selectPreviousDay() {
+        _mutableSelectedDay?.calendar?.apply {
+            add(Calendar.DATE, -1)
+        }
+        _selectedDay.value = _mutableSelectedDay
+    }
 }
