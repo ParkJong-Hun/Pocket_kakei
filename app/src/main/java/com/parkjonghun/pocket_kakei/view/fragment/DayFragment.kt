@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.AndroidViewModel
 import androidx.viewpager2.widget.ViewPager2
 import com.parkjonghun.pocket_kakei.databinding.FragmentDayBinding
 import com.parkjonghun.pocket_kakei.view.viewpager.ViewPagerAdapter

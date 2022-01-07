@@ -76,5 +76,6 @@ class AddActivity: AppCompatActivity() {
         binding.closeButton.setOnClickListener {
             finish()
         }
+        binding.todayTextView.text = viewModel.getToday()
     }
 }
