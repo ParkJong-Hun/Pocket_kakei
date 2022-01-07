@@ -337,52 +337,45 @@
             android:background="@drawable/shadow"
             app:layout_constraintTop_toBottomOf="@id/dayInfoLayout" />
 
-        <HorizontalScrollView
-            android:id="@+id/dayScroll"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/dayRestViewPager"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:scrollbars="none"
-            android:fillViewport="true"
-            android:layoutDirection="locale"
             app:layout_constraintTop_toBottomOf="@+id/dayInfoLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <LinearLayout
-                android:layout_width="450dp"
-                android:layout_height="match_parent"
+            <!--
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="left|center"
+                android:background="@color/lifeWhite" />
+            
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dayRestLayout"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center">
-                <View
-                    android:layout_width="30dp"
-                    android:layout_height="wrap_content"/>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/dayRestLayout"
-                    android:layout_width="450dp"
-                    android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/dayNoDataNotification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_data_notification"
+                    app:layout_constraintBottom_toBottomOf="@id/dayRestLayout"
+                    app:layout_constraintEnd_toEndOf="@id/dayRestLayout"
+                    app:layout_constraintStart_toStartOf="@id/dayRestLayout"
+                    app:layout_constraintTop_toTopOf="@id/dayRestLayout" />
 
-                    <TextView
-                        android:id="@+id/dayNoDataNotification"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/no_data_notification"
-                        app:layout_constraintBottom_toBottomOf="@id/dayRestLayout"
-                        app:layout_constraintEnd_toEndOf="@id/dayRestLayout"
-                        app:layout_constraintStart_toStartOf="@id/dayRestLayout"
-                        app:layout_constraintTop_toTopOf="@id/dayRestLayout" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:layout_width="30dp"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-        </HorizontalScrollView>
-
-
-
-
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right|center"
+                android:background="@color/lifeWhite" />
+                -->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
