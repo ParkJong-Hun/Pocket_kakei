@@ -2,17 +2,13 @@ package com.parkjonghun.pocket_kakei.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.parkjonghun.pocket_kakei.model.AppDatabase
 import com.parkjonghun.pocket_kakei.model.Sheet
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,7 +22,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private val _sheets:MutableLiveData<List<Sheet>> = MutableLiveData()
     val sheets:LiveData<List<Sheet>> = _sheets
     //選択した日
-    private var _mutableSelectedDay: CalendarDay? = CalendarDay.today()
+    private var _mutableSelectedDay: CalendarDay = CalendarDay.today()
     private val _selectedDay: MutableLiveData<CalendarDay> = MutableLiveData()
     val selectedDay:LiveData<CalendarDay> = _selectedDay
     //選択した月
@@ -92,7 +88,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun selectMonth(date: CalendarDay) {
         _mutableSelectedMonth = date
         _selectedMonth.value = _mutableSelectedMonth
-        Log.d("", selectedMonth.value.toString())
     }
 
 
@@ -167,16 +162,35 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
     //選択する日を次の日に
     fun selectNextDay() {
-        _mutableSelectedDay?.calendar?.apply {
+        _mutableSelectedDay.calendar.apply {
             add(Calendar.DATE, 1)
+            _mutableSelectedDay.date.time = this.timeInMillis
         }
         _selectedDay.value = _mutableSelectedDay
     }
-    //選択する日を前の日に
+    //選択する日を前の日にl
     fun selectPreviousDay() {
-        _mutableSelectedDay?.calendar?.apply {
+        _mutableSelectedDay.calendar.apply {
             add(Calendar.DATE, -1)
+            _mutableSelectedDay.date.time = this.timeInMillis
         }
         _selectedDay.value = _mutableSelectedDay
+    }
+    //一週間の日を更新
+    fun loadOneWeekDayOfMonth(): List<Int> {
+        val currentWeek:MutableList<Int> = mutableListOf(_mutableSelectedDay.calendar.get(Calendar.DAY_OF_MONTH))
+        val over = 7 - _mutableSelectedDay.calendar.get(Calendar.DAY_OF_WEEK)
+        val under = _mutableSelectedDay.calendar.get(Calendar.DAY_OF_WEEK) - 1
+        val tempUnder: Calendar = _mutableSelectedDay.calendar.clone() as Calendar
+        for (i in 1..under) {
+            tempUnder.add(Calendar.DATE, -1)
+            currentWeek.add(0, tempUnder.get(Calendar.DAY_OF_MONTH))
+        }
+        val tempOver: Calendar = _mutableSelectedDay.calendar.clone() as Calendar
+        for (i in 1..over) {
+            tempOver.add(Calendar.DATE, 1)
+            currentWeek.add(tempOver.get(Calendar.DAY_OF_MONTH))
+        }
+        return currentWeek
     }
 }

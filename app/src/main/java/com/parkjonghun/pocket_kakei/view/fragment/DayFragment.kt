@@ -2,7 +2,6 @@ package com.parkjonghun.pocket_kakei.view.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +26,14 @@ class DayFragment: Fragment() {
 
         val viewModel: MainViewModel by activityViewModels()
 
+        val SUN = 0
+        val MON = 1
+        val TUE = 2
+        val WED = 3
+        val THU = 4
+        val FRI = 5
+        val SAT = 6
+
         val pagerAdapter = ViewPagerAdapter(requireActivity())
         pagerAdapter.addFragment(DayFragmentMargin())
         pagerAdapter.addFragment(DayFragmentArticle())
@@ -46,9 +53,7 @@ class DayFragment: Fragment() {
                 }
             }
         })
-        //TODO: forを使ってもっと見やすく
-        viewModel.selectedDay.observe(viewLifecycleOwner) {
-            Log.d("", viewModel.selectedDay.value.toString())
+        fun initWeekUI() {
             view.daySundayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             view.dayMondayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             view.dayTuesdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
@@ -56,119 +61,31 @@ class DayFragment: Fragment() {
             view.dayThursdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             view.dayFridayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             view.daySaturdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+        }
+        viewModel.selectedDay.observe(viewLifecycleOwner) {
+            initWeekUI()
+            val currentWeek = viewModel.loadOneWeekDayOfMonth()
+            if (currentWeek.size == 7) {
+                view.daySundayValue.text = "${currentWeek[SUN]}"
+                view.dayMondayValue.text = "${currentWeek[MON]}"
+                view.dayTuesdayValue.text = "${currentWeek[TUE]}"
+                view.dayWednesdayValue.text = "${currentWeek[WED]}"
+                view.dayThursdayValue.text = "${currentWeek[THU]}"
+                view.dayFridayValue.text = "${currentWeek[FRI]}"
+                view.daySaturdayValue.text = "${currentWeek[SAT]}"
+            }
             when(it.calendar.get(Calendar.DAY_OF_WEEK)) {
-                1 -> {
-                    view.daySundayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) }"
-                    view.dayMondayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 1}"
-                    view.dayTuesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 2}"
-                    view.dayWednesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 3}"
-                    view.dayThursdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 4}"
-                    view.dayFridayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 5}"
-                    view.daySaturdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 6}"
-                    view.daySundayLayout.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.lifeWhite
-                        )
-                    )
-                }
-                2 -> {
-                    view.daySundayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 1}"
-                    view.dayMondayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH)}"
-                    view.dayTuesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 1}"
-                    view.dayWednesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 2}"
-                    view.dayThursdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 3}"
-                    view.dayFridayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 4}"
-                    view.daySaturdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 5}"
-                    view.dayMondayLayout.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.lifeWhite
-                        )
-                    )
-                }
-                3 -> {
-                    view.daySundayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 2}"
-                    view.dayMondayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 1}"
-                    view.dayTuesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH)}"
-                    view.dayWednesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 1}"
-                    view.dayThursdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 2}"
-                    view.dayFridayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 3}"
-                    view.daySaturdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 4}"
-                    view.dayTuesdayLayout.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.lifeWhite
-                        )
-                    )
-                }
-                4 -> {
-                    view.daySundayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 3}"
-                    view.dayMondayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 2}"
-                    view.dayTuesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 1}"
-                    view.dayWednesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH)}"
-                    view.dayThursdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 1}"
-                    view.dayFridayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 2}"
-                    view.daySaturdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 3}"
-                    view.dayWednesdayLayout.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.lifeWhite
-                        )
-                    )
-                }
-                5 -> {
-                    view.daySundayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 4}"
-                    view.dayMondayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 3}"
-                    view.dayTuesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 2}"
-                    view.dayWednesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 1}"
-                    view.dayThursdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH)}"
-                    view.dayFridayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 1}"
-                    view.daySaturdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 2}"
-                    view.dayThursdayLayout.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.lifeWhite
-                        )
-                    )
-                }
-                6 -> {
-                    view.daySundayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 5}"
-                    view.dayMondayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 4}"
-                    view.dayTuesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 3}"
-                    view.dayWednesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 2}"
-                    view.dayThursdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 1}"
-                    view.dayFridayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH)}"
-                    view.daySaturdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) + 1}"
-                    view.dayFridayLayout.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.lifeWhite
-                        )
-                    )
-                }
-                7 -> {
-                    view.daySundayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 6}"
-                    view.dayMondayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 5}"
-                    view.dayTuesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 4}"
-                    view.dayWednesdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 3}"
-                    view.dayThursdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 2}"
-                    view.dayFridayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH) - 1}"
-                    view.daySaturdayValue.text = "${it.calendar.get(Calendar.DAY_OF_MONTH)}"
-                    view.daySaturdayLayout.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.lifeWhite
-                        )
-                    )
-                }
+                SUN + 1 -> view.daySundayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
+                MON + 1 -> view.dayMondayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
+                TUE + 1 -> view.dayTuesdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
+                WED + 1 -> view.dayWednesdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
+                THU + 1 -> view.dayThursdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
+                FRI + 1 -> view.dayFridayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
+                SAT + 1 -> view.daySaturdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
             }
         }
 
-        return view.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        return view.root
     }
 }
