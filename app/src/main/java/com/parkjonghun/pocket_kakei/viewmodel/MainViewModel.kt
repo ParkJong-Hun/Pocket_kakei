@@ -193,4 +193,64 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         return currentWeek
     }
+    //選択した日の収入を計算
+    fun getSelectedDayIncomeMoney(): Int {
+        var result = 0
+        sheets.value?.let {
+            val thisDaySheets = it.filter { sheet ->
+                sheet.date.get(Calendar.DATE) == selectedDay.value?.calendar?.get(Calendar.DATE)
+            }
+            for(sheet in thisDaySheets) {
+                if(sheet.isAdd) {
+                    result += sheet.money
+                }
+            }
+        }
+        return result
+    }
+    //選択した日の支出を計算
+    fun getSelectedDayExpenditureMoney(): Int {
+        var result = 0
+        sheets.value?.let {
+            val thisDaySheets = it.filter { sheet ->
+                sheet.date.get(Calendar.DATE) == selectedDay.value?.calendar?.get(Calendar.DATE)
+            }
+            for(sheet in thisDaySheets) {
+                if(!sheet.isAdd) {
+                    result += sheet.money
+                }
+            }
+        }
+        return result
+    }
+    //選択した日の現金を計算
+    fun getSelectedDayCashExpenditureMoney(): Int {
+        var result = 0
+        sheets.value?.let {
+            val thisMonthSheets = it.filter { sheet ->
+                sheet.date.get(Calendar.DATE) == selectedDay.value?.calendar?.get(Calendar.DATE)
+            }
+            for(sheet in thisMonthSheets) {
+                if(sheet.category == "cash") {
+                    result += sheet.money
+                }
+            }
+        }
+        return result
+    }
+    //選択した日のカードを計算
+    fun getSelectedDayCardExpenditureMoney(): Int {
+        var result = 0
+        sheets.value?.let {
+            val thisDaySheets = it.filter { sheet ->
+                sheet.date.get(Calendar.DATE) == selectedDay.value?.calendar?.get(Calendar.DATE)
+            }
+            for(sheet in thisDaySheets) {
+                if(sheet.category == "debitCard" || sheet.category == "creditCard") {
+                    result += sheet.money
+                }
+            }
+        }
+        return result
+    }
 }

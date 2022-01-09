@@ -62,6 +62,12 @@ class DayFragment: Fragment() {
             view.dayFridayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             view.daySaturdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
         }
+        fun updateTopUI() {
+            view.dayIncomeValue.text = "${viewModel.getSelectedDayIncomeMoney()}"
+            view.dayExpenditureValue.text = "${viewModel.getSelectedDayExpenditureMoney()}"
+            view.dayExpenditureCashValue.text = "${viewModel.getSelectedDayCashExpenditureMoney()}"
+            view.dayExpenditureCardValue.text = "${viewModel.getSelectedDayCardExpenditureMoney()}"
+        }
         viewModel.selectedDay.observe(viewLifecycleOwner) {
             initWeekUI()
             val currentWeek = viewModel.loadOneWeekDayOfMonth()
@@ -84,7 +90,12 @@ class DayFragment: Fragment() {
                 SAT + 1 -> view.daySaturdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
             }
         }
-
+        viewModel.sheets.observe(viewLifecycleOwner) {
+            updateTopUI()
+        }
+        viewModel.selectedDay.observe(viewLifecycleOwner) {
+            updateTopUI()
+        }
 
         return view.root
     }
