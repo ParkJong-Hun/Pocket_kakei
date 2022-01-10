@@ -253,4 +253,22 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         return result
     }
+    //
+    fun loadOneWeekCalendar(): List<Calendar> {
+        val day = _mutableSelectedDay.calendar
+        val result:MutableList<Calendar> = mutableListOf(day)
+        val over = 7 - _mutableSelectedDay.calendar.get(Calendar.DAY_OF_WEEK)
+        val under = _mutableSelectedDay.calendar.get(Calendar.DAY_OF_WEEK) - 1
+        for (i in 1..under) {
+            val tempUnder: Calendar = _mutableSelectedDay.calendar.clone() as Calendar
+            tempUnder.add(Calendar.DATE, -i)
+            result.add(0, tempUnder)
+        }
+        for (i in 1..over) {
+            val tempOver: Calendar = _mutableSelectedDay.calendar.clone() as Calendar
+            tempOver.add(Calendar.DATE, i)
+            result.add(tempOver)
+        }
+        return result
+    }
 }

@@ -1,6 +1,7 @@
 package com.parkjonghun.pocket_kakei.view.fragment
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.parkjonghun.pocket_kakei.R
 import com.parkjonghun.pocket_kakei.databinding.FragmentDayBinding
+import com.parkjonghun.pocket_kakei.model.Sheet
 import com.parkjonghun.pocket_kakei.view.viewpager.ViewPagerAdapter
 import com.parkjonghun.pocket_kakei.viewmodel.MainViewModel
 import java.util.*
 
 class DayFragment: Fragment() {
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,6 +35,10 @@ class DayFragment: Fragment() {
         val THU = 4
         val FRI = 5
         val SAT = 6
+
+        val addedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_add_money, null)
+        val paidMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_pay_money, null)
+        val usedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_use_money, null)
 
         val pagerAdapter = ViewPagerAdapter(requireActivity())
         pagerAdapter.addFragment(DayFragmentMargin())
@@ -68,7 +74,62 @@ class DayFragment: Fragment() {
             view.dayExpenditureCashValue.text = "${viewModel.getSelectedDayCashExpenditureMoney()}"
             view.dayExpenditureCardValue.text = "${viewModel.getSelectedDayCardExpenditureMoney()}"
         }
+        fun updateEachCalendarUI(days: List<Sheet>?, icon:Drawable) {
+            val dayOfWeekList = days?.map { it.date.get(Calendar.DAY_OF_WEEK) }
+            if (dayOfWeekList != null) {
+                for (day in dayOfWeekList) {
+                    when (day) {
+                        SUN + 1 -> {
+                            view.daySundayDrawable.setImageDrawable(icon)
+                            view.daySundayDrawable.visibility = View.VISIBLE
+                        }
+                        MON + 1 -> {
+                            view.dayMondayDrawable.setImageDrawable(icon)
+                            view.dayMondayDrawable.visibility = View.VISIBLE
+                        }
+                        TUE + 1 -> {
+                            view.dayTuesdayDrawable.setImageDrawable(icon)
+                            view.dayTuesdayDrawable.visibility = View.VISIBLE
+                        }
+                        WED + 1 -> {
+                            view.dayWednesdayDrawable.setImageDrawable(icon)
+                            view.dayWednesdayDrawable.visibility = View.VISIBLE
+                        }
+                        THU + 1 -> {
+                            view.dayThursdayDrawable.setImageDrawable(icon)
+                            view.dayThursdayDrawable.visibility = View.VISIBLE
+                        }
+                        FRI + 1 -> {
+                            view.dayFridayDrawable.setImageDrawable(icon)
+                            view.dayFridayDrawable.visibility = View.VISIBLE
+                        }
+                        SAT + 1 -> {
+                            view.daySaturdayDrawable.setImageDrawable(icon)
+                            view.daySaturdayDrawable.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            }
+        }
+        fun updateCalendarUI() {
+            val week = viewModel.loadOneWeekCalendar()
+            //支出、収入日の背景
+            val addedDay: List<Sheet>? = viewModel.sheets.value?.filter {value ->  value.isAdd && week.map { it.get(Calendar.DATE) }.contains(value.date.get(Calendar.DATE)) }
+            val paidDay: List<Sheet>? = viewModel.sheets.value?.filter {value ->  !value.isAdd && week.map { it.get(Calendar.DATE) }.contains(value.date.get(Calendar.DATE)) }
+
+            updateEachCalendarUI(addedDay, addedMoneyIcon)
+            updateEachCalendarUI(paidDay, paidMoneyIcon)
+
+            //データが支出と収入どっちもあったら
+            if(addedDay != null && paidDay != null) {
+                val union = addedDay + paidDay
+                val intersection = union.groupBy { it.date.get(Calendar.DATE) }.filter { it.value.size > 1 }.flatMap { it.value }.distinct()
+                updateEachCalendarUI(intersection, usedMoneyIcon)
+            }
+        }
         viewModel.selectedDay.observe(viewLifecycleOwner) {
+            updateCalendarUI()
+
             initWeekUI()
             val currentWeek = viewModel.loadOneWeekDayOfMonth()
             if (currentWeek.size == 7) {
@@ -89,11 +150,11 @@ class DayFragment: Fragment() {
                 FRI + 1 -> view.dayFridayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
                 SAT + 1 -> view.daySaturdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
             }
-        }
-        viewModel.sheets.observe(viewLifecycleOwner) {
+
             updateTopUI()
         }
-        viewModel.selectedDay.observe(viewLifecycleOwner) {
+        viewModel.sheets.observe(viewLifecycleOwner) {
+            updateCalendarUI()
             updateTopUI()
         }
 
