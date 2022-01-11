@@ -16,10 +16,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/dayRecyclerViewLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,38 +31,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/syuunyuu"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteX="10dp" />
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/green" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dayIncomeList"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dayIncomeListTitle" />
+            android:layout_marginBottom="20dp"/>
 
         <TextView
             android:id="@+id/dayExpenditureListTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/dayIncomeList"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="20dp"
-            android:text="@string/shisyutsu" />
+            android:text="@string/shisyutsu"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/red"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dayExpenditureList"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dayExpenditureListTitle" />
+            android:layout_marginTop="10dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 

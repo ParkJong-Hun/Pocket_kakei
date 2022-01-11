@@ -44,7 +44,7 @@ class DayFragmentArticle: Fragment() {
             Log.d("", it.calendar.get(Calendar.DATE).toString() + expenditureLayoutManager.toString())
             CoroutineScope(Dispatchers.Main).launch {
                 //選択した日の情報を利用し、データを加工
-                val incomeSheetsOfSelectedDay = viewModel.optimizeForDay()?.filter {it2 -> it2.isAdd }
+                val incomeSheetsOfSelectedDay = viewModel.optimizeForDay(true)
                 //データがないわけじゃないと
                 if (incomeSheetsOfSelectedDay != null) {
                     if (incomeSheetsOfSelectedDay.isNotEmpty()) {
@@ -60,7 +60,7 @@ class DayFragmentArticle: Fragment() {
                     incomeAdapter.submitList(incomeSheetsOfSelectedDay)
 
                 }
-                val expenditureSheetsOfSelectedDay = viewModel.optimizeForDay()?.filter {it3 -> !it3.isAdd }
+                val expenditureSheetsOfSelectedDay = viewModel.optimizeForDay(false)
                 //データがないわけじゃないと
                 if (expenditureSheetsOfSelectedDay != null) {
                     if (expenditureSheetsOfSelectedDay.isNotEmpty()) {

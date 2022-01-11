@@ -26,6 +26,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class MonthFragment: Fragment() {
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
@@ -134,7 +135,8 @@ class MonthFragment: Fragment() {
             }
         }
         //今日を選択する
-        view.monthCalendar.selectedDate = CalendarDay.today()
+        view.monthCalendar.selectedDate = CalendarDay.from(viewModel.selectedDay.value?.date) ?: CalendarDay.today()
+
         //週末の色
         view.monthCalendar.addDecorators(
             SaturdayDecorator(),

@@ -70,14 +70,14 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     }
     //TODO: DayFragmentのカレンダーの選択した日に合わせてデータ情報を加工
-    suspend fun optimizeForDay(): List<Sheet>? {
+    suspend fun optimizeForDay(isAdd: Boolean): List<Sheet>? {
         return if(selectedDay.value != null) {
             val day: Calendar = Calendar.getInstance()
             day.set(selectedDay.value!!.calendar.get(Calendar.YEAR), selectedDay.value!!.calendar.get(Calendar.MONTH), selectedDay.value!!.calendar.get(Calendar.DAY_OF_MONTH), 0, 0, 0)
             val job = CoroutineScope(Dispatchers.IO).async {
                 db?.sheetDao()?.readThatDay(day.time.toString() + "%")
             }
-            job.await()
+            job.await()?.filter { it.isAdd == isAdd }
         } else {
             null
         }
