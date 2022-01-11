@@ -26,7 +26,11 @@ class DayFragment: Fragment() {
     ): View {
         val view = FragmentDayBinding.inflate(inflater, container, false)
 
+
+
         val viewModel: MainViewModel by activityViewModels()
+
+
 
         val SUN = 0
         val MON = 1
@@ -39,6 +43,8 @@ class DayFragment: Fragment() {
         val addedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_add_money, null)
         val paidMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_pay_money, null)
         val usedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_use_money, null)
+
+
 
         val pagerAdapter = ViewPagerAdapter(requireActivity())
         pagerAdapter.addFragment(DayFragmentMargin())
@@ -59,6 +65,9 @@ class DayFragment: Fragment() {
                 }
             }
         })
+
+
+        //UI更新
         fun initWeekUI() {
             view.daySundayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             view.dayMondayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
@@ -127,6 +136,8 @@ class DayFragment: Fragment() {
                 updateEachCalendarUI(intersection, usedMoneyIcon)
             }
         }
+
+        //選択した日が変わったら
         viewModel.selectedDay.observe(viewLifecycleOwner) {
             updateCalendarUI()
 
@@ -141,6 +152,7 @@ class DayFragment: Fragment() {
                 view.dayFridayValue.text = "${currentWeek[FRI]}"
                 view.daySaturdayValue.text = "${currentWeek[SAT]}"
             }
+            
             when(it.calendar.get(Calendar.DAY_OF_WEEK)) {
                 SUN + 1 -> view.daySundayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
                 MON + 1 -> view.dayMondayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
@@ -153,6 +165,7 @@ class DayFragment: Fragment() {
 
             updateTopUI()
         }
+        //モデルが変わったら
         viewModel.sheets.observe(viewLifecycleOwner) {
             updateCalendarUI()
             updateTopUI()

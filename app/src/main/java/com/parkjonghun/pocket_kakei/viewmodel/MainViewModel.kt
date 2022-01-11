@@ -253,7 +253,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         return result
     }
-    //
+    //選択した日が含めてる1週間のカレンダーを返す
     fun loadOneWeekCalendar(): List<Calendar> {
         val day = _mutableSelectedDay.calendar
         val result:MutableList<Calendar> = mutableListOf(day)

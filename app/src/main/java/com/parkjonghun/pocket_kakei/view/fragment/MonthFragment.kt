@@ -36,12 +36,17 @@ class MonthFragment: Fragment() {
     ): View {
         val view = FragmentMonthBinding.inflate(inflater, container, false)
 
+
         //RecyclerView設定
         val adapter = DayOfMonthAdapter()
         val layoutManager = LinearLayoutManager(inflater.context)
         view.monthRecyclerView.layoutManager = layoutManager
 
+
+
         val viewModel: MainViewModel by activityViewModels()
+
+
         //上段のUI更新
         fun updateTopUI() {
             //収入
@@ -158,9 +163,5 @@ class MonthFragment: Fragment() {
 
 
         return view.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 }
