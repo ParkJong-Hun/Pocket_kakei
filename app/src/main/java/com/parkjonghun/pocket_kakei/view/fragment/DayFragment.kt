@@ -3,6 +3,7 @@ package com.parkjonghun.pocket_kakei.view.fragment
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,6 +77,13 @@ class DayFragment: Fragment() {
             view.dayThursdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             view.dayFridayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             view.daySaturdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+            view.daySundayDrawable.visibility = View.INVISIBLE
+            view.dayMondayDrawable.visibility = View.INVISIBLE
+            view.dayTuesdayDrawable.visibility = View.INVISIBLE
+            view.dayWednesdayDrawable.visibility = View.INVISIBLE
+            view.dayThursdayDrawable.visibility = View.INVISIBLE
+            view.dayFridayDrawable.visibility = View.INVISIBLE
+            view.daySaturdayDrawable.visibility = View.INVISIBLE
         }
         fun updateTopUI() {
             view.dayIncomeValue.text = "${viewModel.getSelectedDayIncomeMoney()}"
@@ -139,9 +147,9 @@ class DayFragment: Fragment() {
 
         //選択した日が変わったら
         viewModel.selectedDay.observe(viewLifecycleOwner) {
+            initWeekUI()
             updateCalendarUI()
 
-            initWeekUI()
             val currentWeek = viewModel.loadOneWeekDayOfMonth()
             if (currentWeek.size == 7) {
                 view.daySundayValue.text = "${currentWeek[SUN]}"

@@ -67,9 +67,20 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     }
     //TODO: WeekFragmentのカレンダーの選択した日に合わせてデータ情報を加工
     fun optimizeForWeek() {
+
     }
     //TODO: DayFragmentのカレンダーの選択した日に合わせてデータ情報を加工
-    fun optimizeForDay() {
+    suspend fun optimizeForDay(): List<Sheet>? {
+        return if(selectedDay.value != null) {
+            val day: Calendar = Calendar.getInstance()
+            day.set(selectedDay.value!!.calendar.get(Calendar.YEAR), selectedDay.value!!.calendar.get(Calendar.MONTH), selectedDay.value!!.calendar.get(Calendar.DAY_OF_MONTH), 0, 0, 0)
+            val job = CoroutineScope(Dispatchers.IO).async {
+                db?.sheetDao()?.readThatDay(day.time.toString() + "%")
+            }
+            job.await()
+        } else {
+            null
+        }
     }
 
 
