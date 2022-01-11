@@ -106,7 +106,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left"
-                            android:text="支出" />
+                            android:text="@string/shisyutsu" />
 
                         <View
                             android:layout_width="0dp"

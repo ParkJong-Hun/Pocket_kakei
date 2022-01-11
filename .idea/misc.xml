@@ -24,11 +24,12 @@
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_add_money.xml" value="0.33" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_add_pay_category.xml" value="0.33" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_day.xml" value="0.25" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_day_article.xml" value="0.1890625" />
+        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_day_article.xml" value="0.33" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_day_margin.xml" value="0.1890625" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_month.xml" value="0.22" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_week.xml" value="0.2" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/item_day_of_month.xml" value="0.33" />
+        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/item_day_of_month_2.xml" value="0.36614583333333334" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.3619791666666667" />
       </map>
     </option>
