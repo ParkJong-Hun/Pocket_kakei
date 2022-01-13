@@ -4,37 +4,23 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/mobile_home/Kotlin_Practice/chapter12/kaji_pocket/app/src/main/res/layout/activity_login.xml" value="0.14722222222222223" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/drawable/ic_add_money.xml" value="0.1965" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/drawable/ic_callendar_day.xml" value="0.1305" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/drawable/ic_callendar_month.xml" value="0.1305" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/drawable/ic_callendar_week.xml" value="0.1305" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/drawable/ic_pay_money.xml" value="0.12" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/drawable/ic_send.xml" value="0.1995" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/drawable/ic_use_money.xml" value="0.128" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/drawable/shadow.xml" value="0.217" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout-v26/activity_add.xml" value="0.3605072463768116" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/activity_add.xml" value="0.33" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/activity_add_deposit.xml" value="0.25" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/activity_add_description.xml" value="0.3619791666666667" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/activity_login.xml" value="0.16" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_add_add_category.xml" value="0.33" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_add_category.xml" value="0.3619791666666667" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_add_description.xml" value="0.17603850050658562" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_add_money.xml" value="0.33" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_add_pay_category.xml" value="0.33" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_day.xml" value="0.25" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_day_article.xml" value="0.33" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_day_margin.xml" value="0.1890625" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_month.xml" value="0.22" />
+        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_day.xml" value="0.3605072463768116" />
+        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_month.xml" value="0.2" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_week.xml" value="0.2" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/item_day_of_month.xml" value="0.33" />
-        <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/item_day_of_month_2.xml" value="0.36614583333333334" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.3619791666666667" />
+        <entry key="app/src/main/res/layout/fragment_day_article.xml" value="0.25815217391304346" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

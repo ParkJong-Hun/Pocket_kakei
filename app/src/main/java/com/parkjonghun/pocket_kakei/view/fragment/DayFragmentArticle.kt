@@ -1,7 +1,6 @@
 package com.parkjonghun.pocket_kakei.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import com.parkjonghun.pocket_kakei.viewmodel.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
 
 //FragmentDayから実際使うViewPagerの部分
 class DayFragmentArticle: Fragment() {
@@ -41,7 +39,6 @@ class DayFragmentArticle: Fragment() {
 
         //選択した日が変わったら
         viewModel.selectedDay.observe(viewLifecycleOwner) { it ->
-            Log.d("", it.calendar.get(Calendar.DATE).toString() + expenditureLayoutManager.toString())
             CoroutineScope(Dispatchers.Main).launch {
                 //選択した日の情報を利用し、データを加工
                 val incomeSheetsOfSelectedDay = viewModel.optimizeForDay(true)
@@ -76,7 +73,7 @@ class DayFragmentArticle: Fragment() {
                     expenditureAdapter.submitList(expenditureSheetsOfSelectedDay)
                 }
                 //データが全くないと
-                if (expenditureSheetsOfSelectedDay == null && incomeSheetsOfSelectedDay == null) {
+                if (expenditureSheetsOfSelectedDay.isNullOrEmpty() && incomeSheetsOfSelectedDay.isNullOrEmpty()) {
                     view.dayNoDataNotification.visibility = View.VISIBLE
                 } else {
                     view.dayNoDataNotification.visibility = View.GONE
