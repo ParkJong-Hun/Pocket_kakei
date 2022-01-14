@@ -3,7 +3,6 @@ package com.parkjonghun.pocket_kakei.view.fragment
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,9 +47,9 @@ class DayFragment: Fragment() {
 
 
         val pagerAdapter = ViewPagerAdapter(requireActivity())
-        pagerAdapter.addFragment(DayFragmentMargin())
+        pagerAdapter.addFragment(EmptyFragment())
         pagerAdapter.addFragment(DayFragmentArticle())
-        pagerAdapter.addFragment(DayFragmentMargin())
+        pagerAdapter.addFragment(EmptyFragment())
         view.dayRestViewPager.adapter = pagerAdapter
         //メイン画面を主に左右にビューがあるようにする
         view.dayRestViewPager.currentItem = 1

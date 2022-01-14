@@ -6,12 +6,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
+        <!--第1週目-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/firstWeekLayout"
             android:layout_width="match_parent"
@@ -21,7 +20,7 @@
                 android:id="@+id/firstWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="1月1日 ー 1月1日"
+                android:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -29,7 +28,8 @@
                 android:id="@+id/firstWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="第1週目"
+                android:text="第1週目"
+                android:paddingBottom="5dp"
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@+id/firstWeekTitle"
                 app:layout_constraintStart_toStartOf="parent"/>
@@ -48,15 +48,16 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/firstWeekDescription"
-                android:layout_marginStart="50dp">
+                app:layout_constraintTop_toBottomOf="@+id/firstWeekDescription">
                 <LinearLayout
+                    android:id="@+id/firstWeekMoneyDetail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:layout_marginStart="50dp">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -74,7 +75,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            tools:text="0"
+                            android:text="0"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -95,19 +96,19 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            tools:text="0"
+                            android:text="0"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/firstWeekChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/firstWeekMoneyDetail"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/firstWeekChart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/firstWeekDetails"/>
             <View
                 android:id="@+id/firstWeekShadow"
                 android:layout_width="match_parent"
@@ -115,7 +116,7 @@
                 android:background="@drawable/shadow"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <!--第2週目-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/secondWeekLayout"
             android:layout_width="match_parent"
@@ -125,7 +126,7 @@
                 android:id="@+id/secondWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="1月1日 ー 1月1日"
+                android:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -133,8 +134,9 @@
                 android:id="@+id/secondWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="第2週目"
+                android:text="第2週目"
                 android:textSize="12sp"
+                android:paddingBottom="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/secondWeekTitle"
                 app:layout_constraintStart_toStartOf="parent"/>
             <TextView
@@ -153,14 +155,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/secondWeekDescription"
-                android:layout_marginStart="50dp">
+                android:visibility="gone">
                 <LinearLayout
+                    android:id="@+id/secondWeekMoneyDetail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:layout_marginStart="50dp">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -178,7 +182,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            tools:text="0"
+                            android:text="0"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -199,19 +203,19 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            tools:text="0"
+                            android:text="0"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/secondWeekChart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/secondWeekMoneyDetail"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/secondWeekChart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/secondWeekDetails"/>
             <View
                 android:id="@+id/secondWeekShadow"
                 android:layout_width="match_parent"
@@ -219,7 +223,7 @@
                 android:background="@drawable/shadow"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <!--第3週目-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/thirdWeekLayout"
             android:layout_width="match_parent"
@@ -229,7 +233,7 @@
                 android:id="@+id/thirdWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="1月1日 ー 1月1日"
+                android:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -237,8 +241,9 @@
                 android:id="@+id/thirdWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="第1週目"
+                android:text="第3週目"
                 android:textSize="12sp"
+                android:paddingBottom="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/thirdWeekTitle"
                 app:layout_constraintStart_toStartOf="parent"/>
             <TextView
@@ -257,14 +262,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/thirdWeekDescription"
-                android:layout_marginStart="50dp">
+                android:visibility="gone">
                 <LinearLayout
+                    android:id="@+id/thirdWeekMoneyDetail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:layout_marginStart="50dp">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -282,7 +289,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            tools:text="0"
+                            android:text="0"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -303,19 +310,19 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            tools:text="0"
+                            android:text="0"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/thirdWeekChart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/thirdWeekMoneyDetail"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/thirdWeekChart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/thirdWeekDetails"/>
             <View
                 android:id="@+id/thirdWeekShadow"
                 android:layout_width="match_parent"
@@ -323,7 +330,7 @@
                 android:background="@drawable/shadow"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <!--第4週目-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fourthWeekLayout"
             android:layout_width="match_parent"
@@ -333,7 +340,7 @@
                 android:id="@+id/fourthWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="1月1日 ー 1月1日"
+                android:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -341,8 +348,9 @@
                 android:id="@+id/fourthWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="第1週目"
+                android:text="第4週目"
                 android:textSize="12sp"
+                android:paddingBottom="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/fourthWeekTitle"
                 app:layout_constraintStart_toStartOf="parent"/>
             <TextView
@@ -361,14 +369,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fourthWeekDescription"
-                android:layout_marginStart="50dp">
+                android:visibility="gone">
                 <LinearLayout
+                    android:id="@+id/fourthWeekMoneyDetail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:layout_marginStart="50dp">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -386,7 +396,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            tools:text="0"
+                            android:text="0"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -407,19 +417,19 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            tools:text="0"
+                            android:text="0"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/fourthWeekChart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fourthWeekMoneyDetail"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/fourthWeekChart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fourthWeekDetails"/>
             <View
                 android:id="@+id/fourthWeekShadow"
                 android:layout_width="match_parent"
@@ -427,7 +437,7 @@
                 android:background="@drawable/shadow"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <!--第5週目-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fifthWeekLayout"
             android:layout_width="match_parent"
@@ -437,7 +447,7 @@
                 android:id="@+id/fifthWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="1月1日 ー 1月1日"
+                android:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -445,8 +455,9 @@
                 android:id="@+id/fifthWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="第1週目"
+                android:text="第5週目"
                 android:textSize="12sp"
+                android:paddingBottom="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/fifthWeekTitle"
                 app:layout_constraintStart_toStartOf="parent"/>
             <TextView
@@ -465,14 +476,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fifthWeekDescription"
-                android:layout_marginStart="50dp">
+                android:visibility="gone">
                 <LinearLayout
+                    android:id="@+id/fifthWeekMoneyDetail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:layout_marginStart="50dp">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -490,7 +503,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            tools:text="0"
+                            android:text="0"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -511,19 +524,19 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            tools:text="0"
+                            android:text="0"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/fifthWeekChart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fifthWeekMoneyDetail"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/fifthWeekChart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fifthWeekDetails"/>
             <View
                 android:id="@+id/fifthWeekShadow"
                 android:layout_width="match_parent"
@@ -531,7 +544,7 @@
                 android:background="@drawable/shadow"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <!--第6週目-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/sixthWeekLayout"
             android:layout_width="match_parent"
@@ -541,7 +554,7 @@
                 android:id="@+id/sixthWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="1月1日 ー 1月1日"
+                android:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -549,8 +562,9 @@
                 android:id="@+id/sixthWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="第1週目"
+                android:text="第6週目"
                 android:textSize="12sp"
+                android:paddingBottom="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/sixthWeekTitle"
                 app:layout_constraintStart_toStartOf="parent"/>
             <TextView
@@ -569,14 +583,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sixthWeekDescription"
-                android:layout_marginStart="50dp">
+                android:visibility="gone">
                 <LinearLayout
+                    android:id="@+id/sixthWeekMoneyDetail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:layout_marginStart="50dp">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -594,7 +610,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:tools="0"
+                            android:text="0"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -615,19 +631,19 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            tools:text="0"
+                            android:text="0"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/sixthWeekChart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sixthWeekMoneyDetail"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/sixthWeekChart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sixthWeekDetails"/>
             <View
                 android:id="@+id/sixthWeekShadow"
                 android:layout_width="match_parent"
@@ -635,7 +651,5 @@
                 android:background="@drawable/shadow"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
-
 </ScrollView>
