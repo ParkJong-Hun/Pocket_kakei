@@ -61,4 +61,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$roomVersion"
     //use Room on M1 chip
     kapt "org.xerial:sqlite-jdbc:3.34.0"
+
+    //グラフ
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

@@ -16,7 +16,10 @@
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_month.xml" value="0.2" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_week.xml" value="0.2" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.3619791666666667" />
+        <entry key="app/src/main/res/layout/fragment_day.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_day_article.xml" value="0.25815217391304346" />
+        <entry key="app/src/main/res/layout/fragment_week.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/fragment_week_article.xml" value="0.4036458333333333" />
       </map>
     </option>
   </component>
