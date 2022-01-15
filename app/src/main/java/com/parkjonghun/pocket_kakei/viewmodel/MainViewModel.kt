@@ -69,7 +69,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun optimizeForWeek() {
 
     }
-    //TODO: DayFragmentのカレンダーの選択した日に合わせてデータ情報を加工
+    //DayFragmentのカレンダーの選択した日に合わせてデータ情報を加工
     suspend fun optimizeForDay(isAdd: Boolean): List<Sheet>? {
         return if(selectedDay.value != null) {
             val day: Calendar = Calendar.getInstance()
@@ -281,5 +281,21 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             result.add(tempOver)
         }
         return result
+    }
+    //選択する日を次の日に
+    fun selectNextMonth() {
+        _mutableSelectedMonth.calendar.apply {
+            add(Calendar.MONTH, 1)
+            _mutableSelectedMonth.date.time = this.timeInMillis
+        }
+        _selectedMonth.value = _mutableSelectedMonth
+    }
+    //選択する日を前の日にl
+    fun selectPreviousMonth() {
+        _mutableSelectedMonth.calendar.apply {
+            add(Calendar.MONTH, -1)
+            _mutableSelectedMonth.date.time = this.timeInMillis
+        }
+        _selectedMonth.value = _mutableSelectedMonth
     }
 }
