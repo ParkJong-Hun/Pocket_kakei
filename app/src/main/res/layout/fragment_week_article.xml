@@ -104,7 +104,7 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/firstWeekChart"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/firstWeekMoneyDetail"/>
@@ -211,7 +211,7 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/secondWeekChart"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/secondWeekMoneyDetail"/>
@@ -318,7 +318,7 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/thirdWeekChart"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/thirdWeekMoneyDetail"/>
@@ -425,7 +425,7 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/fourthWeekChart"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fourthWeekMoneyDetail"/>
@@ -532,7 +532,7 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/fifthWeekChart"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fifthWeekMoneyDetail"/>
@@ -639,7 +639,7 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/sixthWeekChart"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/sixthWeekMoneyDetail"/>
