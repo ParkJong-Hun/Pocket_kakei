@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -22,29 +23,36 @@ class WeekFragmentArticle : Fragment() {
         val view = FragmentWeekArticleBinding.inflate(inflater, container, false)
 
         val viewModel: MainViewModel by activityViewModels()
-
-        //TODO: この設定を利用して格週を実装
+        
         val testData = listOf(Entry(0F, 0F), Entry(1F,0F), Entry(2F,1F), Entry(3F, 1F), Entry(4F, 0F), Entry(5F, 2F), Entry(6F, 2F))
-        val testDataSet = LineDataSet(testData, "testDataSet")
-        val lineData = LineData(testDataSet)
 
-        testDataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
-        testDataSet.setDrawFilled(true)
-        testDataSet.setDrawCircleHole(false)
-        testDataSet.color = Color.GREEN
-        testDataSet.setCircleColor(Color.GREEN)
-        testDataSet.fillColor = Color.GREEN
-        testDataSet.valueTextSize = 14F
-        testDataSet.valueTextColor = Color.GREEN
+        fun loadChart(chart: LineChart, entry: List<Entry>) {
+            val dataSet = LineDataSet(entry, "dataSet")
+            val lineData = LineData(dataSet)
 
-        view.firstWeekChart.data = lineData
-        view.firstWeekChart.setExtraOffsets(0F, 0F, 0F, -50F)
-        view.firstWeekChart.animateY(300)
-        view.firstWeekChart.xAxis.isEnabled = false
-        view.firstWeekChart.axisLeft.isEnabled = false
-        view.firstWeekChart.axisRight.isEnabled = false
-        view.firstWeekChart.description.isEnabled = false
-        view.firstWeekChart.legend.isEnabled = false
+            dataSet.apply {
+                mode = LineDataSet.Mode.CUBIC_BEZIER
+                setDrawFilled(true)
+                setDrawCircleHole(false)
+                color = Color.GREEN
+                setCircleColor(Color.GREEN)
+                fillColor = Color.GREEN
+                valueTextSize = 14F
+                valueTextColor = Color.GREEN
+            }
+
+            chart.apply {
+                data = lineData
+                animateY(300)
+                xAxis.isEnabled = false
+                axisLeft.isEnabled = false
+                axisRight.isEnabled = false
+                description.isEnabled = false
+                legend.isEnabled = false
+            }
+        }
+
+        loadChart(view.firstWeekChart, testData)
 
         fun initDetails() {
             view.firstWeekDetails.visibility = View.GONE
