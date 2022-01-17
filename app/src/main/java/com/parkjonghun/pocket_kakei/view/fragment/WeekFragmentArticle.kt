@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -31,7 +30,6 @@ class WeekFragmentArticle : Fragment() {
 
         testDataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
         testDataSet.setDrawFilled(true)
-        testDataSet.setDrawVerticalHighlightIndicator(false)
         testDataSet.setDrawCircleHole(false)
         testDataSet.color = Color.GREEN
         testDataSet.setCircleColor(Color.GREEN)
@@ -47,6 +45,40 @@ class WeekFragmentArticle : Fragment() {
         view.firstWeekChart.axisRight.isEnabled = false
         view.firstWeekChart.description.isEnabled = false
         view.firstWeekChart.legend.isEnabled = false
+
+        fun initDetails() {
+            view.firstWeekDetails.visibility = View.GONE
+            view.secondWeekDetails.visibility = View.GONE
+            view.thirdWeekDetails.visibility = View.GONE
+            view.fourthWeekDetails.visibility = View.GONE
+            view.fifthWeekDetails.visibility = View.GONE
+            view.sixthWeekDetails.visibility = View.GONE
+        }
+
+        view.firstWeekLayout.setOnClickListener{
+            initDetails()
+            view.firstWeekDetails.visibility = View.VISIBLE
+        }
+        view.secondWeekLayout.setOnClickListener{
+            initDetails()
+            view.secondWeekDetails.visibility = View.VISIBLE
+        }
+        view.thirdWeekLayout.setOnClickListener{
+            initDetails()
+            view.thirdWeekDetails.visibility = View.VISIBLE
+        }
+        view.fourthWeekLayout.setOnClickListener{
+            initDetails()
+            view.fourthWeekDetails.visibility = View.VISIBLE
+        }
+        view.fifthWeekLayout.setOnClickListener{
+            initDetails()
+            view.fifthWeekDetails.visibility = View.VISIBLE
+        }
+        view.sixthWeekLayout.setOnClickListener{
+            initDetails()
+            view.sixthWeekDetails.visibility = View.VISIBLE
+        }
 
         return view.root
     }
