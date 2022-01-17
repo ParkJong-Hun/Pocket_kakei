@@ -3,11 +3,12 @@ package com.parkjonghun.pocket_kakei.view.fragment
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.github.mikephil.charting.charts.LineChart
@@ -26,6 +27,9 @@ class WeekFragmentArticle : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = FragmentWeekArticleBinding.inflate(inflater, container, false)
+
+        val layouts: List<ConstraintLayout> = listOf(view.firstWeekLayout, view.secondWeekLayout, view.thirdWeekLayout, view.fourthWeekLayout, view.fifthWeekLayout, view.sixthWeekLayout)
+        val titles: List<TextView> = listOf(view.firstWeekTitle, view.secondWeekTitle, view.thirdWeekTitle, view.fourthWeekTitle, view.fifthWeekTitle, view.sixthWeekTitle)
 
         val viewModel: MainViewModel by activityViewModels()
 
@@ -108,22 +112,30 @@ class WeekFragmentArticle : Fragment() {
         fun updateUI() {
             //格週が何日から何日までか計算して表示
             val weeks: MutableList<List<Calendar>> = mutableListOf()
-            val titles: List<TextView> = listOf(view.firstWeekTitle, view.secondWeekTitle, view.thirdWeekTitle, view.fourthWeekTitle, view.fifthWeekTitle, view.sixthWeekTitle)
+            for (i in 0..5) {
+                layouts[i].visibility = View.VISIBLE
+            }
             for (i in 1..6) {
                 val week = viewModel.getWeekOnMonth(i)
                 if (week.isNotEmpty()) {
                     weeks.add(week)
+                } else {
+                    weeks.add(emptyList())
                 }
             }
             for (i in 0..5) {
-                if(weeks[i].size != 1) {
-                    titles[i].text = "${weeks[i].first().get(Calendar.MONTH) + 1}月 " +
-                            "${weeks[i].first().get(Calendar.DAY_OF_MONTH)}日 - " +
-                            "${weeks[i].last().get(Calendar.MONTH) + 1}月 " +
-                            "${weeks[i].last().get(Calendar.DAY_OF_MONTH)}日"
+                if (weeks[i].isNotEmpty()) {
+                    if (weeks[i].size != 1) {
+                        titles[i].text = "${weeks[i].first().get(Calendar.MONTH) + 1}月 " +
+                                "${weeks[i].first().get(Calendar.DAY_OF_MONTH)}日 - " +
+                                "${weeks[i].last().get(Calendar.MONTH) + 1}月 " +
+                                "${weeks[i].last().get(Calendar.DAY_OF_MONTH)}日"
+                    } else {
+                        titles[i].text = "${weeks[i].first().get(Calendar.MONTH) + 1}月 " +
+                                "${weeks[i].first().get(Calendar.DAY_OF_MONTH)}日"
+                    }
                 } else {
-                    titles[i].text = "${weeks[i].first().get(Calendar.MONTH) + 1}月 " +
-                            "${weeks[i].first().get(Calendar.DAY_OF_MONTH)}日"
+                    layouts[i].visibility = View.GONE
                 }
             }
             //TODO: 格週の収入、支出を計算して表示
@@ -135,7 +147,7 @@ class WeekFragmentArticle : Fragment() {
         }
         //シートが変わったら
         viewModel.sheets.observe(viewLifecycleOwner) {
-            //updateUI()
+            updateUI()
         }
 
         return view.root
