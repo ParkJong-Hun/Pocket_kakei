@@ -2,6 +2,7 @@ package com.parkjonghun.pocket_kakei.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -179,7 +180,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         _selectedDay.value = _mutableSelectedDay
     }
-    //選択する日を前の日にl
+    //選択する日を前の日に
     fun selectPreviousDay() {
         _mutableSelectedDay.calendar.apply {
             add(Calendar.DATE, -1)
@@ -290,12 +291,27 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         _selectedMonth.value = _mutableSelectedMonth
     }
-    //選択する日を前の日にl
+    //選択する日を前の日に
     fun selectPreviousMonth() {
         _mutableSelectedMonth.calendar.apply {
             add(Calendar.MONTH, -1)
             _mutableSelectedMonth.date.time = this.timeInMillis
         }
         _selectedMonth.value = _mutableSelectedMonth
+    }
+    //選択した月の該当週に含まれる日全部を返す
+    fun getWeekOnMonth(weekCount: Int):List<Calendar> {
+        val result: MutableList<Calendar> = mutableListOf()
+        var plusDay = 0
+        do {
+            val temp = _mutableSelectedMonth.calendar.clone() as Calendar
+            temp.set(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), 1, 0, 0, 0)
+            temp.add(Calendar.DATE, plusDay)
+            plusDay += 1
+            if (temp.get(Calendar.WEEK_OF_MONTH) == weekCount && temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH)) {
+                result.add(temp)
+            }
+        } while (temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH))
+        return result
     }
 }
