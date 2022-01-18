@@ -71,6 +71,7 @@
                             android:text="@string/syuunyuu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/firstWeekIncomeValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -92,6 +93,7 @@
                             android:text="@string/shisyutsu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/firstWeekExpenditureValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -178,6 +180,7 @@
                             android:text="@string/syuunyuu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/secondWeekIncomeValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -199,6 +202,7 @@
                             android:text="@string/shisyutsu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/secondWeekExpenditureValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -285,6 +289,7 @@
                             android:text="@string/syuunyuu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/thirdWeekIncomeValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -306,6 +311,7 @@
                             android:text="@string/shisyutsu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/thirdWeekExpenditureValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -392,6 +398,7 @@
                             android:text="@string/syuunyuu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/fourthWeekIncomeValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -413,6 +420,7 @@
                             android:text="@string/shisyutsu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/fourthWeekExpenditureValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -499,6 +507,7 @@
                             android:text="@string/syuunyuu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/fifthWeekIncomeValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -520,6 +529,7 @@
                             android:text="@string/shisyutsu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/fifthWeekExpenditureValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -606,6 +616,7 @@
                             android:text="@string/syuunyuu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/sixthWeekIncomeValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -627,6 +638,7 @@
                             android:text="@string/shisyutsu"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/sixthWeekExpenditureValue"
                             android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

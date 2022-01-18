@@ -2,6 +2,7 @@ package com.parkjonghun.pocket_kakei.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -33,6 +34,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private var _mutableDoubleClicked:Boolean = false
     private val _doubleClicked: MutableLiveData<Boolean> = MutableLiveData()
     val doubleClicked:LiveData<Boolean> = _doubleClicked
+    //選択した週
+    private var _mutableSelectedWeek: Int? = null
+    private val _selectedWeek: MutableLiveData<Int> = MutableLiveData()
+    val selectedWeek:LiveData<Int> = _selectedWeek
 
 
 
@@ -40,6 +45,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         loadSheets()
         _selectedDay.value = _mutableSelectedDay
         _selectedMonth.value = _mutableSelectedMonth
+        _selectedWeek.value = _mutableSelectedWeek
     }
 
 
@@ -311,6 +317,68 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
                 result.add(temp)
             }
         } while (temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH))
+        return result
+    }
+    //
+    fun getDayIncomeMoney(targetDay: Calendar): Int {
+        var result = 0
+        sheets.value?.let {
+            val thisDaySheets = it.filter { sheet ->
+                sheet.date.get(Calendar.DATE) == targetDay.get(Calendar.DATE)
+            }
+            for(sheet in thisDaySheets) {
+                if(sheet.isAdd) {
+                    result += sheet.money
+                }
+            }
+        }
+        return result
+    }
+    //
+    fun getDayExpenditureMoney(targetDay: Calendar): Int {
+        var result = 0
+        sheets.value?.let {
+            val thisDaySheets = it.filter { sheet ->
+                sheet.date.get(Calendar.DATE) == targetDay.get(Calendar.DATE)
+            }
+            for(sheet in thisDaySheets) {
+                if(!sheet.isAdd) {
+                    result += sheet.money
+                }
+            }
+        }
+        return result
+    }
+    fun selectWeek(weekCount: Int) {
+        _mutableSelectedWeek = weekCount
+        _selectedWeek.value = _mutableSelectedWeek
+    }
+    //TODO: 一週間計算エラー修正
+    fun getSelectedWeekIncomeMoney(): Int {
+        var result = 0
+        for(i in 1..7) {
+            val temp = _mutableSelectedMonth.calendar.clone() as Calendar
+            temp.set(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), 1, 0, 0, 0)
+            temp.add(Calendar.WEEK_OF_MONTH, selectedWeek.value!! - 1)
+            temp.add(Calendar.DATE, i - 1)
+            Log.d("", "${temp.get(Calendar.WEEK_OF_MONTH)}, ${selectedWeek.value}")
+            if (temp.get(Calendar.WEEK_OF_MONTH) == selectedWeek.value && temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH)) {
+                result += getDayIncomeMoney(temp)
+            }
+        }
+        return result
+    }
+    //
+    fun getSelectedWeekExpenditureMoney(): Int {
+        var result = 0
+        for(i in 1..7) {
+            val temp = _mutableSelectedMonth.calendar.clone() as Calendar
+            temp.set(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), 1, 0, 0, 0)
+            temp.add(Calendar.DATE, i)
+            if (temp.get(Calendar.WEEK_OF_MONTH) == selectedWeek.value && temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH)) {
+                result += getDayExpenditureMoney(temp)
+            }
+        }
         return result
     }
 }

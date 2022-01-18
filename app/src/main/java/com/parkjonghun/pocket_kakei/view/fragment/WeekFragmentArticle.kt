@@ -32,6 +32,8 @@ class WeekFragmentArticle : Fragment() {
         val titles: List<TextView> = listOf(view.firstWeekTitle, view.secondWeekTitle, view.thirdWeekTitle, view.fourthWeekTitle, view.fifthWeekTitle, view.sixthWeekTitle)
         val details: List<ConstraintLayout> = listOf(view.firstWeekDetails, view.secondWeekDetails, view.thirdWeekDetails, view.fourthWeekDetails, view.fifthWeekDetails, view.sixthWeekDetails)
         val charts: List<LineChart> = listOf(view.firstWeekChart, view.secondWeekChart, view.thirdWeekChart, view.fourthWeekChart, view.fifthWeekChart, view.sixthWeekChart)
+        val incomes: List<TextView> = listOf(view.firstWeekIncomeValue, view.secondWeekIncomeValue, view.thirdWeekIncomeValue, view.fourthWeekIncomeValue, view.fifthWeekIncomeValue, view.sixthWeekIncomeValue)
+        val expenditures: List<TextView> = listOf(view.firstWeekExpenditureValue, view.secondWeekExpenditureValue, view.thirdWeekExpenditureValue, view.fourthWeekExpenditureValue, view.fifthWeekExpenditureValue, view.sixthWeekExpenditureValue)
 
         val viewModel: MainViewModel by activityViewModels()
 
@@ -77,6 +79,7 @@ class WeekFragmentArticle : Fragment() {
                 initDetails()
                 details[i].visibility = View.VISIBLE
                 charts[i].animateY(300)
+                viewModel.selectWeek(i + 1)
             }
         }
 
@@ -96,7 +99,7 @@ class WeekFragmentArticle : Fragment() {
                     weeks.add(emptyList())
                 }
             }
-            for (i in 0..5) {
+            for (i in 0 until 6) {
                 if (weeks[i].isNotEmpty()) {
                     if (weeks[i].size != 1) {
                         titles[i].text = "${weeks[i].first().get(Calendar.MONTH) + 1}月 " +
@@ -114,6 +117,13 @@ class WeekFragmentArticle : Fragment() {
             //TODO: 格週の収入、支出を計算して表示
             //TODO: 日々の支出を計算してエントリーリストオブジェクトに返す
         }
+        //
+        fun updateDetailsUI() {
+            viewModel.selectedWeek.value?.let {
+                incomes[it - 1].text = "${viewModel.getSelectedWeekIncomeMoney()} 円"
+                expenditures[it - 1].text = "${viewModel.getSelectedWeekExpenditureMoney()} 円"
+            }
+        }
         //選択した月が変わったら
         viewModel.selectedMonth.observe(viewLifecycleOwner) {
             updateUI()
@@ -121,6 +131,10 @@ class WeekFragmentArticle : Fragment() {
         //シートが変わったら
         viewModel.sheets.observe(viewLifecycleOwner) {
             updateUI()
+        }
+        //
+        viewModel.selectedWeek.observe(viewLifecycleOwner) {
+            updateDetailsUI()
         }
 
         return view.root
