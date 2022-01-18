@@ -77,13 +77,17 @@ class WeekFragmentArticle : Fragment() {
         //格週をクリックしたら
         for(i in 0 until 6) {
             layouts[i].setOnClickListener{
-                if(details[i].visibility == View.GONE) {
+                var check = false
+                if(details[i].visibility == View.VISIBLE){
+                    check = true
+                }
+                initDetails()
+                if (check) {
+                    viewModel.selectWeek(null)
+                } else {
                     details[i].visibility = View.VISIBLE
                     viewModel.selectWeek(i + 1)
                     charts[i].animateY(300)
-                } else if(details[i].visibility == View.VISIBLE){
-                    initDetails()
-                    viewModel.selectWeek(null)
                 }
             }
         }
@@ -120,7 +124,6 @@ class WeekFragmentArticle : Fragment() {
                     layouts[i].visibility = View.GONE
                 }
             }
-            //TODO: 日々の支出を計算してエントリーリストオブジェクトに返す
         }
         //詳細情報を表示
         fun updateDetailsUI() {
