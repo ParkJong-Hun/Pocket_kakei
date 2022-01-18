@@ -215,7 +215,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         var result = 0
         sheets.value?.let {
             val thisDaySheets = it.filter { sheet ->
-                sheet.date.get(Calendar.DATE) == selectedDay.value?.calendar?.get(Calendar.DATE)
+                sheet.date.get(Calendar.DAY_OF_YEAR) == selectedDay.value?.calendar?.get(Calendar.DAY_OF_YEAR)
             }
             for(sheet in thisDaySheets) {
                 if(sheet.isAdd) {
@@ -230,7 +230,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         var result = 0
         sheets.value?.let {
             val thisDaySheets = it.filter { sheet ->
-                sheet.date.get(Calendar.DATE) == selectedDay.value?.calendar?.get(Calendar.DATE)
+                sheet.date.get(Calendar.DAY_OF_YEAR) == selectedDay.value?.calendar?.get(Calendar.DAY_OF_YEAR)
             }
             for(sheet in thisDaySheets) {
                 if(!sheet.isAdd) {
@@ -260,7 +260,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         var result = 0
         sheets.value?.let {
             val thisDaySheets = it.filter { sheet ->
-                sheet.date.get(Calendar.DATE) == selectedDay.value?.calendar?.get(Calendar.DATE)
+                sheet.date.get(Calendar.DAY_OF_YEAR) == selectedDay.value?.calendar?.get(Calendar.DAY_OF_YEAR)
             }
             for(sheet in thisDaySheets) {
                 if(sheet.category == "debitCard" || sheet.category == "creditCard") {
@@ -313,18 +313,20 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             temp.set(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), 1, 0, 0, 0)
             temp.add(Calendar.DATE, plusDay)
             plusDay += 1
-            if (temp.get(Calendar.WEEK_OF_MONTH) == weekCount && temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH)) {
+            if (temp.get(Calendar.WEEK_OF_MONTH) == weekCount &&
+                temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH) &&
+                temp.get(Calendar.YEAR) == _mutableSelectedMonth.calendar.get(Calendar.YEAR)) {
                 result.add(temp)
             }
         } while (temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH))
         return result
     }
-    //
+    //該当日の収入を返す
     fun getDayIncomeMoney(targetDay: Calendar): Int {
         var result = 0
         sheets.value?.let {
             val thisDaySheets = it.filter { sheet ->
-                sheet.date.get(Calendar.DATE) == targetDay.get(Calendar.DATE)
+                sheet.date.get(Calendar.DAY_OF_YEAR) == targetDay.get(Calendar.DAY_OF_YEAR)
             }
             for(sheet in thisDaySheets) {
                 if(sheet.isAdd) {
@@ -334,12 +336,12 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         return result
     }
-    //
+    //該当日の支出を返す
     fun getDayExpenditureMoney(targetDay: Calendar): Int {
         var result = 0
         sheets.value?.let {
             val thisDaySheets = it.filter { sheet ->
-                sheet.date.get(Calendar.DATE) == targetDay.get(Calendar.DATE)
+                sheet.date.get(Calendar.DAY_OF_YEAR) == targetDay.get(Calendar.DAY_OF_YEAR)
             }
             for(sheet in thisDaySheets) {
                 if(!sheet.isAdd) {
@@ -349,32 +351,44 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         return result
     }
-    //
-    fun selectWeek(weekCount: Int) {
+    //該当週の支出を返す
+    fun getWeekExpenditureMoney(targetWeek: List<Calendar>): Int {
+        var result = 0
+        for(day in targetWeek) {
+            result += getDayExpenditureMoney(day)
+        }
+        return result
+    }
+    //選択した週を変える
+    fun selectWeek(weekCount: Int?) {
         _mutableSelectedWeek = weekCount
         _selectedWeek.value = _mutableSelectedWeek
     }
-    //
+    //選択した週の収入を返す
     fun getSelectedWeekIncomeMoney(): Int {
         var result = 0
         for(i in 1..31) {
             val temp = _mutableSelectedMonth.calendar.clone() as Calendar
             temp.set(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), 1, 0, 0, 0)
             temp.add(Calendar.DATE, i - 1)
-            if (temp.get(Calendar.WEEK_OF_MONTH) == selectedWeek.value && temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH)) {
+            if (temp.get(Calendar.WEEK_OF_MONTH) == _mutableSelectedWeek &&
+                temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH) &&
+                temp.get(Calendar.YEAR) == _mutableSelectedMonth.calendar.get(Calendar.YEAR)) {
                 result += getDayIncomeMoney(temp)
             }
         }
         return result
     }
-    //
+    //選択した週の支出を返す
     fun getSelectedWeekExpenditureMoney(): Int {
         var result = 0
         for(i in 1..31) {
             val temp = _mutableSelectedMonth.calendar.clone() as Calendar
             temp.set(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), 1, 0, 0, 0)
             temp.add(Calendar.DATE, i - 1)
-            if (temp.get(Calendar.WEEK_OF_MONTH) == selectedWeek.value && temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH)) {
+            if (temp.get(Calendar.WEEK_OF_MONTH) == _mutableSelectedWeek &&
+                temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH) &&
+                temp.get(Calendar.YEAR) == _mutableSelectedMonth.calendar.get(Calendar.YEAR)) {
                 result += getDayExpenditureMoney(temp)
             }
         }

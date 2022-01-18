@@ -3,7 +3,7 @@ package com.parkjonghun.pocket_kakei.view.fragment
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +34,7 @@ class WeekFragmentArticle : Fragment() {
         val charts: List<LineChart> = listOf(view.firstWeekChart, view.secondWeekChart, view.thirdWeekChart, view.fourthWeekChart, view.fifthWeekChart, view.sixthWeekChart)
         val incomes: List<TextView> = listOf(view.firstWeekIncomeValue, view.secondWeekIncomeValue, view.thirdWeekIncomeValue, view.fourthWeekIncomeValue, view.fifthWeekIncomeValue, view.sixthWeekIncomeValue)
         val expenditures: List<TextView> = listOf(view.firstWeekExpenditureValue, view.secondWeekExpenditureValue, view.thirdWeekExpenditureValue, view.fourthWeekExpenditureValue, view.fifthWeekExpenditureValue, view.sixthWeekExpenditureValue)
+        val bigExpenditures: List<TextView> = listOf(view.firstWeekExpenditure, view.secondWeekExpenditure, view.thirdWeekExpenditure, view.fourthWeekExpenditure, view.fifthWeekExpenditure, view.sixthWeekExpenditure)
 
         val viewModel: MainViewModel by activityViewModels()
 
@@ -76,10 +77,14 @@ class WeekFragmentArticle : Fragment() {
         //格週をクリックしたら
         for(i in 0 until 6) {
             layouts[i].setOnClickListener{
-                initDetails()
-                details[i].visibility = View.VISIBLE
-                charts[i].animateY(300)
-                viewModel.selectWeek(i + 1)
+                if(details[i].visibility == View.GONE) {
+                    details[i].visibility = View.VISIBLE
+                    viewModel.selectWeek(i + 1)
+                    charts[i].animateY(300)
+                } else if(details[i].visibility == View.VISIBLE){
+                    initDetails()
+                    viewModel.selectWeek(null)
+                }
             }
         }
 
@@ -110,14 +115,14 @@ class WeekFragmentArticle : Fragment() {
                         titles[i].text = "${weeks[i].first().get(Calendar.MONTH) + 1}月 " +
                                 "${weeks[i].first().get(Calendar.DAY_OF_MONTH)}日"
                     }
+                    bigExpenditures[i].text = "${viewModel.getWeekExpenditureMoney(weeks[i])}円"
                 } else {
                     layouts[i].visibility = View.GONE
                 }
             }
-            //TODO: 格週の収入、支出を計算して表示
             //TODO: 日々の支出を計算してエントリーリストオブジェクトに返す
         }
-        //
+        //詳細情報を表示
         fun updateDetailsUI() {
             viewModel.selectedWeek.value?.let {
                 incomes[it - 1].text = "0 円"
@@ -129,14 +134,12 @@ class WeekFragmentArticle : Fragment() {
         //選択した月が変わったら
         viewModel.selectedMonth.observe(viewLifecycleOwner) {
             updateUI()
-            updateDetailsUI()
         }
         //シートが変わったら
         viewModel.sheets.observe(viewLifecycleOwner) {
             updateUI()
-            updateDetailsUI()
         }
-        //
+        //選択した週が変わったら
         viewModel.selectedWeek.observe(viewLifecycleOwner) {
             updateDetailsUI()
         }
