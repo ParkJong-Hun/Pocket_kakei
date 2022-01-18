@@ -30,6 +30,8 @@ class WeekFragmentArticle : Fragment() {
 
         val layouts: List<ConstraintLayout> = listOf(view.firstWeekLayout, view.secondWeekLayout, view.thirdWeekLayout, view.fourthWeekLayout, view.fifthWeekLayout, view.sixthWeekLayout)
         val titles: List<TextView> = listOf(view.firstWeekTitle, view.secondWeekTitle, view.thirdWeekTitle, view.fourthWeekTitle, view.fifthWeekTitle, view.sixthWeekTitle)
+        val details: List<ConstraintLayout> = listOf(view.firstWeekDetails, view.secondWeekDetails, view.thirdWeekDetails, view.fourthWeekDetails, view.fifthWeekDetails, view.sixthWeekDetails)
+        val charts: List<LineChart> = listOf(view.firstWeekChart, view.secondWeekChart, view.thirdWeekChart, view.fourthWeekChart, view.fifthWeekChart, view.sixthWeekChart)
 
         val viewModel: MainViewModel by activityViewModels()
 
@@ -58,53 +60,24 @@ class WeekFragmentArticle : Fragment() {
                 legend.isEnabled = false
             }
         }
-        loadChart(view.firstWeekChart, testData)
-        loadChart(view.secondWeekChart, testData)
-        loadChart(view.thirdWeekChart, testData)
-        loadChart(view.fourthWeekChart, testData)
-        loadChart(view.fifthWeekChart, testData)
-        loadChart(view.sixthWeekChart, testData)
+        for (i in 0 until 6) {
+            loadChart(charts[i], testData)
+        }
 
 
         //詳細情報を全部見えないように
         fun initDetails() {
-            view.firstWeekDetails.visibility = View.GONE
-            view.secondWeekDetails.visibility = View.GONE
-            view.thirdWeekDetails.visibility = View.GONE
-            view.fourthWeekDetails.visibility = View.GONE
-            view.fifthWeekDetails.visibility = View.GONE
-            view.sixthWeekDetails.visibility = View.GONE
+            for(i in 0 until 6) {
+                details[i].visibility = View.GONE
+            }
         }
         //格週をクリックしたら
-        view.firstWeekLayout.setOnClickListener{
-            initDetails()
-            view.firstWeekDetails.visibility = View.VISIBLE
-            view.firstWeekChart.animateY(300)
-        }
-        view.secondWeekLayout.setOnClickListener{
-            initDetails()
-            view.secondWeekDetails.visibility = View.VISIBLE
-            view.secondWeekChart.animateY(300)
-        }
-        view.thirdWeekLayout.setOnClickListener{
-            initDetails()
-            view.thirdWeekDetails.visibility = View.VISIBLE
-            view.thirdWeekChart.animateY(300)
-        }
-        view.fourthWeekLayout.setOnClickListener{
-            initDetails()
-            view.fourthWeekDetails.visibility = View.VISIBLE
-            view.fourthWeekChart.animateY(300)
-        }
-        view.fifthWeekLayout.setOnClickListener{
-            initDetails()
-            view.fifthWeekDetails.visibility = View.VISIBLE
-            view.fifthWeekChart.animateY(300)
-        }
-        view.sixthWeekLayout.setOnClickListener{
-            initDetails()
-            view.sixthWeekDetails.visibility = View.VISIBLE
-            view.sixthWeekChart.animateY(300)
+        for(i in 0 until 6) {
+            layouts[i].setOnClickListener{
+                initDetails()
+                details[i].visibility = View.VISIBLE
+                charts[i].animateY(300)
+            }
         }
 
 

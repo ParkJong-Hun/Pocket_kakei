@@ -41,11 +41,3 @@ class DayOfMonthAdapter: ListAdapter<Sheet, DayOfMonthAdapter.DayOfMonthViewHold
         holder.bind(getItem(position))
     }
 }
-
-class DiffCallback: DiffUtil.ItemCallback<Sheet>() {
-    override fun areItemsTheSame(oldItem: Sheet, newItem: Sheet): Boolean =
-        oldItem.id == newItem.id
-
-    override fun areContentsTheSame(oldItem: Sheet, newItem: Sheet): Boolean =
-        oldItem == newItem
-}
