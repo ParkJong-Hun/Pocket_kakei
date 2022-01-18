@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.github.mikephil.charting.data.Entry
 import com.parkjonghun.pocket_kakei.model.AppDatabase
 import com.parkjonghun.pocket_kakei.model.Sheet
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -36,8 +37,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     val doubleClicked:LiveData<Boolean> = _doubleClicked
     //選択した週
     private var _mutableSelectedWeek: Int? = null
-    private val _selectedWeek: MutableLiveData<Int> = MutableLiveData()
-    val selectedWeek:LiveData<Int> = _selectedWeek
+    private val _selectedWeek: MutableLiveData<Int?> = MutableLiveData()
+    val selectedWeek:LiveData<Int?> = _selectedWeek
 
 
 
@@ -393,5 +394,16 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             }
         }
         return result
+    }
+    //選択した週のグラフの格日のデータを返す
+    fun loadSelectedWeekChartData(): List<Entry> {
+        val entries: MutableList<Entry> = mutableListOf()
+        var count = 0F
+        for (day in getWeekOnMonth(_mutableSelectedWeek!!)) {
+            val entry = Entry(count, getDayExpenditureMoney(day).toFloat())
+            entries.add(entry)
+            count++
+        }
+        return entries
     }
 }

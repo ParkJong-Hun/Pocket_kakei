@@ -141,6 +141,9 @@ class WeekFragmentArticle : Fragment() {
         }
         //選択した週が変わったら
         viewModel.selectedWeek.observe(viewLifecycleOwner) {
+            if(it != null) {
+                loadChart(charts[it - 1], viewModel.loadSelectedWeekChartData())
+            }
             updateDetailsUI()
         }
 
