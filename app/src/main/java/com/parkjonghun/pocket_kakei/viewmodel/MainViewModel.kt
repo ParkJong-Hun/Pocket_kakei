@@ -349,19 +349,18 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         return result
     }
+    //
     fun selectWeek(weekCount: Int) {
         _mutableSelectedWeek = weekCount
         _selectedWeek.value = _mutableSelectedWeek
     }
-    //TODO: 一週間計算エラー修正
+    //
     fun getSelectedWeekIncomeMoney(): Int {
         var result = 0
-        for(i in 1..7) {
+        for(i in 1..31) {
             val temp = _mutableSelectedMonth.calendar.clone() as Calendar
             temp.set(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), 1, 0, 0, 0)
-            temp.add(Calendar.WEEK_OF_MONTH, selectedWeek.value!! - 1)
             temp.add(Calendar.DATE, i - 1)
-            Log.d("", "${temp.get(Calendar.WEEK_OF_MONTH)}, ${selectedWeek.value}")
             if (temp.get(Calendar.WEEK_OF_MONTH) == selectedWeek.value && temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH)) {
                 result += getDayIncomeMoney(temp)
             }
@@ -371,10 +370,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     //
     fun getSelectedWeekExpenditureMoney(): Int {
         var result = 0
-        for(i in 1..7) {
+        for(i in 1..31) {
             val temp = _mutableSelectedMonth.calendar.clone() as Calendar
             temp.set(temp.get(Calendar.YEAR), temp.get(Calendar.MONTH), 1, 0, 0, 0)
-            temp.add(Calendar.DATE, i)
+            temp.add(Calendar.DATE, i - 1)
             if (temp.get(Calendar.WEEK_OF_MONTH) == selectedWeek.value && temp.get(Calendar.MONTH) == _mutableSelectedMonth.calendar.get(Calendar.MONTH)) {
                 result += getDayExpenditureMoney(temp)
             }

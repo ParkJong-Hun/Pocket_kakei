@@ -120,6 +120,8 @@ class WeekFragmentArticle : Fragment() {
         //
         fun updateDetailsUI() {
             viewModel.selectedWeek.value?.let {
+                incomes[it - 1].text = "0 円"
+                expenditures[it - 1].text = "0 円"
                 incomes[it - 1].text = "${viewModel.getSelectedWeekIncomeMoney()} 円"
                 expenditures[it - 1].text = "${viewModel.getSelectedWeekExpenditureMoney()} 円"
             }
@@ -127,10 +129,12 @@ class WeekFragmentArticle : Fragment() {
         //選択した月が変わったら
         viewModel.selectedMonth.observe(viewLifecycleOwner) {
             updateUI()
+            updateDetailsUI()
         }
         //シートが変わったら
         viewModel.sheets.observe(viewLifecycleOwner) {
             updateUI()
+            updateDetailsUI()
         }
         //
         viewModel.selectedWeek.observe(viewLifecycleOwner) {
