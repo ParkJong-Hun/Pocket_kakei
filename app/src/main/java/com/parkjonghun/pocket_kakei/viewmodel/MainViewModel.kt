@@ -72,10 +72,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             null
         }
     }
-    //TODO: WeekFragmentのカレンダーの選択した日に合わせてデータ情報を加工
-    fun optimizeForWeek() {
-
-    }
     //DayFragmentのカレンダーの選択した日に合わせてデータ情報を加工
     suspend fun optimizeForDay(isAdd: Boolean): List<Sheet>? {
         return if(selectedDay.value != null) {
@@ -110,6 +106,11 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun selectMonth(date: CalendarDay) {
         _mutableSelectedMonth = date
         _selectedMonth.value = _mutableSelectedMonth
+    }
+    //選択した週を変える
+    fun selectWeek(weekCount: Int?) {
+        _mutableSelectedWeek = weekCount
+        _selectedWeek.value = _mutableSelectedWeek
     }
 
 
@@ -173,6 +174,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         return result
     }
+
+
     //ダブルクリックチェック
     fun doubleClicked() {
         _mutableDoubleClicked = true
@@ -182,6 +185,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         _mutableDoubleClicked = false
         _doubleClicked.value = _mutableDoubleClicked
     }
+
+
     //選択する日を次の日に
     fun selectNextDay() {
         _mutableSelectedDay.calendar.apply {
@@ -198,6 +203,24 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         _selectedDay.value = _mutableSelectedDay
     }
+    //選択する日を次の日に
+    fun selectNextMonth() {
+        _mutableSelectedMonth.calendar.apply {
+            add(Calendar.MONTH, 1)
+            _mutableSelectedMonth.date.time = this.timeInMillis
+        }
+        _selectedMonth.value = _mutableSelectedMonth
+    }
+    //選択する日を前の日に
+    fun selectPreviousMonth() {
+        _mutableSelectedMonth.calendar.apply {
+            add(Calendar.MONTH, -1)
+            _mutableSelectedMonth.date.time = this.timeInMillis
+        }
+        _selectedMonth.value = _mutableSelectedMonth
+    }
+
+
     //一週間の日を更新
     fun loadOneWeekDayOfMonth(): List<Int> {
         val currentWeek:MutableList<Int> = mutableListOf(_mutableSelectedDay.calendar.get(Calendar.DAY_OF_MONTH))
@@ -293,22 +316,8 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
         return result
     }
-    //選択する日を次の日に
-    fun selectNextMonth() {
-        _mutableSelectedMonth.calendar.apply {
-            add(Calendar.MONTH, 1)
-            _mutableSelectedMonth.date.time = this.timeInMillis
-        }
-        _selectedMonth.value = _mutableSelectedMonth
-    }
-    //選択する日を前の日に
-    fun selectPreviousMonth() {
-        _mutableSelectedMonth.calendar.apply {
-            add(Calendar.MONTH, -1)
-            _mutableSelectedMonth.date.time = this.timeInMillis
-        }
-        _selectedMonth.value = _mutableSelectedMonth
-    }
+
+
     //選択した月の該当週に含まれる日全部を返す
     fun getWeekOnMonth(weekCount: Int):List<Calendar> {
         val result: MutableList<Calendar> = mutableListOf()
@@ -327,7 +336,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         return result
     }
     //該当日の収入を返す
-    fun getDayIncomeMoney(targetDay: Calendar): Int {
+    private fun getDayIncomeMoney(targetDay: Calendar): Int {
         var result = 0
         sheets.value?.let {
             val thisDaySheets = it.filter { sheet ->
@@ -342,7 +351,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         return result
     }
     //該当日の支出を返す
-    fun getDayExpenditureMoney(targetDay: Calendar): Int {
+    private fun getDayExpenditureMoney(targetDay: Calendar): Int {
         var result = 0
         sheets.value?.let {
             val thisDaySheets = it.filter { sheet ->
@@ -363,11 +372,6 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             result += getDayExpenditureMoney(day)
         }
         return result
-    }
-    //選択した週を変える
-    fun selectWeek(weekCount: Int?) {
-        _mutableSelectedWeek = weekCount
-        _selectedWeek.value = _mutableSelectedWeek
     }
     //選択した週の収入を返す
     fun getSelectedWeekIncomeMoney(): Int {

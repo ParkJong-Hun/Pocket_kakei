@@ -12,5 +12,5 @@ data class Sheet(
     val isAdd: Boolean,
     val money: Int,
     val category: String,
-    val description: String
+    val description: String,
 )

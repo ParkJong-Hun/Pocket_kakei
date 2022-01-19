@@ -35,6 +35,8 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
     //データ追加準備完了合図
     private var _dataIsReady: Boolean = false
     var dataIsReady: MutableLiveData<Boolean> = MutableLiveData()
+
+
     //3字があれば「,」を記入
     fun checkComma(value:Int): String {
         val formatter = DecimalFormat("###,###")
@@ -53,6 +55,8 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
             value
         }
     }
+
+
     //次の画面に移る
     fun nextStep() {
         _currentStep += 1
@@ -63,6 +67,8 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
         _currentStep -= 1
         currentStep.value = _currentStep
     }
+
+
     //データを追加する準備OK
     fun dataReady() {
         _dataIsReady = true
@@ -87,6 +93,8 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
             }
         }
     }
+
+
     //選択した日付を返す
     fun getToday(): String {
         return "${calendar.get(Calendar.YEAR)}年 ${calendar.get(Calendar.MONTH) + 1}月 ${calendar.get(Calendar.DAY_OF_MONTH)}日"
