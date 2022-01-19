@@ -128,7 +128,7 @@ class MonthFragment: Fragment() {
 
 
         //FloatingButtonクリックしたら
-        view.addButton.setOnClickListener {
+        view.addButtonMonth.setOnClickListener {
             Intent(activity, AddActivity::class.java).apply {
                 putExtra("calendar", viewModel.calendarDayToString(view.monthCalendar.selectedDate))
                 activityResult.launch(this)

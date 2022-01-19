@@ -1,16 +1,21 @@
 package com.parkjonghun.pocket_kakei.view.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.parkjonghun.pocket_kakei.databinding.FragmentWeekBinding
+import com.parkjonghun.pocket_kakei.view.activity.AddActivity
 import com.parkjonghun.pocket_kakei.view.viewpager.ViewPagerAdapter
 import com.parkjonghun.pocket_kakei.viewmodel.MainViewModel
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import java.util.*
 
 class WeekFragment: Fragment() {
@@ -49,6 +54,22 @@ class WeekFragment: Fragment() {
         viewModel.selectedMonth.observe(viewLifecycleOwner) {
             view.weekCurrentMonth.text = "${viewModel.selectedMonth.value?.calendar?.get(Calendar.YEAR)}年 ${viewModel.selectedMonth.value?.calendar?.get(Calendar.MONTH)
                 ?.plus(1)}月"
+        }
+
+        //AddActivityからデータを追加したら
+        val activityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if(result.resultCode == AppCompatActivity.RESULT_OK) {
+                //データ更新
+                viewModel.loadSheets()
+            }
+        }
+
+        //FloatingButtonクリックしたら
+        view.addButtonWeek.setOnClickListener {
+            Intent(activity, AddActivity::class.java).apply {
+                putExtra("calendar", viewModel.calendarDayToString(CalendarDay.today()))
+                activityResult.launch(this)
+            }
         }
 
         return view.root

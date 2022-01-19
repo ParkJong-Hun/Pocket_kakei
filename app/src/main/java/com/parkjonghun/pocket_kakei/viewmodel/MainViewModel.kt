@@ -95,6 +95,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     fun calendarDayToString(calendar: CalendarDay): String {
         return SimpleDateFormat("yyyy MM dd", Locale.JAPANESE).format(calendar.date)
     }
+    //CalendarをStringに変換
+    fun calendarDayToString(calendar: Calendar): String {
+        return SimpleDateFormat("yyyy MM dd", Locale.JAPANESE).format(calendar.time)
+    }
 
 
     //選択した日更新

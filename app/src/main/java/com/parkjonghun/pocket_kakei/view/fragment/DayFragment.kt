@@ -1,11 +1,14 @@
 package com.parkjonghun.pocket_kakei.view.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -13,8 +16,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.parkjonghun.pocket_kakei.R
 import com.parkjonghun.pocket_kakei.databinding.FragmentDayBinding
 import com.parkjonghun.pocket_kakei.model.Sheet
+import com.parkjonghun.pocket_kakei.view.activity.AddActivity
 import com.parkjonghun.pocket_kakei.view.viewpager.ViewPagerAdapter
 import com.parkjonghun.pocket_kakei.viewmodel.MainViewModel
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import java.util.*
 
 class DayFragment: Fragment() {
@@ -176,6 +181,24 @@ class DayFragment: Fragment() {
         viewModel.sheets.observe(viewLifecycleOwner) {
             updateCalendarUI()
             updateTopUI()
+        }
+
+        //AddActivityからデータを追加したら
+        val activityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if(result.resultCode == AppCompatActivity.RESULT_OK) {
+                //データ更新
+                viewModel.loadSheets()
+            }
+        }
+
+        //FloatingButtonクリックしたら
+        view.addButtonDay.setOnClickListener {
+            if(viewModel.selectedDay.value != null) {
+                Intent(activity, AddActivity::class.java).apply {
+                    putExtra("calendar", viewModel.calendarDayToString(viewModel.selectedDay.value!!.calendar))
+                    activityResult.launch(this)
+                }
+            }
         }
 
         return view.root
