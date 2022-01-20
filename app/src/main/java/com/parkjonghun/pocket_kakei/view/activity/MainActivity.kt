@@ -12,7 +12,7 @@ import com.parkjonghun.pocket_kakei.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +51,5 @@ class MainActivity : AppCompatActivity() {
                 true
             }
         }
-
     }
 }

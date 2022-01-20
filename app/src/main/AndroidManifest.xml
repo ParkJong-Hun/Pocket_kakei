@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kaji_pocket">
         <activity
-            android:name="com.parkjonghun.pocket_kakei.view.activity.MainActivity"
+            android:name=".view.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.AddActivity"/>
+        <activity android:name=".view.activity.SheetActivity"/>
     </application>
 
 </manifest>

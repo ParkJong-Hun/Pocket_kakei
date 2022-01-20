@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -123,6 +124,8 @@ class MonthFragment: Fragment() {
             if(result.resultCode == AppCompatActivity.RESULT_OK) {
                 //データ更新
                 viewModel.loadSheets()
+            } else {
+                Log.d("", (result.resultCode == AppCompatActivity.RESULT_CANCELED).toString())
             }
         }
 
@@ -158,6 +161,7 @@ class MonthFragment: Fragment() {
             //データ更新
             viewModel.selectMonth(date)
         }
+
 
 
 

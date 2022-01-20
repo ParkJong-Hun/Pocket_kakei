@@ -1,18 +1,23 @@
 package com.parkjonghun.pocket_kakei.view.recylcerview
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.parkjonghun.pocket_kakei.R
 import com.parkjonghun.pocket_kakei.databinding.ItemDayOfMonthBinding
 import com.parkjonghun.pocket_kakei.model.Sheet
+import com.parkjonghun.pocket_kakei.view.activity.SheetActivity
 
 class DayOfMonthAdapter: ListAdapter<Sheet, DayOfMonthAdapter.DayOfMonthViewHolder>(DiffCallback()) {
     inner class DayOfMonthViewHolder(private val binding: ItemDayOfMonthBinding): RecyclerView.ViewHolder(binding.root) {
+        val context: Context = binding.root.context
+
         @SuppressLint("SetTextI18n")
         fun bind(item: Sheet) {
             //Sheetの情報を加工してアイテムのUIを更新
@@ -28,6 +33,13 @@ class DayOfMonthAdapter: ListAdapter<Sheet, DayOfMonthAdapter.DayOfMonthViewHold
                 binding.itemDayOfMonthMoney.setTextColor(ContextCompat.getColor(binding.root.context, R.color.green))
             } else {
                 binding.itemDayOfMonthMoney.setTextColor(ContextCompat.getColor(binding.root.context, R.color.red))
+            }
+
+            //TODO: どうしたら結果を確認できるか？
+            itemView.setOnClickListener{
+                Intent(context, SheetActivity::class.java).apply {
+                    putExtra("sheet", item)
+                }.run { context.startActivity(this) }
             }
         }
     }

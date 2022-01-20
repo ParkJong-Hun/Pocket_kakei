@@ -2,6 +2,7 @@ package com.parkjonghun.pocket_kakei.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.util.*
 
 //Model
@@ -14,4 +15,4 @@ data class Sheet(
     val category: String,
     val description: String,
     val memo: String
-)
+): Serializable
