@@ -35,6 +35,8 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
     //データ追加準備完了合図
     private var _dataIsReady: Boolean = false
     var dataIsReady: MutableLiveData<Boolean> = MutableLiveData()
+    //メモ
+    private val memo: String = ""
 
 
     //3字があれば「,」を記入
@@ -84,7 +86,8 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
                 isAdd = isAdd,
                 money = it,
                 category = category,
-                description = description
+                description = description,
+                memo = memo
             )
         }
         if (newSheet != null) {

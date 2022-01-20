@@ -13,4 +13,5 @@ data class Sheet(
     val money: Int,
     val category: String,
     val description: String,
+    val memo: String
 )
