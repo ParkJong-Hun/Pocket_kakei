@@ -27,11 +27,14 @@ class SheetActivity: AppCompatActivity() {
 
         val viewModel: SheetViewModel by viewModels()
 
+
+
         val sheet = intent.getSerializableExtra("sheet") as Sheet
         binding.sheetDescription.text = sheet.description
         binding.sheetCategoryValue.text = sheet.category
         binding.sheetMoneyValue.setText(sheet.money.toString())
         binding.sheetTodayTextView.text = "${sheet.date.get(Calendar.YEAR)}年 ${sheet.date.get(Calendar.MONTH)}月 ${sheet.date.get(Calendar.DAY_OF_MONTH)}日"
+        binding.sheetMemoValue.setText(sheet.memo)
 
 
         //入力をするたび「,」を追加するかチェック
@@ -58,7 +61,7 @@ class SheetActivity: AppCompatActivity() {
             //変化なし
             if(binding.sheetCategoryValue.text == sheet.category &&
                 binding.sheetMoneyValue.text.toString() == sheet.money.toString() &&
-                binding.sheetMemoText.text == sheet.memo
+                binding.sheetMemoValue.text.toString() == sheet.memo
             ) {
                 setResult(RESULT_CANCELED)
                 finish()
@@ -74,7 +77,7 @@ class SheetActivity: AppCompatActivity() {
                             money = viewModel.moneyValue.value?: 0,
                             category = binding.sheetCategoryValue.text.toString(),
                             description = sheet.description,
-                            memo = binding.sheetMemoText.text.toString()
+                            memo = binding.sheetMemoValue.text.toString()
                         )
                     )
                 }
