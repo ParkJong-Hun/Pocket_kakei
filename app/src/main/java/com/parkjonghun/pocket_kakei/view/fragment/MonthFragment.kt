@@ -68,6 +68,7 @@ class MonthFragment: Fragment() {
                 view.monthBalanceValue.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
             }
         }
+        //下段のUI更新
         fun updateBottomUI() {
             CoroutineScope(Dispatchers.Main).launch {
                 //選択した日の情報を利用し、データを加工

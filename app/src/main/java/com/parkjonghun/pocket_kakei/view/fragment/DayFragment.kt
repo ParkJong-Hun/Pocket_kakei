@@ -103,48 +103,49 @@ class DayFragment: Fragment() {
             view.dayExpenditureCashValue.text = "${viewModel.getSelectedDayCashExpenditureMoney()}"
             view.dayExpenditureCardValue.text = "${viewModel.getSelectedDayCardExpenditureMoney()}"
         }
-        fun updateEachCalendarUI(days: List<Sheet>?, icon:Drawable) {
-            val dayOfWeekList = days?.map { it.date.get(Calendar.DAY_OF_WEEK) }
-            if (dayOfWeekList != null) {
-                for (day in dayOfWeekList) {
-                    when (day) {
-                        SUN + 1 -> {
-                            view.daySundayDrawable.setImageDrawable(icon)
-                            view.daySundayDrawable.visibility = View.VISIBLE
-                        }
-                        MON + 1 -> {
-                            view.dayMondayDrawable.setImageDrawable(icon)
-                            view.dayMondayDrawable.visibility = View.VISIBLE
-                        }
-                        TUE + 1 -> {
-                            view.dayTuesdayDrawable.setImageDrawable(icon)
-                            view.dayTuesdayDrawable.visibility = View.VISIBLE
-                        }
-                        WED + 1 -> {
-                            view.dayWednesdayDrawable.setImageDrawable(icon)
-                            view.dayWednesdayDrawable.visibility = View.VISIBLE
-                        }
-                        THU + 1 -> {
-                            view.dayThursdayDrawable.setImageDrawable(icon)
-                            view.dayThursdayDrawable.visibility = View.VISIBLE
-                        }
-                        FRI + 1 -> {
-                            view.dayFridayDrawable.setImageDrawable(icon)
-                            view.dayFridayDrawable.visibility = View.VISIBLE
-                        }
-                        SAT + 1 -> {
-                            view.daySaturdayDrawable.setImageDrawable(icon)
-                            view.daySaturdayDrawable.visibility = View.VISIBLE
-                        }
-                    }
-                }
-            }
-        }
         fun updateCalendarUI() {
             val week = viewModel.loadOneWeekCalendar()
             //支出、収入日の背景
             val addedDay: List<Sheet>? = viewModel.sheets.value?.filter {value ->  value.isAdd && week.map { it.get(Calendar.DATE) }.contains(value.date.get(Calendar.DATE)) }
             val paidDay: List<Sheet>? = viewModel.sheets.value?.filter {value ->  !value.isAdd && week.map { it.get(Calendar.DATE) }.contains(value.date.get(Calendar.DATE)) }
+
+            fun updateEachCalendarUI(days: List<Sheet>?, icon:Drawable) {
+                val dayOfWeekList = days?.map { it.date.get(Calendar.DAY_OF_WEEK) }
+                if (dayOfWeekList != null) {
+                    for (day in dayOfWeekList) {
+                        when (day) {
+                            SUN + 1 -> {
+                                view.daySundayDrawable.setImageDrawable(icon)
+                                view.daySundayDrawable.visibility = View.VISIBLE
+                            }
+                            MON + 1 -> {
+                                view.dayMondayDrawable.setImageDrawable(icon)
+                                view.dayMondayDrawable.visibility = View.VISIBLE
+                            }
+                            TUE + 1 -> {
+                                view.dayTuesdayDrawable.setImageDrawable(icon)
+                                view.dayTuesdayDrawable.visibility = View.VISIBLE
+                            }
+                            WED + 1 -> {
+                                view.dayWednesdayDrawable.setImageDrawable(icon)
+                                view.dayWednesdayDrawable.visibility = View.VISIBLE
+                            }
+                            THU + 1 -> {
+                                view.dayThursdayDrawable.setImageDrawable(icon)
+                                view.dayThursdayDrawable.visibility = View.VISIBLE
+                            }
+                            FRI + 1 -> {
+                                view.dayFridayDrawable.setImageDrawable(icon)
+                                view.dayFridayDrawable.visibility = View.VISIBLE
+                            }
+                            SAT + 1 -> {
+                                view.daySaturdayDrawable.setImageDrawable(icon)
+                                view.daySaturdayDrawable.visibility = View.VISIBLE
+                            }
+                        }
+                    }
+                }
+            }
 
             updateEachCalendarUI(addedDay, addedMoneyIcon)
             updateEachCalendarUI(paidDay, paidMoneyIcon)
@@ -156,6 +157,7 @@ class DayFragment: Fragment() {
                 updateEachCalendarUI(intersection, usedMoneyIcon)
             }
         }
+
 
         //選択した日が変わったら
         viewModel.selectedDay.observe(viewLifecycleOwner) {
@@ -187,9 +189,11 @@ class DayFragment: Fragment() {
         }
         //モデルが変わったら
         viewModel.sheets.observe(viewLifecycleOwner) {
+            initWeekUI()
             updateCalendarUI()
             updateTopUI()
         }
+
 
         //FloatingButtonクリックしたら
         view.addButtonDay.setOnClickListener {

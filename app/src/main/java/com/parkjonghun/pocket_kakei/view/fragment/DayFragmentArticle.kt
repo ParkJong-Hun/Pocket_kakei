@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +13,6 @@ import com.parkjonghun.pocket_kakei.databinding.FragmentDayArticleBinding
 import com.parkjonghun.pocket_kakei.model.Sheet
 import com.parkjonghun.pocket_kakei.view.activity.SheetActivity
 import com.parkjonghun.pocket_kakei.view.recylcerview.DayOfMonth2Adapter
-import com.parkjonghun.pocket_kakei.view.recylcerview.DayOfMonthAdapter
 import com.parkjonghun.pocket_kakei.viewmodel.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,8 +41,8 @@ class DayFragmentArticle(val activityResult: ActivityResultLauncher<Intent>): Fr
         view.dayExpenditureList.adapter = expenditureAdapter
 
 
-        //選択した日が変わったら
-        viewModel.selectedDay.observe(viewLifecycleOwner) { it ->
+        //UI更新
+        fun updateUI() {
             CoroutineScope(Dispatchers.Main).launch {
                 //選択した日の情報を利用し、データを加工
                 val incomeSheetsOfSelectedDay = viewModel.optimizeForDay(true)
@@ -86,6 +83,14 @@ class DayFragmentArticle(val activityResult: ActivityResultLauncher<Intent>): Fr
                     view.dayNoDataNotification.visibility = View.GONE
                 }
             }
+        }
+        //選択した日が変わったら
+        viewModel.selectedDay.observe(viewLifecycleOwner) {
+            updateUI()
+        }
+        //シートが変わったら
+        viewModel.sheets.observe(viewLifecycleOwner) {
+            updateUI()
         }
 
 
