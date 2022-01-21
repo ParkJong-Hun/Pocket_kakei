@@ -25,15 +25,15 @@ class EditCategoryDialog: DialogFragment() {
         val view = binding.root
         //ボタンをクリックしたら
         binding.editCashButton.setOnClickListener{
-            onClickListener.onClick("現金")
+            onClickListener.onClick("deposit")
             dismiss()
         }
         binding.editDebitCardButton.setOnClickListener{
-            onClickListener.onClick("デビットカード")
+            onClickListener.onClick("debitCard")
             dismiss()
         }
         binding.editCreditCardButton.setOnClickListener{
-            onClickListener.onClick("クレジットカード")
+            onClickListener.onClick("creditCard")
             dismiss()
         }
 

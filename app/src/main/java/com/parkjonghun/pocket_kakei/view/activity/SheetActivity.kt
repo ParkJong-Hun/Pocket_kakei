@@ -33,7 +33,7 @@ class SheetActivity: AppCompatActivity() {
         val sheet = intent.getSerializableExtra("sheet") as Sheet
         binding.sheetDescription.text = sheet.description
         when(sheet.category) {
-            "cash" -> binding.sheetCategoryValue.text = "現金"
+            "deposit" -> binding.sheetCategoryValue.text = "現金"
             "debitCard" -> binding.sheetCategoryValue.text = "デビットカード"
             "creditCard" -> binding.sheetCategoryValue.text = "クレジットカード"
         }
@@ -112,7 +112,7 @@ class SheetActivity: AppCompatActivity() {
                 dialog.setOnClickListener(object: EditCategoryDialog.OnClickListener{
                     override fun onClick(inputData: String) {
                         when(inputData) {
-                            "cash" -> binding.sheetCategoryValue.text = "現金"
+                            "deposit" -> binding.sheetCategoryValue.text = "現金"
                             "debitCard" -> binding.sheetCategoryValue.text = "デビットカード"
                             "creditCard" -> binding.sheetCategoryValue.text = "クレジットカード"
                         }
