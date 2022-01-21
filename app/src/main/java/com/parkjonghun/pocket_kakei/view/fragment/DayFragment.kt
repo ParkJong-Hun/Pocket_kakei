@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,6 @@ import com.parkjonghun.pocket_kakei.model.Sheet
 import com.parkjonghun.pocket_kakei.view.activity.AddActivity
 import com.parkjonghun.pocket_kakei.view.viewpager.ViewPagerAdapter
 import com.parkjonghun.pocket_kakei.viewmodel.MainViewModel
-import com.prolificinteractive.materialcalendarview.CalendarDay
 import java.util.*
 
 class DayFragment: Fragment() {
@@ -50,10 +50,18 @@ class DayFragment: Fragment() {
         val usedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_use_money, null)
 
 
+        //AddActivityからデータを追加したら
+        val activityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if(result.resultCode == AppCompatActivity.RESULT_OK) {
+                //データ更新
+                viewModel.loadSheets()
+            }
+        }
+
 
         val pagerAdapter = ViewPagerAdapter(requireActivity())
         pagerAdapter.addFragment(EmptyFragment())
-        pagerAdapter.addFragment(DayFragmentArticle())
+        pagerAdapter.addFragment(DayFragmentArticle(activityResult))
         pagerAdapter.addFragment(EmptyFragment())
         view.dayRestViewPager.adapter = pagerAdapter
         //メイン画面を主に左右にビューがあるようにする
@@ -181,14 +189,6 @@ class DayFragment: Fragment() {
         viewModel.sheets.observe(viewLifecycleOwner) {
             updateCalendarUI()
             updateTopUI()
-        }
-
-        //AddActivityからデータを追加したら
-        val activityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if(result.resultCode == AppCompatActivity.RESULT_OK) {
-                //データ更新
-                viewModel.loadSheets()
-            }
         }
 
         //FloatingButtonクリックしたら

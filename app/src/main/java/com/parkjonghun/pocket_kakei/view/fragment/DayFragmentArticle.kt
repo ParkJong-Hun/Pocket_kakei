@@ -1,21 +1,28 @@
 package com.parkjonghun.pocket_kakei.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.parkjonghun.pocket_kakei.databinding.FragmentDayArticleBinding
+import com.parkjonghun.pocket_kakei.model.Sheet
+import com.parkjonghun.pocket_kakei.view.activity.SheetActivity
 import com.parkjonghun.pocket_kakei.view.recylcerview.DayOfMonth2Adapter
+import com.parkjonghun.pocket_kakei.view.recylcerview.DayOfMonthAdapter
 import com.parkjonghun.pocket_kakei.viewmodel.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 //FragmentDayから実際使うViewPagerの部分
-class DayFragmentArticle: Fragment() {
+class DayFragmentArticle(val activityResult: ActivityResultLauncher<Intent>): Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -80,6 +87,26 @@ class DayFragmentArticle: Fragment() {
                 }
             }
         }
+
+
+        //シートリストをクリックしたら
+        incomeAdapter.setOnClickListener(object : DayOfMonth2Adapter.OnItemCLickListener {
+            override fun onItemClick(v: View, sheet: Sheet) {
+                Intent(requireContext(), SheetActivity::class.java).apply {
+                    putExtra("sheet", sheet)
+                    activityResult.launch(this)
+                }
+            }
+        })
+        //シートリストをクリックしたら
+        expenditureAdapter.setOnClickListener(object : DayOfMonth2Adapter.OnItemCLickListener {
+            override fun onItemClick(v: View, sheet: Sheet) {
+                Intent(requireContext(), SheetActivity::class.java).apply {
+                    putExtra("sheet", sheet)
+                    activityResult.launch(this)
+                }
+            }
+        })
 
         return view.root
     }

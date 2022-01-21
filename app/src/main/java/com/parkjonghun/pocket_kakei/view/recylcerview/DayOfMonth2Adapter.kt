@@ -2,6 +2,7 @@ package com.parkjonghun.pocket_kakei.view.recylcerview
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,13 @@ import com.parkjonghun.pocket_kakei.databinding.ItemDayOfMonth2Binding
 import com.parkjonghun.pocket_kakei.model.Sheet
 
 class DayOfMonth2Adapter: ListAdapter<Sheet, DayOfMonth2Adapter.DayOfMonth2ViewHolder>(DiffCallback()) {
+
+    interface OnItemCLickListener {
+        fun onItemClick(v: View, sheet: Sheet)
+    }
+
+    private lateinit var itemClickListener: OnItemCLickListener
+
     inner class DayOfMonth2ViewHolder(private val binding: ItemDayOfMonth2Binding): RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(item: Sheet) {
@@ -21,6 +29,12 @@ class DayOfMonth2Adapter: ListAdapter<Sheet, DayOfMonth2Adapter.DayOfMonth2ViewH
                 "creditCard" -> binding.itemDayOfMonth2Category.text = "クレジットカード"
             }
             binding.itemDayOfMonth2Money.text = "${item.money} 円"
+
+
+            //クリックリスナー
+            itemView.setOnClickListener{
+                itemClickListener.onItemClick(it, item)
+            }
         }
     }
 
@@ -31,5 +45,9 @@ class DayOfMonth2Adapter: ListAdapter<Sheet, DayOfMonth2Adapter.DayOfMonth2ViewH
 
     override fun onBindViewHolder(holder: DayOfMonth2ViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    fun setOnClickListener(onItemClickListener: OnItemCLickListener) {
+        itemClickListener = onItemClickListener
     }
 }
