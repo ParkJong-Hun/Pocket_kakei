@@ -104,7 +104,7 @@ class SheetActivity: AppCompatActivity() {
             setResult(RESULT_OK)
             finish()
         }
-
+        //カテゴリーを選択したら
         if (!sheet.isAdd) {
             binding.sheetCategoryValue.setOnClickListener{
                 val dialog = EditCategoryDialog()
