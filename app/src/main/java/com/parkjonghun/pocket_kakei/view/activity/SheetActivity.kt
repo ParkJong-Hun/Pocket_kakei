@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.parkjonghun.pocket_kakei.databinding.ActivitySheetBinding
 import com.parkjonghun.pocket_kakei.model.Sheet
+import com.parkjonghun.pocket_kakei.view.dialog.EditCategoryDialog
 import com.parkjonghun.pocket_kakei.viewmodel.SheetViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +32,11 @@ class SheetActivity: AppCompatActivity() {
 
         val sheet = intent.getSerializableExtra("sheet") as Sheet
         binding.sheetDescription.text = sheet.description
-        binding.sheetCategoryValue.text = sheet.category
+        when(sheet.category) {
+            "cash" -> binding.sheetCategoryValue.text = "現金"
+            "debitCard" -> binding.sheetCategoryValue.text = "デビットカード"
+            "creditCard" -> binding.sheetCategoryValue.text = "クレジットカード"
+        }
         binding.sheetMoneyValue.setText(sheet.money.toString())
         binding.sheetTodayTextView.text = "${sheet.date.get(Calendar.YEAR)}年 ${sheet.date.get(Calendar.MONTH)}月 ${sheet.date.get(Calendar.DAY_OF_MONTH)}日"
         binding.sheetMemoValue.setText(sheet.memo)
@@ -68,6 +73,12 @@ class SheetActivity: AppCompatActivity() {
             }
             //変化あり
             else {
+                var categoryValue = sheet.category
+                when(binding.sheetCategoryValue.text) {
+                    "現金" -> categoryValue = "cash"
+                    "デビットカード" -> categoryValue = "debitCard"
+                    "クレジットカード" -> categoryValue = "creditCard"
+                }
                 CoroutineScope(Dispatchers.IO).launch {
                     viewModel.updateSheet(
                         Sheet(
@@ -75,7 +86,7 @@ class SheetActivity: AppCompatActivity() {
                             date = sheet.date,
                             isAdd = sheet.isAdd,
                             money = viewModel.moneyValue.value?: 0,
-                            category = binding.sheetCategoryValue.text.toString(),
+                            category = categoryValue,
                             description = sheet.description,
                             memo = binding.sheetMemoValue.text.toString()
                         )
@@ -92,6 +103,24 @@ class SheetActivity: AppCompatActivity() {
             }
             setResult(RESULT_OK)
             finish()
+        }
+
+        if (!sheet.isAdd) {
+            binding.sheetCategoryValue.setOnClickListener{
+                val dialog = EditCategoryDialog()
+                //作ったDialogFragmentの中のボタンを押したらMainActivityにDialogのEditTextのTextを返す
+                dialog.setOnClickListener(object: EditCategoryDialog.OnClickListener{
+                    override fun onClick(inputData: String) {
+                        when(inputData) {
+                            "cash" -> binding.sheetCategoryValue.text = "現金"
+                            "debitCard" -> binding.sheetCategoryValue.text = "デビットカード"
+                            "creditCard" -> binding.sheetCategoryValue.text = "クレジットカード"
+                        }
+                    }
+                })
+                //作ったDialogオブジェクトをsupportFragmentManagerを使って画面に表示する。
+                dialog.show(supportFragmentManager, "DialogFragment")
+            }
         }
     }
 }
