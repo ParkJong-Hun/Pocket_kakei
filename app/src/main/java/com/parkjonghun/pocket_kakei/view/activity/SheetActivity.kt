@@ -2,6 +2,8 @@ package com.parkjonghun.pocket_kakei.view.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.parkjonghun.pocket_kakei.databinding.ActivitySheetBinding
@@ -30,14 +32,59 @@ class SheetActivity: AppCompatActivity() {
         binding.sheetCategoryValue.text = sheet.category
         binding.sheetMoneyValue.setText(sheet.money.toString())
         binding.sheetTodayTextView.text = "${sheet.date.get(Calendar.YEAR)}年 ${sheet.date.get(Calendar.MONTH)}月 ${sheet.date.get(Calendar.DAY_OF_MONTH)}日"
+
+
+        //入力をするたび「,」を追加するかチェック
+        binding.sheetMoneyValue.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                binding.sheetMoneyValue.removeTextChangedListener(this)
+                binding.sheetMoneyValue.apply {
+                    setText(viewModel.checkComma(viewModel.checkLength(s.toString()).filter { it.isDigit() }.toInt()))
+                    setSelection(binding.sheetMoneyValue.text.length)
+                }
+                binding.sheetMoneyValue.addTextChangedListener(this)
+            }
+        })
+
+
         //バックボタンをクリックしたら
         binding.sheetBackButton.setOnClickListener{
-            setResult(RESULT_CANCELED)
-            finish()
+            //変化なし
+            if(binding.sheetCategoryValue.text == sheet.category &&
+                binding.sheetMoneyValue.text.toString() == sheet.money.toString() &&
+                binding.sheetMemoText.text == sheet.memo
+            ) {
+                setResult(RESULT_CANCELED)
+                finish()
+            }
+            //変化あり
+            else {
+                CoroutineScope(Dispatchers.IO).launch {
+                    viewModel.updateSheet(
+                        Sheet(
+                            id =  sheet.id,
+                            date = sheet.date,
+                            isAdd = sheet.isAdd,
+                            money = viewModel.moneyValue.value?: 0,
+                            category = binding.sheetCategoryValue.text.toString(),
+                            description = sheet.description,
+                            memo = binding.sheetMemoText.text.toString()
+                        )
+                    )
+                }
+                setResult(RESULT_OK)
+                finish()
+            }
         }
         //削除ボタンをクリックしたら
         binding.sheetDeleteButton.setOnClickListener{
-            val job = CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 viewModel.deleteSheet(sheet)
             }
             setResult(RESULT_OK)
