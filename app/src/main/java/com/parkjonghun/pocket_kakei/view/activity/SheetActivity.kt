@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.parkjonghun.pocket_kakei.databinding.ActivitySheetBinding
 import com.parkjonghun.pocket_kakei.model.Sheet
 import com.parkjonghun.pocket_kakei.viewmodel.SheetViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 @SuppressLint("SetTextI18n")
@@ -27,9 +30,17 @@ class SheetActivity: AppCompatActivity() {
         binding.sheetCategoryValue.text = sheet.category
         binding.sheetMoneyValue.setText(sheet.money.toString())
         binding.sheetTodayTextView.text = "${sheet.date.get(Calendar.YEAR)}年 ${sheet.date.get(Calendar.MONTH)}月 ${sheet.date.get(Calendar.DAY_OF_MONTH)}日"
-
+        //バックボタンをクリックしたら
         binding.sheetBackButton.setOnClickListener{
             setResult(RESULT_CANCELED)
+            finish()
+        }
+        //削除ボタンをクリックしたら
+        binding.sheetDeleteButton.setOnClickListener{
+            val job = CoroutineScope(Dispatchers.IO).launch {
+                viewModel.deleteSheet(sheet)
+            }
+            setResult(RESULT_OK)
             finish()
         }
     }

@@ -68,35 +68,7 @@ class MonthFragment: Fragment() {
                 view.monthBalanceValue.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
             }
         }
-        //Sheetsが変わったら
-        viewModel.sheets.observe(viewLifecycleOwner) {
-            //支出、収入日の背景
-            val addedDay: List<Sheet>? = viewModel.sheets.value?.filter { it.isAdd }
-            val paidDay: List<Sheet>? = viewModel.sheets.value?.filter { !it.isAdd }
-
-            val addedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_add_money, null)
-            val paidMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_pay_money, null)
-            val usedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_use_money, null)
-
-            view.monthCalendar.addDecorators(
-                addedDay?.let { it1 -> BackgroundDecorator(addedMoneyIcon, it1) },
-                paidDay?.let { it1 -> BackgroundDecorator(paidMoneyIcon, it1) },
-            )
-            //データが支出と収入どっちもあったら
-            if(addedDay != null && paidDay != null) {
-                val union = addedDay + paidDay
-                val intersection = union.groupBy { it.date.time }.filter { it.value.size > 1 }.flatMap { it.value }.distinct()
-                view.monthCalendar.addDecorator(BackgroundDecorator(usedMoneyIcon, intersection))
-            }
-
-            updateTopUI()
-        }
-        //選択した月が変わったら
-        viewModel.selectedMonth.observe(viewLifecycleOwner) {
-            updateTopUI()
-        }
-        //選択した日が変わったら
-        viewModel.selectedDay.observe(viewLifecycleOwner) {
+        fun updateBottomUI() {
             CoroutineScope(Dispatchers.Main).launch {
                 //選択した日の情報を利用し、データを加工
                 val sheetsOfSelectedDay = viewModel.optimizeForMonth()
@@ -117,6 +89,39 @@ class MonthFragment: Fragment() {
                     }
                 }
             }
+        }
+        //Sheetsが変わったら
+        viewModel.sheets.observe(viewLifecycleOwner) {
+            view.monthCalendar.removeDecorators()
+            //支出、収入日の背景
+            val addedDay: List<Sheet>? = viewModel.sheets.value?.filter { it.isAdd }
+            val paidDay: List<Sheet>? = viewModel.sheets.value?.filter { !it.isAdd }
+
+            val addedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_add_money, null)
+            val paidMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_pay_money, null)
+            val usedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_use_money, null)
+
+            view.monthCalendar.addDecorators(
+                addedDay?.let { it1 -> BackgroundDecorator(addedMoneyIcon, it1) },
+                paidDay?.let { it1 -> BackgroundDecorator(paidMoneyIcon, it1) },
+            )
+            //データが支出と収入どっちもあったら
+            if(addedDay != null && paidDay != null) {
+                val union = addedDay + paidDay
+                val intersection = union.groupBy { it.date.time }.filter { it.value.size > 1 }.flatMap { it.value }.distinct()
+                view.monthCalendar.addDecorator(BackgroundDecorator(usedMoneyIcon, intersection))
+            }
+
+            updateTopUI()
+            updateBottomUI()
+        }
+        //選択した月が変わったら
+        viewModel.selectedMonth.observe(viewLifecycleOwner) {
+            updateTopUI()
+        }
+        //選択した日が変わったら
+        viewModel.selectedDay.observe(viewLifecycleOwner) {
+            updateBottomUI()
         }
 
         //AddActivityからデータを追加したら
@@ -169,11 +174,6 @@ class MonthFragment: Fragment() {
             //データ更新
             viewModel.selectMonth(date)
         }
-
-
-
-
-
 
         return view.root
     }
