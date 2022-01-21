@@ -18,6 +18,7 @@ import com.parkjonghun.pocket_kakei.R
 import com.parkjonghun.pocket_kakei.databinding.FragmentMonthBinding
 import com.parkjonghun.pocket_kakei.model.Sheet
 import com.parkjonghun.pocket_kakei.view.activity.AddActivity
+import com.parkjonghun.pocket_kakei.view.activity.SheetActivity
 import com.parkjonghun.pocket_kakei.view.decorator.BackgroundDecorator
 import com.parkjonghun.pocket_kakei.view.decorator.SaturdayDecorator
 import com.parkjonghun.pocket_kakei.view.decorator.SundayDecorator
@@ -27,7 +28,6 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
 
 class MonthFragment: Fragment() {
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
@@ -124,8 +124,6 @@ class MonthFragment: Fragment() {
             if(result.resultCode == AppCompatActivity.RESULT_OK) {
                 //データ更新
                 viewModel.loadSheets()
-            } else {
-                Log.d("", (result.resultCode == AppCompatActivity.RESULT_CANCELED).toString())
             }
         }
 
@@ -137,6 +135,16 @@ class MonthFragment: Fragment() {
                 activityResult.launch(this)
             }
         }
+        //シートリストをクリックしたら
+        adapter.setOnClickListener(object : DayOfMonthAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, sheet: Sheet) {
+                Intent(requireContext(), SheetActivity::class.java).apply {
+                    putExtra("sheet", sheet)
+                    activityResult.launch(this)
+                }
+            }
+        })
+
         //今日を選択する
         view.monthCalendar.selectedDate = CalendarDay.from(viewModel.selectedDay.value?.date) ?: CalendarDay.today()
 
@@ -161,7 +169,6 @@ class MonthFragment: Fragment() {
             //データ更新
             viewModel.selectMonth(date)
         }
-
 
 
 
