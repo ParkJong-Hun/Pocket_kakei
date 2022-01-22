@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import com.parkjonghun.pocket_kakei.databinding.DialogEditCategoryBinding
 
@@ -23,18 +24,20 @@ class EditCategoryDialog: DialogFragment() {
     ): View {
         _binding = DialogEditCategoryBinding.inflate(inflater, container, false)
         val view = binding.root
+
+
+
+        val buttons: List<Button> = listOf(binding.editCashButton, binding.editDebitCardButton, binding.editCreditCardButton)
+        val values: List<String> = listOf("deposit", "debitCard", "creditCard")
         //ボタンをクリックしたら
-        binding.editCashButton.setOnClickListener{
-            onClickListener.onClick("deposit")
-            dismiss()
+        fun onClickButton(button: Button, inputData: String) {
+            button.setOnClickListener {
+                onClickListener.onClick(inputData)
+                dismiss()
+            }
         }
-        binding.editDebitCardButton.setOnClickListener{
-            onClickListener.onClick("debitCard")
-            dismiss()
-        }
-        binding.editCreditCardButton.setOnClickListener{
-            onClickListener.onClick("creditCard")
-            dismiss()
+        for (i in buttons.indices) {
+            onClickButton(buttons[i], values[i])
         }
 
         return view

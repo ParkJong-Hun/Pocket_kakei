@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
 
 
         val viewModel: MainViewModel by viewModels()
+
+
         //ダブルクリックしたら
         viewModel.doubleClicked.observe(this) {
             if(it) {

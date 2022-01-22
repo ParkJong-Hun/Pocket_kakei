@@ -20,15 +20,19 @@ class AddActivity: AppCompatActivity() {
         binding = ActivityAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val viewModel: AddViewModel by viewModels()
+
         //初期はバックボタンを見えないように
         binding.backButton.visibility = View.GONE
         //初期Fragment
         supportFragmentManager.beginTransaction().add(binding.addFragmentLayout.id, AddMoneyFragment()).commit()
         //持ってきたカレンダーデータ
         val selectedCalendarDay = SimpleDateFormat("yyyy MM dd", Locale.JAPANESE).parse(intent.getStringExtra("calendar")!!)
-
-        val viewModel: AddViewModel by viewModels()
         viewModel.calendar.time = selectedCalendarDay!!
+        //選択した日付
+        binding.todayTextView.text = viewModel.getToday()
+
+
         //ステップによって画面が変わる
         viewModel.currentStep.observe(this) {
             when(it) {
@@ -67,6 +71,8 @@ class AddActivity: AppCompatActivity() {
                 finish()
             }
         }
+
+
         //バックボタン
         binding.backButton.setOnClickListener {
             viewModel.previousStep()
@@ -75,7 +81,5 @@ class AddActivity: AppCompatActivity() {
         binding.closeButton.setOnClickListener {
             finish()
         }
-        //選択した日付
-        binding.todayTextView.text = viewModel.getToday()
     }
 }

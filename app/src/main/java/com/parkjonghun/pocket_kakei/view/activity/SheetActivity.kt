@@ -26,11 +26,13 @@ class SheetActivity: AppCompatActivity() {
         binding = ActivitySheetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val viewModel: SheetViewModel by viewModels()
 
 
-
+        //選択したシートを持ってくる
         val sheet = intent.getSerializableExtra("sheet") as Sheet
+        //初期化
         binding.sheetDescription.text = sheet.description
         when(sheet.category) {
             "deposit" -> binding.sheetCategoryValue.text = "現金"
@@ -79,6 +81,7 @@ class SheetActivity: AppCompatActivity() {
                     "デビットカード" -> categoryValue = "debitCard"
                     "クレジットカード" -> categoryValue = "creditCard"
                 }
+                //シートアップデート
                 CoroutineScope(Dispatchers.IO).launch {
                     viewModel.updateSheet(
                         Sheet(
@@ -98,6 +101,7 @@ class SheetActivity: AppCompatActivity() {
         }
         //削除ボタンをクリックしたら
         binding.sheetDeleteButton.setOnClickListener{
+            //シート削除
             CoroutineScope(Dispatchers.IO).launch {
                 viewModel.deleteSheet(sheet)
             }

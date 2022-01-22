@@ -19,7 +19,11 @@ class AddMoneyFragment: Fragment() {
     ): View {
         val view = FragmentAddMoneyBinding.inflate(inflater, container, false)
 
+
+
         val viewModel: AddViewModel by activityViewModels()
+
+
         //ViewModelの金額を使ってUI更新
         view.moneyValue.setText(viewModel.checkComma(viewModel.checkLength(viewModel.moneyValue.value.toString()).filter { it.isDigit() }.toInt()))
         //入力をするたび「,」を追加するかチェック
@@ -39,6 +43,8 @@ class AddMoneyFragment: Fragment() {
                 view.moneyValue.addTextChangedListener(this)
             }
         })
+
+
         //収入をクリックしたら
         view.submitIncomeButton.setOnClickListener {
             viewModel.isAdd = true

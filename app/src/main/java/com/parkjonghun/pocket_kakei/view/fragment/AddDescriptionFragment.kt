@@ -17,9 +17,15 @@ class AddDescriptionFragment: Fragment() {
     ): View {
         val view = FragmentAddDescriptionBinding.inflate(inflater, container, false)
 
+
+
         val viewModel: AddViewModel by activityViewModels()
+
+
         //ViewModelからデータを持ってきてUI表示
         view.descriptionValue.setText(viewModel.description)
+
+
         //ボタンをクリックしたら
         view.submitDescriptionButton.setOnClickListener {
             //入力したのをViewModelのデータに更新
