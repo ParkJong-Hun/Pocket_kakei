@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">pocket_kakei</string>
+    <string name="display_app_name">Pocket kakei</string>
+    <string name="page_month">Monthly</string>
+    <string name="page_week">Weekly</string>
+    <string name="page_day">Daily</string>
+    <string name="add_description">Post</string>
+    <string name="description_hint">Please enter your content.</string>
+    <string name="cash">Cash</string>
+    <string name="debit_card">Debit card</string>
+    <string name="credit_card">Credit card</string>
+    <string name="income">Income</string>
+    <string name="amount0_big">0$</string>
+    <string name="balance">Balance</string>
+    <string name="cash_underbar">└Cash</string>
+    <string name="card_underbar">└Card</string>
+    <string name="no_data_notification">No data.</string>
+    <string name="expenditure">Expenditure</string>
+    <string name="amount">Amount</string>
+    <string name="currency">$</string>
+    <string name="expenditure_way">Payment way</string>
+    <string name="memo">Memo</string>
+    <string name="memo_hint">Please enter your memo.</string>
+    <string name="deposit">Deposit</string>
+    <string name="sunday">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="first_week">First week</string>
+    <string name="second_week">Second week</string>
+    <string name="third_week">Third week</string>
+    <string name="fourth_week">Fourth week</string>
+    <string name="fifth_week">Fifth week</string>
+    <string name="sixth_week">Sixth week</string>
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">pocket_kakei</string>
+    <string name="display_app_name">포켓 가계</string>
+    <string name="page_month">월간</string>
+    <string name="page_week">주간</string>
+    <string name="page_day">일간</string>
+    <string name="add_description">이 내용을 등록</string>
+    <string name="description_hint">내용을 입력해주세요.</string>
+    <string name="cash">현금</string>
+    <string name="debit_card">체크 카드</string>
+    <string name="credit_card">신용 카드</string>
+    <string name="income">수입</string>
+    <string name="amount0_big">0원</string>
+    <string name="balance">잔고</string>
+    <string name="cash_underbar">└현금</string>
+    <string name="card_underbar">└카드</string>
+    <string name="no_data_notification">데이터가 없습니다.</string>
+    <string name="expenditure">지출</string>
+    <string name="amount">금액</string>
+    <string name="currency">원</string>
+    <string name="expenditure_way">지불 방법</string>
+    <string name="memo">메모</string>
+    <string name="memo_hint">메모를 작성해주세요.</string>
+    <string name="deposit">입금</string>
+    <string name="sunday">일</string>
+    <string name="monday">월</string>
+    <string name="tuesday">화</string>
+    <string name="wednesday">수</string>
+    <string name="thursday">목</string>
+    <string name="friday">금</string>
+    <string name="saturday">토</string>
+    <string name="first_week">1째주</string>
+    <string name="second_week">2째주</string>
+    <string name="third_week">3째주</string>
+    <string name="fourth_week">4째주</string>
+    <string name="fifth_week">5째주</string>
+    <string name="sixth_week">6째주</string>
+</resources>

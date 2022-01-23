@@ -20,7 +20,7 @@
                 android:id="@+id/firstWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1月1日 ー 1月1日"
+                tools:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -28,7 +28,7 @@
                 android:id="@+id/firstWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="第1週目"
+                android:text="@string/first_week"
                 android:paddingBottom="5dp"
                 android:textSize="12sp"
                 app:layout_constraintTop_toBottomOf="@+id/firstWeekTitle"
@@ -69,7 +69,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/syuunyuu"
+                            android:text="@string/income"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/firstWeekIncomeValue"
@@ -77,7 +77,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -91,7 +91,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/shisyutsu"
+                            android:text="@string/expenditure"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/firstWeekExpenditureValue"
@@ -99,7 +99,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -129,7 +129,7 @@
                 android:id="@+id/secondWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1月1日 ー 1月1日"
+                tools:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -137,7 +137,7 @@
                 android:id="@+id/secondWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="第2週目"
+                android:text="@string/second_week"
                 android:textSize="12sp"
                 android:paddingBottom="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/secondWeekTitle"
@@ -178,7 +178,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/syuunyuu"
+                            android:text="@string/income"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/secondWeekIncomeValue"
@@ -186,7 +186,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -200,7 +200,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/shisyutsu"
+                            android:text="@string/expenditure"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/secondWeekExpenditureValue"
@@ -208,7 +208,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -238,7 +238,7 @@
                 android:id="@+id/thirdWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1月1日 ー 1月1日"
+                tools:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -246,7 +246,7 @@
                 android:id="@+id/thirdWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="第3週目"
+                android:text="@string/third_week"
                 android:textSize="12sp"
                 android:paddingBottom="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/thirdWeekTitle"
@@ -287,7 +287,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/syuunyuu"
+                            android:text="@string/income"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/thirdWeekIncomeValue"
@@ -295,7 +295,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -309,7 +309,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/shisyutsu"
+                            android:text="@string/expenditure"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/thirdWeekExpenditureValue"
@@ -317,7 +317,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -347,7 +347,7 @@
                 android:id="@+id/fourthWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1月1日 ー 1月1日"
+                tools:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -355,7 +355,7 @@
                 android:id="@+id/fourthWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="第4週目"
+                android:text="@string/fourth_week"
                 android:textSize="12sp"
                 android:paddingBottom="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/fourthWeekTitle"
@@ -396,7 +396,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/syuunyuu"
+                            android:text="@string/income"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/fourthWeekIncomeValue"
@@ -404,7 +404,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -418,7 +418,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/shisyutsu"
+                            android:text="@string/expenditure"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/fourthWeekExpenditureValue"
@@ -426,7 +426,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -456,7 +456,7 @@
                 android:id="@+id/fifthWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1月1日 ー 1月1日"
+                tools:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -464,7 +464,7 @@
                 android:id="@+id/fifthWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="第5週目"
+                android:text="@string/fifth_week"
                 android:textSize="12sp"
                 android:paddingBottom="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/fifthWeekTitle"
@@ -505,7 +505,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/syuunyuu"
+                            android:text="@string/income"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/fifthWeekIncomeValue"
@@ -513,7 +513,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -527,7 +527,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/shisyutsu"
+                            android:text="@string/expenditure"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/fifthWeekExpenditureValue"
@@ -535,7 +535,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -565,7 +565,7 @@
                 android:id="@+id/sixthWeekTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1月1日 ー 1月1日"
+                tools:text="1月1日 ー 1月1日"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -573,7 +573,7 @@
                 android:id="@+id/sixthWeekDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="第6週目"
+                android:text="@string/sixth_week"
                 android:textSize="12sp"
                 android:paddingBottom="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/sixthWeekTitle"
@@ -614,7 +614,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/syuunyuu"
+                            android:text="@string/income"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/sixthWeekIncomeValue"
@@ -622,7 +622,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/green"
                             android:layout_weight="1"/>
                     </LinearLayout>
@@ -636,7 +636,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="@string/shisyutsu"
+                            android:text="@string/expenditure"
                             android:layout_weight="1"/>
                         <TextView
                             android:id="@+id/sixthWeekExpenditureValue"
@@ -644,7 +644,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="0"
+                            android:text="@string/zero"
                             android:textColor="@color/red"
                             android:layout_weight="1"/>
                     </LinearLayout>

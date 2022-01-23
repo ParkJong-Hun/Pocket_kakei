@@ -16,20 +16,26 @@
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_month.xml" value="0.2" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/layout/fragment_week.xml" value="0.2" />
         <entry key="..\:/mobile_home/kaji_pocket/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.3619791666666667" />
+        <entry key="app/src/main/res/drawable/ic_add_money.xml" value="0.328" />
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.328" />
         <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.328" />
         <entry key="app/src/main/res/layout/acitivity_sheet.xml" value="0.35352390988861054" />
-        <entry key="app/src/main/res/layout/activity_add.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_add.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/activity_sheet.xml" value="0.19519927536231885" />
+        <entry key="app/src/main/res/layout/activity_sheet.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_edit_category.xml" value="0.33324803098236055" />
         <entry key="app/src/main/res/layout/fragment_add_category.xml" value="0.19630192502532928" />
-        <entry key="app/src/main/res/layout/fragment_add_money.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/fragment_day.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/fragment_add_description.xml" value="0.14166666666666666" />
+        <entry key="app/src/main/res/layout/fragment_add_money.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_day.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_day_article.xml" value="0.25815217391304346" />
-        <entry key="app/src/main/res/layout/fragment_month.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/fragment_week.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/fragment_week_article.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/fragment_empty.xml" value="0.14166666666666666" />
+        <entry key="app/src/main/res/layout/fragment_month.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_week.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_week_article.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_day_of_month.xml" value="0.14166666666666666" />
+        <entry key="app/src/main/res/layout/item_day_of_month_2.xml" value="0.14166666666666666" />
+        <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.4036458333333333" />
       </map>
     </option>
   </component>

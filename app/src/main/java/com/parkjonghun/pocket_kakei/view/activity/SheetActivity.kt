@@ -40,7 +40,7 @@ class SheetActivity: AppCompatActivity() {
             "creditCard" -> binding.sheetCategoryValue.text = "クレジットカード"
         }
         binding.sheetMoneyValue.setText(viewModel.checkComma(viewModel.checkLength(sheet.money.toString()).filter { it.isDigit() }.toInt()))
-        binding.sheetTodayTextView.text = "${sheet.date.get(Calendar.YEAR)}年 ${sheet.date.get(Calendar.MONTH)}月 ${sheet.date.get(Calendar.DAY_OF_MONTH)}日"
+        binding.sheetTodayTextView.text = "${sheet.date.get(Calendar.YEAR)}年 ${sheet.date.get(Calendar.MONTH) + 1}月 ${sheet.date.get(Calendar.DAY_OF_MONTH)}日"
         binding.sheetMemoValue.setText(sheet.memo)
 
 

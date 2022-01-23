@@ -1,19 +1,39 @@
 <resources>
     <string name="app_name">pocket_kakei</string>
     <string name="display_app_name">ポケット家計簿</string>
-    <string name="page_month">月間</string>
-    <string name="page_week">週間</string>
-    <string name="page_day">日間</string>
+    <string name="page_month">月刊</string>
+    <string name="page_week">週刊</string>
+    <string name="page_day">日刊</string>
     <string name="add_description">この内容を登録</string>
     <string name="description_hint">内容を入力してください。</string>
     <string name="cash">現金</string>
     <string name="debit_card">デビットカード</string>
     <string name="credit_card">クレジットカード</string>
-    <string name="syuunyuu">収入</string>
-    <string name="_0en_big">0円</string>
-    <string name="zandaka">残高</string>
-    <string name="genkin_underbar">└現金</string>
+    <string name="income">収入</string>
+    <string name="amount0_big">0円</string>
+    <string name="balance">残高</string>
+    <string name="cash_underbar">└現金</string>
     <string name="card_underbar">└カード</string>
     <string name="no_data_notification">データがないです。</string>
-    <string name="shisyutsu">支出</string>
+    <string name="expenditure">支出</string>
+    <string name="amount">金額</string>
+    <string name="currency">円</string>
+    <string name="expenditure_way">お支払い方法</string>
+    <string name="memo">メモ</string>
+    <string name="memo_hint">メモを書いてください。</string>
+    <string name="deposit">入金</string>
+    <string name="sunday">日</string>
+    <string name="monday">月</string>
+    <string name="tuesday">火</string>
+    <string name="wednesday">水</string>
+    <string name="thursday">木</string>
+    <string name="friday">金</string>
+    <string name="saturday">日</string>
+    <string name="zero" translatable="false">0</string>
+    <string name="first_week">第1週目</string>
+    <string name="second_week">第2週目</string>
+    <string name="third_week">第3週目</string>
+    <string name="fourth_week">第4週目</string>
+    <string name="fifth_week">第5週目</string>
+    <string name="sixth_week">第6週目</string>
 </resources>

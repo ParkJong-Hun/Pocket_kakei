@@ -30,7 +30,7 @@
             android:id="@+id/dayIncomeListTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/syuunyuu"
+            android:text="@string/income"
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="@color/green" />
@@ -46,7 +46,7 @@
             android:id="@+id/dayExpenditureListTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/shisyutsu"
+            android:text="@string/expenditure"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/red"/>
