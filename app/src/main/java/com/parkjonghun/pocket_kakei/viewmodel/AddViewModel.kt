@@ -2,7 +2,6 @@ package com.parkjonghun.pocket_kakei.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -45,7 +44,6 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
         val formatter = DecimalFormat("###,###")
         _moneyValue = value
         _moneyValueLiveData.value = _moneyValue
-        Log.d("money", "money: ${moneyValue.value}")
         return formatter.format(value)
     }
     //数字の長さが9より高いと禁止

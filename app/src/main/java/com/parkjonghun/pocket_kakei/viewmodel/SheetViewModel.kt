@@ -11,7 +11,6 @@ import com.parkjonghun.pocket_kakei.model.Sheet
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 
 class SheetViewModel(application: Application): AndroidViewModel(application) {

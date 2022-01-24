@@ -19,8 +19,4 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter
         fragments.add(fragment)
         notifyItemInserted(fragments.size - 1)
     }
-    fun removeFragment() {
-        fragments.removeLast()
-        notifyItemRemoved(fragments.size)
-    }
 }
