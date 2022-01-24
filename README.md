@@ -1,7 +1,7 @@
 # Pocket_kakei
 スマホで作成する小さい家計メモ
 <br>
-https://blog.naver.com/exoci/222629815850
+<a href="https://blog.naver.com/exoci/222629815850">Video URL</a>
 <br>
 **Language**: Japanese(default), English, Korean
 <br>
