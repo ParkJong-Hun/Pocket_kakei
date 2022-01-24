@@ -8,7 +8,7 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/lifeGreen</item>
         <item name="colorSecondaryVariant">@color/lifeGreen_dark</item>
-        <item name="colorOnSecondary">@color/lifeBlack</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

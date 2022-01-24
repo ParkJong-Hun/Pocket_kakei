@@ -32,7 +32,7 @@ class DayFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = FragmentDayBinding.inflate(inflater, container, false)
-
+        
 
 
         val viewModel: MainViewModel by activityViewModels()
