@@ -29,12 +29,17 @@ class DayOfMonthAdapter: ListAdapter<Sheet, DayOfMonthAdapter.DayOfMonthViewHold
             //Sheetの情報を加工してアイテムのUIを更新
             binding.itemDayOfMonthDescription.text = item.description
             when(item.category) {
-                "deposit"-> binding.itemDayOfMonthCategory.text = "入金"
-                "cash" -> binding.itemDayOfMonthCategory.text = "現金"
-                "debitCard" -> binding.itemDayOfMonthCategory.text = "デビットカード"
-                "creditCard" -> binding.itemDayOfMonthCategory.text = "クレジットカード"
+                "deposit"-> binding.itemDayOfMonthCategory.text = itemView.context.resources.getString(
+                    R.string.deposit)
+                "cash" -> binding.itemDayOfMonthCategory.text = itemView.context.resources.getString(
+                    R.string.cash)
+                "debitCard" -> binding.itemDayOfMonthCategory.text = itemView.context.resources.getString(
+                    R.string.debit_card)
+                "creditCard" -> binding.itemDayOfMonthCategory.text = itemView.context.resources.getString(
+                    R.string.credit_card)
             }
-            binding.itemDayOfMonthMoney.text = "${item.money} 円"
+            binding.itemDayOfMonthMoney.text = "${item.money} ${itemView.context.resources.getString(
+                R.string.currency)}"
             if(item.isAdd) {
                 binding.itemDayOfMonthMoney.setTextColor(ContextCompat.getColor(binding.root.context, R.color.green))
             } else {

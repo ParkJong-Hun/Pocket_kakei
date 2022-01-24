@@ -36,4 +36,7 @@
     <string name="fourth_week">Fourth week</string>
     <string name="fifth_week">Fifth week</string>
     <string name="sixth_week">Sixth week</string>
+    <string name="year">/</string>
+    <string name="month">/</string>
+    <string name="day">" "</string>
 </resources>

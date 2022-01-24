@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
+import com.parkjonghun.pocket_kakei.R
 import com.parkjonghun.pocket_kakei.databinding.FragmentWeekBinding
 import com.parkjonghun.pocket_kakei.view.activity.AddActivity
 import com.parkjonghun.pocket_kakei.view.viewpager.ViewPagerAdapter
@@ -27,7 +28,10 @@ class WeekFragment: Fragment() {
     ): View {
         val view = FragmentWeekBinding.inflate(inflater, container, false)
 
+
         val viewModel: MainViewModel by activityViewModels()
+
+
 
         val pagerAdapter = ViewPagerAdapter(requireActivity())
         pagerAdapter.addFragment(EmptyFragment())
@@ -52,8 +56,9 @@ class WeekFragment: Fragment() {
 
         //選択した月が変わったら
         viewModel.selectedMonth.observe(viewLifecycleOwner) {
-            view.weekCurrentMonth.text = "${viewModel.selectedMonth.value?.calendar?.get(Calendar.YEAR)}年 ${viewModel.selectedMonth.value?.calendar?.get(Calendar.MONTH)
-                ?.plus(1)}月"
+            view.weekCurrentMonth.text = "${viewModel.selectedMonth.value?.calendar?.get(Calendar.YEAR)}${resources.getString(
+                R.string.year)} ${viewModel.selectedMonth.value?.calendar?.get(Calendar.MONTH)
+            ?.plus(1)}${resources.getString(R.string.month)}"
         }
 
         //AddActivityからデータを追加したら

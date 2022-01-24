@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.parkjonghun.pocket_kakei.R
 import com.parkjonghun.pocket_kakei.databinding.ActivitySheetBinding
 import com.parkjonghun.pocket_kakei.model.Sheet
 import com.parkjonghun.pocket_kakei.view.dialog.EditCategoryDialog
@@ -26,9 +27,12 @@ class SheetActivity: AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivitySheetBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val currentLanguage = resources.configuration.locales.get(0).language
+
 
 
         val viewModel: SheetViewModel by viewModels()
+
 
 
         //選択したシートを持ってくる
@@ -36,13 +40,17 @@ class SheetActivity: AppCompatActivity() {
         //初期化
         binding.sheetDescription.text = sheet.description
         when(sheet.category) {
-            "deposit" -> binding.sheetCategoryValue.text = "入金"
-            "cash" -> binding.sheetCategoryValue.text = "現金"
-            "debitCard" -> binding.sheetCategoryValue.text = "デビットカード"
-            "creditCard" -> binding.sheetCategoryValue.text = "クレジットカード"
+            "deposit" -> binding.sheetCategoryValue.text = resources.getString(R.string.deposit)
+            "cash" -> binding.sheetCategoryValue.text = resources.getString(R.string.cash)
+            "debitCard" -> binding.sheetCategoryValue.text = resources.getString(R.string.debit_card)
+            "creditCard" -> binding.sheetCategoryValue.text = resources.getString(R.string.credit_card)
         }
         binding.sheetMoneyValue.setText(viewModel.checkComma(viewModel.checkLength(sheet.money.toString()).filter { it.isDigit() }.toInt()))
-        binding.sheetTodayTextView.text = "${sheet.date.get(Calendar.YEAR)}年 ${sheet.date.get(Calendar.MONTH) + 1}月 ${sheet.date.get(Calendar.DAY_OF_MONTH)}日"
+        when(currentLanguage) {
+            "jp" -> binding.sheetTodayTextView.text = "${sheet.date.get(Calendar.YEAR)}年 ${sheet.date.get(Calendar.MONTH) + 1}月 ${sheet.date.get(Calendar.DAY_OF_MONTH)}日"
+            "en" -> binding.sheetTodayTextView.text = "${sheet.date.get(Calendar.YEAR)}/ ${sheet.date.get(Calendar.MONTH) + 1}/ ${sheet.date.get(Calendar.DAY_OF_MONTH)}"
+            "ko" -> binding.sheetTodayTextView.text = "${sheet.date.get(Calendar.YEAR)}년 ${sheet.date.get(Calendar.MONTH) + 1}월 ${sheet.date.get(Calendar.DAY_OF_MONTH)}일"
+        }
         binding.sheetMemoValue.setText(sheet.memo)
 
 
@@ -79,10 +87,10 @@ class SheetActivity: AppCompatActivity() {
             else {
                 var categoryValue = sheet.category
                 when(binding.sheetCategoryValue.text) {
-                    "入金" -> categoryValue = "入金"
-                    "現金" -> categoryValue = "cash"
-                    "デビットカード" -> categoryValue = "debitCard"
-                    "クレジットカード" -> categoryValue = "creditCard"
+                    resources.getString(R.string.deposit) -> categoryValue = "deposit"
+                    resources.getString(R.string.cash) -> categoryValue = "cash"
+                    resources.getString(R.string.debit_card) -> categoryValue = "debitCard"
+                    resources.getString(R.string.credit_card) -> categoryValue = "creditCard"
                 }
                 //シートアップデート
                 CoroutineScope(Dispatchers.IO).launch {
@@ -120,10 +128,10 @@ class SheetActivity: AppCompatActivity() {
                 dialog.setOnClickListener(object: EditCategoryDialog.OnClickListener{
                     override fun onClick(inputData: String) {
                         when(inputData) {
-                            "deposit" -> binding.sheetCategoryValue.text = "入金"
-                            "cash" -> binding.sheetCategoryValue.text = "現金"
-                            "debitCard" -> binding.sheetCategoryValue.text = "デビットカード"
-                            "creditCard" -> binding.sheetCategoryValue.text = "クレジットカード"
+                            "deposit" -> binding.sheetCategoryValue.text = resources.getString(R.string.deposit)
+                            "cash" -> binding.sheetCategoryValue.text = resources.getString(R.string.cash)
+                            "debitCard" -> binding.sheetCategoryValue.text = resources.getString(R.string.debit_card)
+                            "creditCard" -> binding.sheetCategoryValue.text = resources.getString(R.string.credit_card)
                         }
                     }
                 })

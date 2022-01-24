@@ -52,16 +52,16 @@ class MonthFragment: Fragment() {
         //上段のUI更新
         fun updateTopUI() {
             //収入
-            view.monthIncomeValue.text = "${viewModel.getAllIncomeMoney()}円"
+            view.monthIncomeValue.text = "${viewModel.getAllIncomeMoney()}${resources.getString(R.string.currency)}"
             //支出
-            view.monthExpenditureValue.text = "${viewModel.getAllExpenditureMoney()}円"
+            view.monthExpenditureValue.text = "${viewModel.getAllExpenditureMoney()}${resources.getString(R.string.currency)}"
             //現金
-            view.monthExpenditureCashValue.text = "${viewModel.getCashExpenditureMoney()}円"
+            view.monthExpenditureCashValue.text = "${viewModel.getCashExpenditureMoney()}${resources.getString(R.string.currency)}"
             //カード
-            view.monthExpenditureCardValue.text = "${viewModel.getCardExpenditureMoney()}円"
+            view.monthExpenditureCardValue.text = "${viewModel.getCardExpenditureMoney()}${resources.getString(R.string.currency)}"
             //残高
             val balance = viewModel.getAllIncomeMoney() - viewModel.getAllExpenditureMoney()
-            view.monthBalanceValue.text = "${balance}円"
+            view.monthBalanceValue.text = "${balance}${resources.getString(R.string.currency)}"
             if(balance < 0) {
                 view.monthBalanceValue.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
             } else {

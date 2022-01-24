@@ -27,7 +27,7 @@ class AddActivity: AppCompatActivity() {
         //初期Fragment
         supportFragmentManager.beginTransaction().add(binding.addFragmentLayout.id, AddMoneyFragment()).commit()
         //持ってきたカレンダーデータ
-        val selectedCalendarDay = SimpleDateFormat("yyyy MM dd", Locale.JAPANESE).parse(intent.getStringExtra("calendar")!!)
+        val selectedCalendarDay = SimpleDateFormat("yyyy MM dd", resources.configuration.locales.get(0)).parse(intent.getStringExtra("calendar")!!)
         viewModel.calendar.time = selectedCalendarDay!!
         //選択した日付
         binding.todayTextView.text = viewModel.getToday()

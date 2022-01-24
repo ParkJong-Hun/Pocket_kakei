@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.parkjonghun.pocket_kakei.R
 import com.parkjonghun.pocket_kakei.model.AppDatabase
 import com.parkjonghun.pocket_kakei.model.Sheet
 import kotlinx.coroutines.CoroutineScope
@@ -100,6 +101,6 @@ class AddViewModel(application: Application):AndroidViewModel(application) {
 
     //選択した日付を返す
     fun getToday(): String {
-        return "${calendar.get(Calendar.YEAR)}年 ${calendar.get(Calendar.MONTH) + 1}月 ${calendar.get(Calendar.DAY_OF_MONTH)}日"
+        return "${calendar.get(Calendar.YEAR)}${context.resources.getString(R.string.year)} ${calendar.get(Calendar.MONTH) + 1}${context.resources.getString(R.string.month)} ${calendar.get(Calendar.DAY_OF_MONTH)}${context.resources.getString(R.string.day)}"
     }
 }
