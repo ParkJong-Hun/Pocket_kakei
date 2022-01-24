@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.parkjonghun.pocket_kakei.databinding.ActivitySheetBinding
@@ -35,7 +36,8 @@ class SheetActivity: AppCompatActivity() {
         //初期化
         binding.sheetDescription.text = sheet.description
         when(sheet.category) {
-            "deposit" -> binding.sheetCategoryValue.text = "現金"
+            "deposit" -> binding.sheetCategoryValue.text = "入金"
+            "cash" -> binding.sheetCategoryValue.text = "現金"
             "debitCard" -> binding.sheetCategoryValue.text = "デビットカード"
             "creditCard" -> binding.sheetCategoryValue.text = "クレジットカード"
         }
@@ -77,12 +79,14 @@ class SheetActivity: AppCompatActivity() {
             else {
                 var categoryValue = sheet.category
                 when(binding.sheetCategoryValue.text) {
+                    "入金" -> categoryValue = "入金"
                     "現金" -> categoryValue = "cash"
                     "デビットカード" -> categoryValue = "debitCard"
                     "クレジットカード" -> categoryValue = "creditCard"
                 }
                 //シートアップデート
                 CoroutineScope(Dispatchers.IO).launch {
+                    Log.d("", categoryValue)
                     viewModel.updateSheet(
                         Sheet(
                             id =  sheet.id,
@@ -116,7 +120,8 @@ class SheetActivity: AppCompatActivity() {
                 dialog.setOnClickListener(object: EditCategoryDialog.OnClickListener{
                     override fun onClick(inputData: String) {
                         when(inputData) {
-                            "deposit" -> binding.sheetCategoryValue.text = "現金"
+                            "deposit" -> binding.sheetCategoryValue.text = "入金"
+                            "cash" -> binding.sheetCategoryValue.text = "現金"
                             "debitCard" -> binding.sheetCategoryValue.text = "デビットカード"
                             "creditCard" -> binding.sheetCategoryValue.text = "クレジットカード"
                         }

@@ -28,7 +28,7 @@ class EditCategoryDialog: DialogFragment() {
 
 
         val buttons: List<Button> = listOf(binding.editCashButton, binding.editDebitCardButton, binding.editCreditCardButton)
-        val values: List<String> = listOf("deposit", "debitCard", "creditCard")
+        val values: List<String> = listOf("cash", "debitCard", "creditCard")
         //ボタンをクリックしたら
         fun onClickButton(button: Button, inputData: String) {
             button.setOnClickListener {

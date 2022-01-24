@@ -8,6 +8,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -37,18 +40,13 @@ class DayFragment: Fragment() {
 
 
 
-        val SUN = 0
-        val MON = 1
-        val TUE = 2
-        val WED = 3
-        val THU = 4
-        val FRI = 5
-        val SAT = 6
-
         val addedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_add_money, null)
         val paidMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_pay_money, null)
         val usedMoneyIcon: Drawable = view.root.resources.getDrawable(R.drawable.ic_use_money, null)
 
+        val layouts: List<LinearLayout> = listOf(view.daySundayLayout, view.dayMondayLayout, view.dayTuesdayLayout, view.dayWednesdayLayout, view.dayThursdayLayout, view.dayFridayLayout, view.daySaturdayLayout)
+        val images: List<ImageView> = listOf(view.daySundayDrawable, view.dayMondayDrawable, view.dayTuesdayDrawable, view.dayWednesdayDrawable, view.dayThursdayDrawable, view.dayFridayDrawable, view.daySaturdayDrawable)
+        val values: List<TextView> = listOf(view.daySundayValue, view.dayMondayValue, view.dayTuesdayValue, view.dayWednesdayValue, view.dayThursdayValue, view.dayFridayValue, view.daySaturdayValue)
 
         //AddActivityからデータを追加したら
         val activityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -82,20 +80,10 @@ class DayFragment: Fragment() {
 
         //UI更新
         fun initWeekUI() {
-            view.daySundayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
-            view.dayMondayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
-            view.dayTuesdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
-            view.dayWednesdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
-            view.dayThursdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
-            view.dayFridayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
-            view.daySaturdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
-            view.daySundayDrawable.visibility = View.INVISIBLE
-            view.dayMondayDrawable.visibility = View.INVISIBLE
-            view.dayTuesdayDrawable.visibility = View.INVISIBLE
-            view.dayWednesdayDrawable.visibility = View.INVISIBLE
-            view.dayThursdayDrawable.visibility = View.INVISIBLE
-            view.dayFridayDrawable.visibility = View.INVISIBLE
-            view.daySaturdayDrawable.visibility = View.INVISIBLE
+            for (i in 0 until 7) {
+                layouts[i].setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+                images[i].visibility = View.INVISIBLE
+            }
         }
         fun updateTopUI() {
             view.dayIncomeValue.text = "${viewModel.getSelectedDayIncomeMoney()}"
@@ -113,35 +101,9 @@ class DayFragment: Fragment() {
                 val dayOfWeekList = days?.map { it.date.get(Calendar.DAY_OF_WEEK) }
                 if (dayOfWeekList != null) {
                     for (day in dayOfWeekList) {
-                        when (day) {
-                            SUN + 1 -> {
-                                view.daySundayDrawable.setImageDrawable(icon)
-                                view.daySundayDrawable.visibility = View.VISIBLE
-                            }
-                            MON + 1 -> {
-                                view.dayMondayDrawable.setImageDrawable(icon)
-                                view.dayMondayDrawable.visibility = View.VISIBLE
-                            }
-                            TUE + 1 -> {
-                                view.dayTuesdayDrawable.setImageDrawable(icon)
-                                view.dayTuesdayDrawable.visibility = View.VISIBLE
-                            }
-                            WED + 1 -> {
-                                view.dayWednesdayDrawable.setImageDrawable(icon)
-                                view.dayWednesdayDrawable.visibility = View.VISIBLE
-                            }
-                            THU + 1 -> {
-                                view.dayThursdayDrawable.setImageDrawable(icon)
-                                view.dayThursdayDrawable.visibility = View.VISIBLE
-                            }
-                            FRI + 1 -> {
-                                view.dayFridayDrawable.setImageDrawable(icon)
-                                view.dayFridayDrawable.visibility = View.VISIBLE
-                            }
-                            SAT + 1 -> {
-                                view.daySaturdayDrawable.setImageDrawable(icon)
-                                view.daySaturdayDrawable.visibility = View.VISIBLE
-                            }
+                        images[day.minus(1)].apply {
+                            setImageDrawable(icon)
+                            visibility = View.VISIBLE
                         }
                     }
                 }
@@ -157,40 +119,31 @@ class DayFragment: Fragment() {
                 updateEachCalendarUI(intersection, usedMoneyIcon)
             }
         }
+        fun updateSelectCalendarUI() {
+            val currentWeek = viewModel.loadOneWeekDayOfMonth()
+            if (currentWeek.size == 7) {
+                for(i in 0 until 7) {
+                    values[i].text = "${currentWeek[i]}"
+                }
+            }
+
+            val index = viewModel.selectedDay.value?.calendar?.get(Calendar.DAY_OF_WEEK)?.minus(1)
+            layouts[index?: 0].setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
+        }
 
 
         //選択した日が変わったら
         viewModel.selectedDay.observe(viewLifecycleOwner) {
             initWeekUI()
             updateCalendarUI()
-
-            val currentWeek = viewModel.loadOneWeekDayOfMonth()
-            if (currentWeek.size == 7) {
-                view.daySundayValue.text = "${currentWeek[SUN]}"
-                view.dayMondayValue.text = "${currentWeek[MON]}"
-                view.dayTuesdayValue.text = "${currentWeek[TUE]}"
-                view.dayWednesdayValue.text = "${currentWeek[WED]}"
-                view.dayThursdayValue.text = "${currentWeek[THU]}"
-                view.dayFridayValue.text = "${currentWeek[FRI]}"
-                view.daySaturdayValue.text = "${currentWeek[SAT]}"
-            }
-            
-            when(it.calendar.get(Calendar.DAY_OF_WEEK)) {
-                SUN + 1 -> view.daySundayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
-                MON + 1 -> view.dayMondayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
-                TUE + 1 -> view.dayTuesdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
-                WED + 1 -> view.dayWednesdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
-                THU + 1 -> view.dayThursdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
-                FRI + 1 -> view.dayFridayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
-                SAT + 1 -> view.daySaturdayLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.lifeWhite))
-            }
-
+            updateSelectCalendarUI()
             updateTopUI()
         }
         //モデルが変わったら
         viewModel.sheets.observe(viewLifecycleOwner) {
             initWeekUI()
             updateCalendarUI()
+            updateSelectCalendarUI()
             updateTopUI()
         }
 
