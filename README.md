@@ -12,4 +12,5 @@
 **Library**: Material Calendar, MPAndroid Chart
 <br>
 **Dark Mode**: Support
+<br>
 <img width="389" src="https://user-images.githubusercontent.com/81838716/150713928-4e940f28-c656-4b7b-b547-fcbfd1feab97.png">
